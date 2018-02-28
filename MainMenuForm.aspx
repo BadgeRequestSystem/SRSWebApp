@@ -6,7 +6,7 @@
 <head runat="server">
     <title>SRS-Badge Request</title>
 </head>
-<body>
+<body bgcolor="rgb(249,237,197)">
     <form id="form1" runat="server">
     <div>
     
@@ -24,10 +24,10 @@
             <asp:Button ID="ButtonViewSubmittedRequests" runat="server" Text="View Submitted Requests" OnClick="ButtonViewSubmittedRequests_Click" />
         </p>
         <p>
-            <asp:Button ID="ButtonReviewRequests" runat="server" Text="Review Requests" OnClick="ButtonReviewRequests_Click" />
+            <asp:Button ID="ButtonReviewRequests" runat="server" Text="Review Requests" OnClick="ButtonReviewRequests_Click" Visible="False" />
         </p>
         <p>
-            <asp:Button ID="ButtonUpdateEmployees" runat="server" Text="Update Employees" OnClick="ButtonUpdateEmployees_Click" />
+            <asp:Button ID="ButtonUpdateEmployees" runat="server" Text="Update Employees" OnClick="ButtonUpdateEmployees_Click" Visible="False" />
         </p>
         <p>
             </center>
