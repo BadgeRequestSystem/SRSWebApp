@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -8,7 +9,19 @@ public partial class MainMenuForm : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Label2.Text = Response.Cookies["UserName"].Value;
+        if (Request.Cookies["userName"] != null && !Label2.Text.Contains(Server.HtmlEncode(Request.Cookies["userName"].Value)))
+            Label2.Text = Label2.Text + Server.HtmlEncode(Request.Cookies["userName"].Value);
+
+        if (Request.Cookies["isManager"].Value == "1")
+        {
+            ButtonReviewRequests.Visible = true;
+        }
+        if (Request.Cookies["isHR"].Value == "1")
+        {
+            ButtonUpdateEmployees.Visible = true;
+        }
+
+
     }
 
 

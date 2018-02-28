@@ -11,7 +11,7 @@
     <div>
     
     </div>
-         <div align="right"><asp:Label ID="Label2" runat="server" Text="USERNAME"></asp:Label></div>
+         <div align="right"><asp:Label ID="Label2" runat="server" Text="Welcome, "></asp:Label></div>
 
         <center>
         <asp:Label ID="Label1" runat="server" Text="Main Menu"></asp:Label>
