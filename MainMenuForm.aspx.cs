@@ -23,6 +23,14 @@ public partial class MainMenuForm : System.Web.UI.Page
 
     protected void ButtonLogout_Click1(object sender, EventArgs e)
     {
+        if (Request.Cookies["userInfo"] != null)
+        {
+            Response.Cookies["userInfo"].Expires = DateTime.Now.AddDays(-1);
+        }
+        if (Request.Cookies["USERname"] != null)
+        {
+            Response.Cookies["USERname"].Expires = DateTime.Now.AddDays(-1);
+        }
         Response.Redirect("~/Login.aspx");
     }
 
