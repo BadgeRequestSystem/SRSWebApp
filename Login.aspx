@@ -6,10 +6,11 @@
 <head runat="server">
     <title>Login - SRS Badget Request</title>
 </head>
-<body bgcolor="rgb(249,237,197)">
+<body bgcolor="wheat">
     <form id="form1" runat="server">
         <div>
             <center>
+			    <asp:Label ID="RequestLabel" runat="server" text="Badge Request System"  Font-Bold="True" Font-Size="23pt" /><br />
 			<asp:Label ID="userLabel" runat="server" Text="Username:" />
 			<br /> 
 			<asp:TextBox ID="userBox" Columns="20" MaxLength="25" Text="" runat="server"/>

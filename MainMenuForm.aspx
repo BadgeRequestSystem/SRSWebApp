@@ -6,7 +6,7 @@
 <head runat="server">
     <title>SRS-Badge Request</title>
 </head>
-<body bgcolor="rgb(249,237,197)">
+<body bgcolor="wheat">
     <form id="form1" runat="server">
     <div>
     

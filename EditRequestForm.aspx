@@ -72,7 +72,7 @@
         </div>
         <asp:Button ID="CancelButton" text="Cancel" runat="server" />
         <asp:Button ID="SaveButton" Text="Cancel" runat="server" />
-        <asp:Button ID="SubmmitButton" Text="Submit" runat="server" />
+        <asp:Button ID="SubmmitButton" Text="Submit" runat="server" OnClick="SubmmitButton_Click" />
             
              
 
