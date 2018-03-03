@@ -18,22 +18,6 @@ public partial class MainMenuForm : System.Web.UI.Page
         if (aCookie["isHR"] == "True")
             ButtonUpdateEmployees.Visible = true;
 
-        //Individual Cookies---No longer needed---
-        //if (Request.Cookies["userName"] != null && !Label2.Text.Contains(Server.HtmlEncode(Request.Cookies["userName"].Value)))
-        //    Label2.Text = Label2.Text + Server.HtmlEncode(Request.Cookies["userName"].Value);
-
-        //if (Request.Cookies["isManager"].Value == "True")
-        //{
-        //    ButtonReviewRequests.Visible = true;
-        //}
-        //if (Request.Cookies["isHR"].Value == "True")
-        //{
-        //    ButtonUpdateEmployees.Visible = true;
-        //}
-
-        //if (Request.Cookies["userInfo"]["userName"] != null && !Label2.Text.Contains(Server.HtmlEncode(Request.Cookies["userInfo"]["userName"].Value)))
-        //    Label2.Text = Label2.Text + Server.HtmlEncode(Request.Cookies["userInfo"]["userName"].Value);
-        //Individual Cookies---No longer needed---
     }
 
 
