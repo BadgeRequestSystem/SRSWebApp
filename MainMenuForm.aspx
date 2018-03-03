@@ -19,7 +19,7 @@
         <p>
             <asp:Button ID="ButtonNewRequest" runat="server" Text="New Request" OnClick="ButtonNewRequest_Click" />
         </p>
-        <asp:Button ID="ButtonViewSavedRequests" runat="server" Text="View Saved Requests" OnClick="ButtonViewSavedRequests_Click" />
+        <asp:Button ID="ButtonViewSavedRequests" runat="server" Text="View Drafts" OnClick="ButtonViewSavedRequests_Click" />
         <p>
             <asp:Button ID="ButtonViewSubmittedRequests" runat="server" Text="View Submitted Requests" OnClick="ButtonViewSubmittedRequests_Click" />
         </p>

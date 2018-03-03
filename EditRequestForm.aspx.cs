@@ -25,23 +25,38 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     protected void SubmmitButton_Click(object sender, EventArgs e)
     {
-        //---------TODO--------------Create Query for inserting requests into table--------
-        //using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
-        //{
-        //    Connection.Open();
-        //    SqlCommand cmd = new SqlCommand(@"INSERT INTO Requests
-        //            VALUES ();", Connection);
-        //    cmd.Parameters.AddWithValue("@Employee", EmployeeDDL);
-        //    cmd.Parameters.AddWithValue("@Reason", ReasonDDL);
-        //    cmd.Parameters.AddWithValue("@GET", GetTextBox);
-        //    cmd.Parameters.AddWithValue("@SSN", SSNTextBox);
-        //    cmd.Parameters.AddWithValue("@DOB", DOBTextBox);
-        //    cmd.Parameters.AddWithValue("@BadgeType", BadgeTypeDDL);
-        //    cmd.Parameters.AddWithValue("@Proximity", ProximityCheckBox);
-        //    cmd.Parameters.AddWithValue("@Emergency", EmergencyCheckBox);
-        //    cmd.Parameters.AddWithValue("@Accounts", AccountsCheckBox);
-        //    cmd.Parameters.AddWithValue("@Notes", NotesTextBox);
-        //}
+        try
+        {
+            HttpCookie aCookie = Request.Cookies["userInfo"];
+            string state = "Pending";
+            //Creates Connection to database and updates Requests with new request.
+            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+            {
+                Connection.Open();
+                SqlCommand cmd = new SqlCommand(@"INSERT INTO Requests
+                    VALUES (@Employee, @Reason, @GET, @SSN, @DOB, @BadgeType, @Proximity, @Emergency, @Accounts, @Notes, @CurrentDate, @State, @Username);", Connection);
+                cmd.Parameters.AddWithValue("@Employee", EmployeeDDL.Text);
+                cmd.Parameters.AddWithValue("@Reason", ReasonDDL.Text);
+                cmd.Parameters.AddWithValue("@GET", GetTextBox.Text);
+                cmd.Parameters.AddWithValue("@SSN", SSNTextBox.Text);
+                cmd.Parameters.AddWithValue("@DOB", DOBTextBox.Text);
+                cmd.Parameters.AddWithValue("@BadgeType", BadgeTypeDDL.Text);
+                cmd.Parameters.AddWithValue("@Proximity", ProximityCheckBox.Checked);
+                cmd.Parameters.AddWithValue("@Emergency", EmergencyCheckBox.Checked);
+                cmd.Parameters.AddWithValue("@Accounts", AccountsCheckBox.Checked);
+                cmd.Parameters.AddWithValue("@Notes", NotesTextBox.Text);
+                cmd.Parameters.AddWithValue("@Username", aCookie["userName"]);
+                cmd.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
+                cmd.Parameters.AddWithValue("@State", state);
 
+                cmd.ExecuteNonQuery();
+            }
+
+            Response.Redirect("~/MainMenuForm.aspx");
+        }
+        catch (Exception ex)
+        {
+
+        }
     }
 }

@@ -28,7 +28,7 @@ public partial class MainMenuForm : System.Web.UI.Page
 
     protected void ButtonNewRequest_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/EditRequestForm.aspx");
     }
 
     protected void ButtonViewSavedRequests_Click(object sender, EventArgs e)
