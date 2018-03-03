@@ -49,12 +49,12 @@ public partial class MainMenuForm : System.Web.UI.Page
 
     protected void ButtonViewSavedRequests_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/SavedRequestForm.aspx");
     }
 
     protected void ButtonViewSubmittedRequests_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/ReviewRequestsForm.aspx");
     }
 
     protected void ButtonReviewRequests_Click(object sender, EventArgs e)
