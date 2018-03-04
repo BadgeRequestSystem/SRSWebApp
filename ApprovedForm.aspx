@@ -10,8 +10,8 @@
     <form id="form1" runat="server">
     <div>
     <center>
-        <asp:ListBox ID="ListBox1" runat="server" DataSourceID="SqlDataSource1" DataTextField="Employee" DataValueField="RequestID"></asp:ListBox>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:badge_requestConnectionString %>" SelectCommand="SELECT [RequestID], [Employee], [RequestState] FROM [Requests] WHERE (([RequestState] = @RequestState) AND ([Username] = @Username))">
+        <asp:ListBox ID="ListBox1" runat="server" DataSourceID="SqlDataSource1" DataTextField="PendingDisplay" DataValueField="PendingDisplay"></asp:ListBox>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:badge_requestConnectionString %>" SelectCommand="Select CAST([RequestID] AS varchar(200)) + '   ' + [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay From Requests WHERE (([RequestState] = @RequestState) AND ([Username] = @Username))">
             <SelectParameters>
                 <asp:Parameter DefaultValue="Approved" Name="RequestState" Type="String" />
                 <asp:CookieParameter CookieName="USERname" Name="Username" Type="String" />

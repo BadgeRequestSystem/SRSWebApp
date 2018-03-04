@@ -90,8 +90,8 @@
         <div>
                 <asp:TextBox ID="NotesTextBox" Columns ="20" MaxLength="500" runat="server" Height="200px" TextMode="MultiLine" Width="400px" />
         </div>
-        <asp:Button ID="CancelButton" text="Cancel" runat="server" />
-        <asp:Button ID="SaveButton" Text="Save Draft" runat="server" />
+        <asp:Button ID="CancelButton" text="Cancel" runat="server" OnClick="CancelButton_Click" />
+        <asp:Button ID="SaveButton" Text="Save Draft" runat="server" OnClick="SaveButton_Click" />
         <asp:Button ID="SubmmitButton" Text="Submit" runat="server" OnClick="SubmmitButton_Click" />
             
              
