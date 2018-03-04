@@ -15,10 +15,52 @@ public partial class PendingForm : System.Web.UI.Page
         HttpCookie usernameCookie = new HttpCookie("USERname");
         usernameCookie.Value = aCookie.Values["userName"];
         Response.Cookies.Add(usernameCookie);
+
+
+        /*DOUBLE CLICK EVENT FOR LISTBOX*/
+        if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "move")
+        {
+            //THIS IS WHERE THE EVENT GOES
+
+            HttpCookie bCookie = new HttpCookie("submittedCookieInfo"); //trying to store info that will be seen on ViewSubmittedForm.aspx into cooked 'submittedCookieInfo'
+            bCookie.Values["Employee"] = usernameCookie.Value;
+            //bCookie.Values["Initials"] = grabSQLData("Initials", ListBox1.SelectedValue.Substring(0, ListBox1.SelectedValue.IndexOf(" ") + 1));
+            Response.Cookies.Add(bCookie);
+
+            Response.Redirect("~/ViewSubmittedForm.aspx");
+        }
+        ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "move"));
+        /****************/
+
+
     }
 
     protected void Button1_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/ReviewRequestsForm.aspx");
     }
+
+
+    /*Trying to have a general sql data grab function, but we need to correct sql tables first, need a way to access Employees table consistently (Username is not UserID so we cant compare right now)*/
+
+    //public string grabSQLData(string s, string reqID)
+    //{
+    //    HttpCookie aCookie = Request.Cookies["userInfo"];
+    //    string toReturn = string.Empty;
+
+    //    using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+    //    {
+    //        SqlCommand cmdGetManager = new SqlCommand(@"SELECT " + s + " FROM Employees WHERE Username=@uname and Password=@pass", Connection);
+    //        cmdGetManager.Parameters.AddWithValue("@uname", aCookie.Values["userName"]);
+
+    //        toReturn = (string)cmdGetManager.ExecuteScalar();
+    //    }
+
+    //    if (toReturn == "True")
+    //        toReturn = "Yes";
+    //    else if (toReturn == "False")
+    //        toReturn = "No";
+
+    //    return toReturn;
+    //}
 }
