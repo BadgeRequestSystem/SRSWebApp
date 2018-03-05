@@ -40,6 +40,8 @@
         <br />
         <asp:Label ID="dateofbirthLabel" runat="server" Text="Date of Birth: "></asp:Label>
         <br />
+        <asp:Label ID="typeofbadgeLabel" runat="server" Text="Type of badge required: "></asp:Label>
+        <br />
         <asp:Label ID="proximitycardLabel" runat="server" Text="Proximity Card? "></asp:Label>
         <br />
         <asp:Label ID="emergencyaccessLabel" runat="server" Text="Emergency Access? "></asp:Label>

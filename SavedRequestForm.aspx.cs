@@ -32,8 +32,15 @@ public partial class SavedRequestForm : System.Web.UI.Page
                     while (reader.Read())
                     {
                         cCookie["Employee"] = reader["Employee"].ToString();
-                        cCookie["SSN"] = reader["SSN"].ToString();
                         cCookie["Reason"] = reader["ReasonForRequest"].ToString();
+                        cCookie["GET"] = reader["GETDate"].ToString();
+                        cCookie["SSN"] = reader["SSN"].ToString();
+                        cCookie["DOB"] = reader["DateOfBirth"].ToString();
+                        cCookie["TOB"] = reader["TypeOfBadge"].ToString();
+                        cCookie["Proximity"] = reader["ProximityCard"].ToString();
+                        cCookie["Emergency"] = reader["EmergencyAccess"].ToString();
+                        cCookie["Accounts"] = reader["ContinueAccounts"].ToString();
+                        cCookie["Notes"] = reader["Notes"].ToString();
                     }
                     Connection.Close();
                 }
