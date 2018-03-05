@@ -18,8 +18,6 @@ public partial class SavedRequestForm : System.Web.UI.Page
         /*DOUBLE CLICK EVENT FOR LISTBOX*/
         if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "move")
         {
-            //THIS IS WHERE THE EVENT GOES
-
             HttpCookie cCookie = new HttpCookie("draftInfo"); //trying to store info that will be seen on ViewSubmittedForm.aspx into cooked 'submittedCookieInfo'
             Response.Cookies.Add(cCookie);
 

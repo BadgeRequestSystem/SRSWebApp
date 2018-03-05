@@ -11,7 +11,7 @@ public partial class ViewSubmittedForm : System.Web.UI.Page
         HttpCookie aCookie = Request.Cookies["submittedCookieInfo"];
         employeeLabel.Text = "Employee: " + aCookie.Values["Employee"];
         ssnLabel.Text = "SSN: " + aCookie.Values["SSN"];
-        dateofbirthLabel.Text = "Date of Birth: " + aCookie.Values["DOB"];
+        dateofbirthLabel.Text = "Date of Birth: " + aCookie.Values["DOB"].Replace(" 12:00:00 AM", "");
         
     }
 

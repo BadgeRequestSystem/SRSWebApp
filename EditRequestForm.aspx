@@ -21,7 +21,7 @@
         <asp:Label ID="EmployeeLabel" runat="server" Text="Employee:" />
         <div>
         <asp:DropDownList ID="EmployeeDDL" runat="server" Width="125px" DataSourceID="SqlDataSource1" DataTextField="Last_Name" DataValueField="Last_Name" />
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:badge_requestConnectionString %>" SelectCommand="SELECT [First Name] + [Middle Name] + [Last Name] AS Last_Name FROM [Employees]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:badge_requestConnectionString %>" SelectCommand="SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees]"></asp:SqlDataSource>
         </div>
         <asp:Label ID="ReasonLabel" runat="server" Text="Reason For Request:" />
         <div>
