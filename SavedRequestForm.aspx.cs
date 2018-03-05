@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Net;
 
 public partial class SavedRequestForm : System.Web.UI.Page
 {
@@ -12,6 +14,39 @@ public partial class SavedRequestForm : System.Web.UI.Page
         HttpCookie usernameCookie = new HttpCookie("USERname");
         usernameCookie.Value = aCookie.Values["userName"];
         Response.Cookies.Add(usernameCookie);
+
+        /*DOUBLE CLICK EVENT FOR LISTBOX*/
+        if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "move")
+        {
+            //THIS IS WHERE THE EVENT GOES
+
+            HttpCookie cCookie = new HttpCookie("draftInfo"); //trying to store info that will be seen on ViewSubmittedForm.aspx into cooked 'submittedCookieInfo'
+            Response.Cookies.Add(cCookie);
+
+            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+            {
+                SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE Employee=@Employee", Connection);
+                cmd.Parameters.AddWithValue("@Employee", ListBox1.SelectedValue);
+                Connection.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        cCookie["Employee"] = reader["Employee"].ToString();
+                        cCookie["SSN"] = reader["SSN"].ToString();
+                        cCookie["Reason"] = reader["ReasonForRequest"].ToString();
+                    }
+                    Connection.Close();
+                }
+
+
+            }
+
+            Response.Redirect("~/EditRequestForm.aspx");
+        }
+        ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "move"));
+        /****************/
     }
 
     protected void Button1_Click(object sender, EventArgs e)

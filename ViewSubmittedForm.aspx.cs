@@ -9,11 +9,18 @@ public partial class ViewSubmittedForm : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         HttpCookie aCookie = Request.Cookies["submittedCookieInfo"];
-        employeeLabel.Text = employeeLabel.Text + aCookie.Values["Employee"];
+        employeeLabel.Text = "Employee: " + aCookie.Values["Employee"];
+        ssnLabel.Text = "SSN: " + aCookie.Values["SSN"];
+        dateofbirthLabel.Text = "Date of Birth: " + aCookie.Values["DOB"];
+        
     }
 
     protected void backButton_Click(object sender, EventArgs e)
     {
+        if (Request.Cookies["submittedCookieInfo"] != null)
+        {
+            Response.Cookies["submittedCookieInfo"].Expires = DateTime.Now.AddDays(-1);
+        }
         Response.Redirect("~/ReviewRequestsForm.aspx");
         
     }

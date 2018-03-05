@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Net;
 
 public partial class DeniedForm : System.Web.UI.Page
 {
@@ -24,8 +26,28 @@ public partial class DeniedForm : System.Web.UI.Page
 
             HttpCookie bCookie = new HttpCookie("submittedCookieInfo"); //trying to store info that will be seen on ViewSubmittedForm.aspx into cooked 'submittedCookieInfo'
             bCookie.Values["Employee"] = usernameCookie.Value;
+            bCookie.Values["ReasonForRequest"] = null;
             //bCookie.Values["Initials"] = grabSQLData("Initials", ListBox1.SelectedValue.Substring(0, ListBox1.SelectedValue.IndexOf(" ") + 1));
             Response.Cookies.Add(bCookie);
+
+            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+            {
+                SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE RequestID=@RequestID", Connection);
+                cmd.Parameters.AddWithValue("@RequestID", ListBox1.SelectedValue);
+                Connection.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        bCookie["Employee"] = reader["Employee"].ToString();
+                        bCookie["SSN"] = reader["SSN"].ToString();
+                    }
+                    Connection.Close();
+                }
+
+
+            }
 
             Response.Redirect("~/ViewSubmittedForm.aspx");
         }
