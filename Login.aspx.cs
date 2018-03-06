@@ -36,7 +36,6 @@ public partial class Login : System.Web.UI.Page
                 {
 
                     //logged in succesfully, storing isManager and isHR to fields and then to cookie
-                    //I hope this gets changed as I think it will so I can update the project file on GIT...
                     SqlCommand cmdGetManager = new SqlCommand(@"SELECT isManager FROM Credentials 
                                                     WHERE Username=@uname and Password=@pass", Connection);
                     cmdGetManager.Parameters.AddWithValue("@uname", userBox.Text);
@@ -51,17 +50,6 @@ public partial class Login : System.Web.UI.Page
                     temp = (bool)cmdGetHR.ExecuteScalar();
                     isHR = temp;
 
-                    //Individual cookies---No longer needed---
-                    //HttpCookie aCookie = new HttpCookie("userName");
-                    //aCookie.Value = userBox.Text;
-                    //Response.Cookies.Add(aCookie);
-                    //HttpCookie bCookie = new HttpCookie("isManager");
-                    //bCookie.Value = Convert.ToString(isManager);
-                    //Response.Cookies.Add(bCookie);
-                    //HttpCookie cCookie = new HttpCookie("isHR");
-                    //cCookie.Value = Convert.ToString(isHR);
-                    //Response.Cookies.Add(cCookie);
-                    //Individual cookies---No longer needed---
 
                     HttpCookie aCookie = new HttpCookie("userInfo");
                     aCookie.Values["userName"] = userBox.Text;
@@ -69,19 +57,14 @@ public partial class Login : System.Web.UI.Page
                     aCookie.Values["isHR"] = isHR.ToString();
                     Response.Cookies.Add(aCookie);
 
-
+                    
                     Response.Redirect("~/MainMenuForm.aspx");
 
-                    //For testing---No Longer Needed---
-                    //userBox.Text = isManager.ToString(); 
-                    //userBox.Text = isHR.ToString();
-                    //For testing---No Longer Needed---
                 }
 
                 else //LOGIN UNSUCCESFUL
                 {
                     Response.Redirect("~/Login.aspx");
-                    //userBox.Text = "FAIL";
 
                 }
                     

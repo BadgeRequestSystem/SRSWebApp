@@ -18,43 +18,35 @@ public partial class MainMenuForm : System.Web.UI.Page
         if (aCookie["isHR"] == "True")
             ButtonUpdateEmployees.Visible = true;
 
-        //Individual Cookies---No longer needed---
-        //if (Request.Cookies["userName"] != null && !Label2.Text.Contains(Server.HtmlEncode(Request.Cookies["userName"].Value)))
-        //    Label2.Text = Label2.Text + Server.HtmlEncode(Request.Cookies["userName"].Value);
-
-        //if (Request.Cookies["isManager"].Value == "True")
-        //{
-        //    ButtonReviewRequests.Visible = true;
-        //}
-        //if (Request.Cookies["isHR"].Value == "True")
-        //{
-        //    ButtonUpdateEmployees.Visible = true;
-        //}
-
-        //if (Request.Cookies["userInfo"]["userName"] != null && !Label2.Text.Contains(Server.HtmlEncode(Request.Cookies["userInfo"]["userName"].Value)))
-        //    Label2.Text = Label2.Text + Server.HtmlEncode(Request.Cookies["userInfo"]["userName"].Value);
-        //Individual Cookies---No longer needed---
     }
 
 
     protected void ButtonLogout_Click1(object sender, EventArgs e)
     {
+        if (Request.Cookies["userInfo"] != null)
+        {
+            Response.Cookies["userInfo"].Expires = DateTime.Now.AddDays(-1);
+        }
+        if (Request.Cookies["USERname"] != null)
+        {
+            Response.Cookies["USERname"].Expires = DateTime.Now.AddDays(-1);
+        }
         Response.Redirect("~/Login.aspx");
     }
 
     protected void ButtonNewRequest_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/EditRequestForm.aspx");
     }
 
     protected void ButtonViewSavedRequests_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/SavedRequestForm.aspx");
     }
 
     protected void ButtonViewSubmittedRequests_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/ReviewRequestsForm.aspx");
     }
 
     protected void ButtonReviewRequests_Click(object sender, EventArgs e)
