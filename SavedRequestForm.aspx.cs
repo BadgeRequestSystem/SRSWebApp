@@ -23,7 +23,7 @@ public partial class SavedRequestForm : System.Web.UI.Page
 
             using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
             {
-                SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE Employee=@Employee", Connection);
+                SqlCommand cmd = new SqlCommand(@"SELECT * FROM Drafts WHERE Employee=@Employee", Connection);
                 cmd.Parameters.AddWithValue("@Employee", ListBox1.SelectedValue);
                 Connection.Open();
 

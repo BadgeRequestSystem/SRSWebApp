@@ -11,7 +11,28 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //try
+        //{
+        //    HttpCookie aCookie = Request.Cookies["draftInfo"];
+        //}
+        //catch (Exception ex) { }
+        if (Request.Cookies["draftInfo"] != null)
+        {
+            HttpCookie cCookie = Request.Cookies["draftInfo"];
+            EmployeeDDL.Text = cCookie["Employee"];
+            ReasonDDL.Text = cCookie["Reason"];
+            GetTextBox.Text = cCookie["GET"].Replace(" 12:00:00 AM", ""); ;
+            SSNTextBox.Text = cCookie["SSN"];
+            DOBTextBox.Text = cCookie["DOB"].Replace(" 12:00:00 AM", ""); ;
+            BadgeTypeDDL.Text = cCookie["TOB"];
+            if (cCookie["Proximity"] == "True")
+                ProximityCheckBox.Checked = true;
+            if (cCookie["Emergency"] == "True")
+                EmergencyCheckBox.Checked = true;
+            if (cCookie["Accounts"] == "True")
+                AccountsCheckBox.Checked = true;
+            NotesTextBox.Text = cCookie["Notes"];
+        }
     }
 
     protected void SubmmitButton_Click(object sender, EventArgs e)
@@ -42,17 +63,28 @@ public partial class EditRequestForm : System.Web.UI.Page
 
                 cmd.ExecuteNonQuery();
             }
-
+            if (Request.Cookies["draftInfo"] != null)
+            {
+                Response.Cookies["draftInfo"].Expires = DateTime.Now.AddDays(-1);
+            }
             Response.Redirect("~/MainMenuForm.aspx");
         }
         catch (Exception ex)
         {
 
         }
+        if (Request.Cookies["draftInfo"] != null)
+        {
+            Response.Cookies["draftInfo"].Expires = DateTime.Now.AddDays(-1);
+        }
     }
 
     protected void CancelButton_Click(object sender, EventArgs e)
     {
+        if (Request.Cookies["draftInfo"] != null)
+        {
+            Response.Cookies["draftInfo"].Expires = DateTime.Now.AddDays(-1);
+        }
         Response.Redirect("~/MainMenuForm.aspx");
     }
 
@@ -84,12 +116,19 @@ public partial class EditRequestForm : System.Web.UI.Page
 
                 cmd.ExecuteNonQuery();
             }
-
+            if (Request.Cookies["draftInfo"] != null)
+            {
+                Response.Cookies["draftInfo"].Expires = DateTime.Now.AddDays(-1);
+            }
             Response.Redirect("~/MainMenuForm.aspx");
         }
         catch (Exception ex)
         {
 
+        }
+        if (Request.Cookies["draftInfo"] != null)
+        {
+            Response.Cookies["draftInfo"].Expires = DateTime.Now.AddDays(-1);
         }
     }
 }
