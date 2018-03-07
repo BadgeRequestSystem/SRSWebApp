@@ -57,13 +57,14 @@ public partial class Login : System.Web.UI.Page
                     aCookie.Values["isHR"] = isHR.ToString();
                     Response.Cookies.Add(aCookie);
 
-                    
+                    Connection.Close();
                     Response.Redirect("~/MainMenuForm.aspx");
 
                 }
 
                 else //LOGIN UNSUCCESFUL
                 {
+                    Connection.Close();
                     Response.Redirect("~/Login.aspx");
 
                 }

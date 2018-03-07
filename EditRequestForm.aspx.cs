@@ -5,6 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Net;
+using System.Text.RegularExpressions;
 
 public partial class EditRequestForm : System.Web.UI.Page
 {
@@ -29,6 +30,8 @@ public partial class EditRequestForm : System.Web.UI.Page
             NotesTextBox.Text = cCookie["Notes"];
 
             Response.Cookies["draftInfo"].Expires = DateTime.Now.AddDays(-1);
+
+            
         }
     }
 
@@ -36,6 +39,7 @@ public partial class EditRequestForm : System.Web.UI.Page
     {
         try
         {
+            string strippedSSN = Regex.Replace(SSNTextBox.Text, "[^0-9]", "");
             HttpCookie aCookie = Request.Cookies["userInfo"];
             string state = "Pending";
             //Creates Connection to database and updates Requests with new request.
@@ -47,7 +51,8 @@ public partial class EditRequestForm : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@Employee", EmployeeDDL.Text);
                 cmd.Parameters.AddWithValue("@Reason", ReasonDDL.Text);
                 cmd.Parameters.AddWithValue("@GET", GetTextBox.Text);
-                cmd.Parameters.AddWithValue("@SSN", SSNTextBox.Text);
+                //cmd.Parameters.AddWithValue("@SSN", SSNTextBox.Text);
+                cmd.Parameters.AddWithValue("@SSN", strippedSSN);
                 cmd.Parameters.AddWithValue("@DOB", DOBTextBox.Text);
                 cmd.Parameters.AddWithValue("@BadgeType", BadgeTypeDDL.Text);
                 cmd.Parameters.AddWithValue("@Proximity", ProximityCheckBox.Checked);
@@ -65,7 +70,8 @@ public partial class EditRequestForm : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-
+            string msg = "There was an error submitting the request form. Please make sure all fields are filled out correctly and try again.";
+            Response.Write("<script>alert('" + msg + "')</script>");
         }
         
     }
@@ -79,6 +85,7 @@ public partial class EditRequestForm : System.Web.UI.Page
     {
         try
         {
+            string strippedSSN = Regex.Replace(SSNTextBox.Text, "[^0-9]", "");
             HttpCookie aCookie = Request.Cookies["userInfo"];
             string state = "Draft";
             //---------TODO-Change DOB and GET to check for no date given
@@ -90,7 +97,8 @@ public partial class EditRequestForm : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@Employee", EmployeeDDL.Text);
                 cmd.Parameters.AddWithValue("@Reason", ReasonDDL.Text);
                 cmd.Parameters.AddWithValue("@GET", GetTextBox.Text);
-                cmd.Parameters.AddWithValue("@SSN", SSNTextBox.Text);
+                //cmd.Parameters.AddWithValue("@SSN", SSNTextBox.Text);
+                cmd.Parameters.AddWithValue("@SSN", strippedSSN);
                 cmd.Parameters.AddWithValue("@DOB", DOBTextBox.Text);
                 cmd.Parameters.AddWithValue("@BadgeType", BadgeTypeDDL.Text);
                 cmd.Parameters.AddWithValue("@Proximity", ProximityCheckBox.Checked);
@@ -107,7 +115,8 @@ public partial class EditRequestForm : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-
+            string msg = "Something went wrong saving your draft. Our bad. Probably had something to do with the SSN field, too many numbers or something.";
+            Response.Write("<script>alert('" + msg + "')</script>");
         }
     }
 }
