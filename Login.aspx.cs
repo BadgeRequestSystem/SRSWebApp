@@ -19,6 +19,7 @@ public partial class Login : System.Web.UI.Page
     {
         bool isManager = false;
         bool isHR = false;
+        string tempID;
         using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
         {
             try
@@ -50,11 +51,17 @@ public partial class Login : System.Web.UI.Page
                     temp = (bool)cmdGetHR.ExecuteScalar();
                     isHR = temp;
 
+                    SqlCommand cmdGetUserID = new SqlCommand(@"SELECT UserID FROM Credentials 
+                                                    WHERE Username=@uname and Password=@pass", Connection);
+                    cmdGetUserID.Parameters.AddWithValue("@uname", userBox.Text);
+                    cmdGetUserID.Parameters.AddWithValue("@pass", passBox.Text);
+                    tempID = (string)cmdGetUserID.ExecuteScalar();
 
                     HttpCookie aCookie = new HttpCookie("userInfo");
                     aCookie.Values["userName"] = userBox.Text;
                     aCookie.Values["isManager"] = isManager.ToString();
                     aCookie.Values["isHR"] = isHR.ToString();
+                    aCookie.Values["UserID"] = tempID;
                     Response.Cookies.Add(aCookie);
 
                     Connection.Close();

@@ -12,6 +12,7 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        HttpCookie aCookie = Request.Cookies["userInfo"];
         if (Request.Cookies["draftInfo"] != null)
         {
             HttpCookie cCookie = Request.Cookies["draftInfo"];
@@ -32,6 +33,26 @@ public partial class EditRequestForm : System.Web.UI.Page
             Response.Cookies["draftInfo"].Expires = DateTime.Now.AddDays(-1);
 
             
+        }
+        else if (aCookie["isManager"] != "True" )
+        {
+            SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]='" + aCookie["UserID"] + "'";
+            //SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]=@UserID";
+            //SqlDataSource1.SelectParameters.Add("@UserID", aCookie["UserID"]);
+        }
+        else
+        {
+            string temp;
+            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+            {
+                Connection.Open();
+                SqlCommand cmdGetDepartment = new SqlCommand(@"SELECT Department FROM Employees 
+                                                    WHERE UserID=@UserID", Connection);
+                cmdGetDepartment.Parameters.AddWithValue("@UserID", aCookie["UserID"]);
+                temp = (string)cmdGetDepartment.ExecuteScalar();
+                Connection.Close();
+            }
+            SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [Department]='" + temp + "'";
         }
     }
 
