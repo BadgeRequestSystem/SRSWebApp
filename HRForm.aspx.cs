@@ -10,4 +10,14 @@ public partial class HRForm : System.Web.UI.Page
     {
 
     }
+
+    protected void backButton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/MainMenuForm.aspx");
+    }
+
+    protected void newButton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/EditEmployeeForm.aspx");
+    }
 }

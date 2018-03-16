@@ -9,7 +9,86 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+             <Center>
+           <asp:Label ID="RequestLabel" runat="server" text="Edit Employees"  Font-Bold="True" Font-Size="23pt" />
+             
+        <div>
+            <br />
+            <asp:Label ID="Label1" runat="server" Text="First Name"></asp:Label>
+            <br />
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="Label2" runat="server" Text="Middle Name"></asp:Label>
+            <br />
+            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="Label3" runat="server" Text="Last Name"></asp:Label>
+            <br />
+            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="Label4" runat="server" Text="Initials"></asp:Label>
+            <br />
+            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            UserID<br />
+            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="Label5" runat="server" Text="Employee Company"></asp:Label>
+            <br />
+            <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="Label6" runat="server" Text="Department"></asp:Label>
+            <br />
+            <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="Label7" runat="server" Text="Work Location"></asp:Label>
+            <br />
+            <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="Label8" runat="server" Text="Work Phone"></asp:Label>
+            <br />
+            <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
+            <br />
+            <br />
+        </div>
+        <asp:Label ID="EmployeeLabel" runat="server" Text="Employee Manager:" />
+        <div>
+        <asp:DropDownList ID="EmployeeDDL" runat="server" Width="125px" DataSourceID="SqlDataSource1" DataTextField="Last_Name" DataValueField="Last_Name" />
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:badge_requestConnectionString %>" SelectCommand="SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees]">
+            <SelectParameters>
+                
+            </SelectParameters>
+                </asp:SqlDataSource>
+            <br />
+            <br />
+            <asp:Label ID="Label9" runat="server" Text="Manager Work Location"></asp:Label>
+            <br />
+            <asp:TextBox ID="TextBox10" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="Label10" runat="server" Text="Manager Work Phone"></asp:Label>
+            <br />
+            <asp:TextBox ID="TextBox11" runat="server"></asp:TextBox>
+        </div>
+        <div>
+            <br />
+        </div>
+        <div>
+            <br />
+        </div>
+        <br />
+        <asp:Button ID="CancelButton" text="Back" runat="server" OnClick="CancelButton_Click" Width="100px" Font-Bold="true"/>
+        <asp:Button ID="SubmmitButton" Text="Save" runat="server" OnClick="SubmmitButton_Click" Width="100px" Font-Bold="true"/>
+            
+             </Center>
     </div>
     </form>
 </body>
