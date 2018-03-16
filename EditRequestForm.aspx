@@ -6,14 +6,14 @@
 <head runat="server">
     <title></title>
 </head>
-<body>
+<body bgcolor="aliceblue">
     <form id="EditRequest" runat="server">
     <div>
         <br />
 
          <Center>
            <asp:Label ID="RequestLabel" runat="server" text="Request Form"  Font-Bold="True" Font-Size="23pt" />
-             </Center>
+             
         <div>
             <br />
             <br />
@@ -21,7 +21,11 @@
         <asp:Label ID="EmployeeLabel" runat="server" Text="Employee:" />
         <div>
         <asp:DropDownList ID="EmployeeDDL" runat="server" Width="125px" DataSourceID="SqlDataSource1" DataTextField="Last_Name" DataValueField="Last_Name" />
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:badge_requestConnectionString %>" SelectCommand="SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:badge_requestConnectionString %>" SelectCommand="SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees]">
+            <SelectParameters>
+                
+            </SelectParameters>
+                </asp:SqlDataSource>
         </div>
         <asp:Label ID="ReasonLabel" runat="server" Text="Reason For Request:" />
         <div>
@@ -90,11 +94,11 @@
         <div>
                 <asp:TextBox ID="NotesTextBox" Columns ="20" MaxLength="500" runat="server" Height="200px" TextMode="MultiLine" Width="400px" />
         </div>
-        <asp:Button ID="CancelButton" text="Cancel" runat="server" OnClick="CancelButton_Click" />
-        <asp:Button ID="SaveButton" Text="Save Draft" runat="server" OnClick="SaveButton_Click" />
-        <asp:Button ID="SubmmitButton" Text="Submit" runat="server" OnClick="SubmmitButton_Click" />
+        <asp:Button ID="CancelButton" text="Cancel" runat="server" OnClick="CancelButton_Click" Width="100px" Font-Bold="true"/>
+        <asp:Button ID="SaveButton" Text="Save Draft" runat="server" OnClick="SaveButton_Click" Width="100px" Font-Bold="true"/>
+        <asp:Button ID="SubmmitButton" Text="Submit" runat="server" OnClick="SubmmitButton_Click" Width="100px" Font-Bold="true"/>
             
-             
+             </Center>
 
 
 

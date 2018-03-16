@@ -12,21 +12,23 @@
         }
     </style>
 </head>
-<body bgcolor="wheat">
+<body bgcolor="aliceblue">
     <form id="form1" runat="server">
         <div>
             <center>
 			    <img alt="Savannah River Site Logo" class="auto-style1" src="Images/SRSLogo.png" /><br />
-			    <asp:Label ID="RequestLabel" runat="server" text="Badge Request System"  Font-Bold="True" Font-Size="23pt" /><br />
-			<asp:Label ID="userLabel" runat="server" Text="Username:" />
-			<br /> 
-			<asp:TextBox ID="userBox" Columns="20" MaxLength="25" Text="" runat="server"/>
+			    <asp:Label ID="RequestLabel" runat="server" text="Badge Request System"  Font-Bold="True" Font-Size="25pt" ForeColor="SteelBlue" /><br />
 			<br />
-			<asp:Label ID="passLabel" runat="server" Text="Password:" />
+            <asp:Label ID="userLabel" runat="server" Text="Username:" Font-Bold="true"/>
 			<br /> 
-			<asp:TextBox ID="passBox" Columns="20" MaxLength="25" Text="" runat="server" style="height: 22px" TextMode="Password"/>
+			<asp:TextBox ID="userBox" Columns="20" MaxLength="25" Text="" runat="server" Height="25px"/>
 			<br />
-			<asp:Button id="loginButton" Text="Login" OnClick="LoginBtn_Click" runat="server"/>
+            <br />
+			<asp:Label ID="passLabel" runat="server" Text="Password:" Font-Bold="true"/>
+			<br /> 
+			<asp:TextBox ID="passBox" Columns="20" MaxLength="25" Text="" runat="server" Height="25px" TextMode="Password"/>
+			<br />
+			<asp:Button id="loginButton" Text="Login" OnClick="LoginBtn_Click" runat="server" Font-Bold="true" Width="100px"/>
             </center>
 
         </div>

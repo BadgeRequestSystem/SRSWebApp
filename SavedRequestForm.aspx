@@ -6,11 +6,12 @@
 <head runat="server">
     <title></title>
 </head>
-<body>
+<body bgcolor="aliceblue">
     <form id="form1" runat="server">
     <div>
-    
-        <asp:ListBox ID="ListBox1" runat="server" DataSourceID="SqlDataSource1" DataTextField="Employee" DataValueField="Employee"></asp:ListBox>
+        <br /><br /><br />
+    <center>
+        <asp:ListBox ID="ListBox1" runat="server" DataSourceID="SqlDataSource1" DataTextField="Employee" DataValueField="Employee"  Height="150px" Font-Size="20px"></asp:ListBox>
         <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:badge_requestConnectionString %>" SelectCommand="Select [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay From Drafts WHERE (([RequestState] = @RequestState) AND ([Username] = @Username))">--%>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:badge_requestConnectionString %>" SelectCommand="Select [Employee], [CurrentDate] From Drafts WHERE (([RequestState] = @RequestState) AND ([Username] = @Username))">
             <SelectParameters>
@@ -20,8 +21,8 @@
         </asp:SqlDataSource>
         <br />
         <br />
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Back" />
-    
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Back" Width="100px" Font-Bold="true"/>
+    </center>
     </div>
     </form>
 </body>
