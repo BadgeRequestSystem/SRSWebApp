@@ -51,7 +51,7 @@ public partial class MainMenuForm : System.Web.UI.Page
 
     protected void ButtonReviewRequests_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/PendingActionForm.aspx");
     }
 
     protected void ButtonUpdateEmployees_Click(object sender, EventArgs e)

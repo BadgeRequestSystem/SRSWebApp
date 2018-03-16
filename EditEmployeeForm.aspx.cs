@@ -10,4 +10,19 @@ public partial class EditEmployeeForm : System.Web.UI.Page
     {
 
     }
+
+    protected void CancelButton_Click(object sender, EventArgs e) //back button
+    {
+        Response.Redirect("~/HRForm.aspx");
+    }
+
+    protected void SaveButton_Click(object sender, EventArgs e) //dont use
+    {
+        //dont use me plz
+    }
+
+    protected void SubmmitButton_Click(object sender, EventArgs e) //save button
+    {
+        Response.Redirect("~/HRForm.aspx");
+    }
 }
