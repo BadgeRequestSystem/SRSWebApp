@@ -56,6 +56,6 @@ public partial class MainMenuForm : System.Web.UI.Page
 
     protected void ButtonUpdateEmployees_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/HRForm.aspx");
     }
 }
