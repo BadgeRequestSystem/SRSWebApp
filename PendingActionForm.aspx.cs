@@ -29,6 +29,7 @@ public partial class PendingActionForm : System.Web.UI.Page
             {
                 SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE RequestID=@RequestID", Connection);
                 cmd.Parameters.AddWithValue("@RequestID", ListBox1.SelectedValue);
+                
                 Connection.Open();
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
