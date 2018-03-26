@@ -43,7 +43,7 @@ public partial class EditRequestForm : System.Web.UI.Page
         else
         {
             string temp;
-            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
             {
                 Connection.Open();
                 SqlCommand cmdGetDepartment = new SqlCommand(@"SELECT Department FROM Employees 
@@ -64,7 +64,7 @@ public partial class EditRequestForm : System.Web.UI.Page
             HttpCookie aCookie = Request.Cookies["userInfo"];
             string state = "Pending";
             //Creates Connection to database and updates Requests with new request.
-            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
             {
                 Connection.Open();
                 SqlCommand cmd = new SqlCommand(@"INSERT INTO Requests
@@ -110,7 +110,7 @@ public partial class EditRequestForm : System.Web.UI.Page
             HttpCookie aCookie = Request.Cookies["userInfo"];
             string state = "Draft";
             //---------TODO-Change DOB and GET to check for no date given
-            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
             {
                 Connection.Open();
                 SqlCommand cmd = new SqlCommand(@"INSERT INTO Drafts

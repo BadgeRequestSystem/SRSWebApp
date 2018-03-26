@@ -26,7 +26,7 @@ public partial class ApprovedForm : System.Web.UI.Page
             HttpCookie bCookie = new HttpCookie("submittedCookieInfo");
             Response.Cookies.Add(bCookie);
 
-            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
             {
                 SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE RequestID=@RequestID", Connection);
                 cmd.Parameters.AddWithValue("@RequestID", ListBox1.SelectedValue);
