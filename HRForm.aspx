@@ -23,6 +23,7 @@
         <asp:Button ID="newButton" runat="server" Text="New" OnClick="newButton_Click" />
         <asp:Button ID="updateButton" runat="server" Text="Update" />
         <asp:Button ID="deleteButton" runat="server" Text="Delete" OnClick="deleteButton_Click" />
+            <asp:Button ID="Button1" Visible="true" SkinID="button"  OnClick="Button1_Click"  runat="server" style="display:none" />
             </center>
     </form>
                                                                                                                                                  
