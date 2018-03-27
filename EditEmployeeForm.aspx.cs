@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Web;
@@ -25,13 +25,12 @@ public partial class EditEmployeeForm : System.Web.UI.Page
             TextBox9.Text = cCookie["Work Phone Number"];
             TextBox10.Text = cCookie["Manager Work Location"];
             TextBox11.Text = cCookie["Manager Work Phone Number"];
+            Response.Cookies["selectedEmployee"].Expires = DateTime.Now.AddDays(-1);
         }
     }
 
     protected void CancelButton_Click(object sender, EventArgs e) //back button
     {
-        if (Request.Cookies["selectedEmployee"] != null)
-            Response.Cookies["selectedEmployee"].Expires = DateTime.Now.AddDays(-1);
         Response.Redirect("~/HRForm.aspx");
     }
 
@@ -88,7 +87,6 @@ public partial class EditEmployeeForm : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@MWPhone", TextBox11.Text);
                 cmd.ExecuteNonQuery();
             }
-            Response.Cookies["selectedEmployee"].Expires = DateTime.Now.AddDays(-1);
             Response.Redirect("~/HRForm.aspx");
         }
     }
