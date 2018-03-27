@@ -18,6 +18,9 @@ public partial class PendingActionForm : System.Web.UI.Page
         usernameCookie.Value = aCookie.Values["userName"];
         Response.Cookies.Add(usernameCookie);
 
+        HttpCookie managerCookie = new HttpCookie("Manager");
+        managerCookie.Value = aCookie.Values["Manager"];
+        Response.Cookies.Add(managerCookie);
 
         /*DOUBLE CLICK EVENT FOR LISTBOX*/
         if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "move")
