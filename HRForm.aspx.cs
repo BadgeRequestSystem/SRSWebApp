@@ -31,7 +31,7 @@ public partial class HRForm : System.Web.UI.Page
     protected void deleteButton_Click(object sender, EventArgs e) //Pop-up dialog, if sucessful confirmation, we activate Button1_Click()
     {
         ClientScript.RegisterStartupScript(typeof(Page), "exampleScript",
-            "if(confirm(\"Are you sure?\"))" +
+            "if(confirm(\"Are you sure you want to delete INSERT EMPLOYEE NAME? \"))" +
             "{ document.getElementById('Button1').click(); }", true);
     }
 
@@ -52,38 +52,41 @@ public partial class HRForm : System.Web.UI.Page
 
     protected void updateButton_Click(object sender, EventArgs e)
     {
-
-        HttpCookie bCookie = new HttpCookie("selectedEmployee");
-        Response.Cookies.Add(bCookie);
-
-        using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+        if(ListBox1.SelectedItem != null)
         {
-            SqlCommand cmd = new SqlCommand(@"SELECT * FROM Employees WHERE UserID=@UID", Connection);
-            cmd.Parameters.AddWithValue("@UID", ListBox1.SelectedValue);
-            Connection.Open();
+            HttpCookie bCookie = new HttpCookie("selectedEmployee");
+            Response.Cookies.Add(bCookie);
 
-            using (SqlDataReader reader = cmd.ExecuteReader())
+            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
             {
-                while (reader.Read())
-                {
-                    bCookie["Last Name"] = reader["Last Name"].ToString().Trim();
-                    bCookie["First Name"] = reader["First Name"].ToString().Trim();
-                    bCookie["Middle Name"] = reader["Middle Name"].ToString().Trim();
-                    bCookie["Initials"] = reader["Initials"].ToString().Trim();
-                    bCookie["UserID"] = reader["UserID"].ToString().Trim();
-                    bCookie["Employee Company"] = reader["Employee Company"].ToString().Trim();
-                    bCookie["Department"] = reader["Department"].ToString().Trim();
-                    bCookie["Work Location"] = reader["Work Location"].ToString().Trim();
-                    bCookie["Work Phone Number"] = reader["Work Phone Number"].ToString().Trim();
-                    bCookie["Manager Name"] = reader["Manager Name"].ToString().Trim();
-                    bCookie["Manager Work Location"] = reader["Manager Work Location"].ToString().Trim();
-                    bCookie["Manager Work Phone Number"] = reader["Manager Work Phone Number"].ToString().Trim();
+                SqlCommand cmd = new SqlCommand(@"SELECT * FROM Employees WHERE UserID=@UID", Connection);
+                cmd.Parameters.AddWithValue("@UID", ListBox1.SelectedValue);
+                Connection.Open();
 
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        bCookie["Last Name"] = reader["Last Name"].ToString().Trim();
+                        bCookie["First Name"] = reader["First Name"].ToString().Trim();
+                        bCookie["Middle Name"] = reader["Middle Name"].ToString().Trim();
+                        bCookie["Initials"] = reader["Initials"].ToString().Trim();
+                        bCookie["UserID"] = reader["UserID"].ToString().Trim();
+                        bCookie["Employee Company"] = reader["Employee Company"].ToString().Trim();
+                        bCookie["Department"] = reader["Department"].ToString().Trim();
+                        bCookie["Work Location"] = reader["Work Location"].ToString().Trim();
+                        bCookie["Work Phone Number"] = reader["Work Phone Number"].ToString().Trim();
+                        bCookie["Manager Name"] = reader["Manager Name"].ToString().Trim();
+                        bCookie["Manager Work Location"] = reader["Manager Work Location"].ToString().Trim();
+                        bCookie["Manager Work Phone Number"] = reader["Manager Work Phone Number"].ToString().Trim();
+
+                    }
+                    Connection.Close();
                 }
-                Connection.Close();
             }
+            Response.Redirect("~/EditEmployeeForm.aspx");
         }
-        Response.Redirect("~/EditEmployeeForm.aspx");
+
     }
 
 

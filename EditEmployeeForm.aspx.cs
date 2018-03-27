@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Web;
@@ -9,10 +9,10 @@ public partial class EditEmployeeForm : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        EmployeeDDL.Items.Add("No Manager");
         if (Request.Cookies["selectedEmployee"] != null)
         {
             HttpCookie cCookie = Request.Cookies["selectedEmployee"];
-            EmployeeDDL.SelectedIndex = EmployeeDDL.Items.IndexOf(EmployeeDDL.Items.FindByValue(cCookie["Manager Name"]));
             TextBox1.Text = cCookie["First Name"];
             TextBox2.Text = cCookie["Middle Name"];
             TextBox3.Text = cCookie["Last Name"];
@@ -25,13 +25,24 @@ public partial class EditEmployeeForm : System.Web.UI.Page
             TextBox9.Text = cCookie["Work Phone Number"];
             TextBox10.Text = cCookie["Manager Work Location"];
             TextBox11.Text = cCookie["Manager Work Phone Number"];
+            if (cCookie["Manager Name"] == "")
+            {
+                EmployeeDDL.Text = "No Manager";
+            }
+            else
+            {
+                EmployeeDDL.Text = cCookie["Manager Name"];
+            }
             Response.Cookies["selectedEmployee"].Expires = DateTime.Now.AddDays(-1);
+
         }
+
     }
 
     protected void CancelButton_Click(object sender, EventArgs e) //back button
     {
         Response.Redirect("~/HRForm.aspx");
+
     }
 
     protected void SaveButton_Click(object sender, EventArgs e) //dont use
@@ -57,9 +68,16 @@ public partial class EditEmployeeForm : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@Department", TextBox7.Text);
                 cmd.Parameters.AddWithValue("@WLocation", TextBox8.Text);
                 cmd.Parameters.AddWithValue("@WPhone", TextBox9.Text);
-                cmd.Parameters.AddWithValue("@EManager", EmployeeDDL.SelectedItem.Text);
                 cmd.Parameters.AddWithValue("@MWLocation", TextBox10.Text);
                 cmd.Parameters.AddWithValue("@MWPhone", TextBox11.Text);
+                if (EmployeeDDL.SelectedItem.Text == "No Manager") //if the 'No Manager' option is selected then Manager Name in database is empty
+                {
+                    cmd.Parameters.AddWithValue("@EManager", "");
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@EManager", EmployeeDDL.SelectedItem.Text);
+                }
                 cmd.ExecuteNonQuery();
             }
             Response.Redirect("~/HRForm.aspx");
@@ -82,9 +100,16 @@ public partial class EditEmployeeForm : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@Department", TextBox7.Text);
                 cmd.Parameters.AddWithValue("@WLocation", TextBox8.Text);
                 cmd.Parameters.AddWithValue("@WPhone", TextBox9.Text);
-                cmd.Parameters.AddWithValue("@EManager", EmployeeDDL.SelectedItem.Text);
                 cmd.Parameters.AddWithValue("@MWLocation", TextBox10.Text);
                 cmd.Parameters.AddWithValue("@MWPhone", TextBox11.Text);
+                if (EmployeeDDL.SelectedItem.Text == "No Manager") //if the 'No Manager' option is selected then Manager Name in database is empty
+                {
+                    cmd.Parameters.AddWithValue("@EManager", "");
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@EManager", EmployeeDDL.SelectedItem.Text);
+                }
                 cmd.ExecuteNonQuery();
             }
             Response.Redirect("~/HRForm.aspx");
@@ -92,4 +117,8 @@ public partial class EditEmployeeForm : System.Web.UI.Page
     }
 
 
+
+    protected void EmployeeDDL_Load(object sender, EventArgs e)
+    {
+    }
 }
