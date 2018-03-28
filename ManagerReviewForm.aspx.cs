@@ -11,6 +11,26 @@ public partial class ManagerReviewForm : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        SSNTextBox.ReadOnly = true;
+        SSNTextBox.BackColor = System.Drawing.Color.LightGray;
+
+        GetTextBox.ReadOnly = true;
+        GetTextBox.BackColor = System.Drawing.Color.LightGray;
+
+        DOBTextBox.ReadOnly = true;
+        DOBTextBox.BackColor = System.Drawing.Color.LightGray;
+
+        NotesTextBox.ReadOnly = true;
+        NotesTextBox.BackColor = System.Drawing.Color.LightGray;
+
+        ProximityCheckBox.Enabled = false;
+        EmergencyCheckBox.Enabled = false;
+        AccountsCheckBox.Enabled = false;
+
+        EmployeeDDL.Enabled = false;
+        ReasonDDL.Enabled = false;
+        BadgeTypeDDL.Enabled = false;
+
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (Request.Cookies["submittedCookieInfo"] != null)
         {

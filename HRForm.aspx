@@ -17,7 +17,7 @@
         <asp:Label ID="Label1" runat="server" Text="Employees"></asp:Label>
         <br />
         <asp:ListBox ID="ListBox1" runat="server" DataSourceID="SqlDataSource1" DataTextField="empNAME" DataValueField="uid"></asp:ListBox>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;Persist Security Info=True;User ID=pwndatnerd;Password=AaronDavidRandall!3" SelectCommand="SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS empNAME, [UserID] AS uid FROM Employees" ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;Persist Security Info=True;User ID=pwndatnerd;Password=AaronDavidRandall!3" SelectCommand="SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS empNAME, [UserID] AS uid FROM Employees ORDER BY [Last Name]" ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
         <br />
         <asp:Button ID="backButton" runat="server" Text="Back" OnClick="backButton_Click" />                                                                                                                
         <asp:Button ID="newButton" runat="server" Text="New" OnClick="newButton_Click" />

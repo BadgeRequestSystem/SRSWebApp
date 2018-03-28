@@ -30,9 +30,13 @@ public partial class HRForm : System.Web.UI.Page
 
     protected void deleteButton_Click(object sender, EventArgs e) //Pop-up dialog, if sucessful confirmation, we activate Button1_Click()
     {
-        ClientScript.RegisterStartupScript(typeof(Page), "exampleScript",
+        if(ListBox1.SelectedItem != null)
+        {
+            ClientScript.RegisterStartupScript(typeof(Page), "exampleScript",
             "if(confirm(\"Are you sure you want to delete INSERT EMPLOYEE NAME? \"))" +
             "{ document.getElementById('Button1').click(); }", true);
+        }
+    
     }
 
     protected void Button1_Click(object sender, EventArgs e) //Does the deleting after the pop-up dialog
