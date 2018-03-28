@@ -88,7 +88,7 @@ public partial class PendingActionForm : System.Web.UI.Page
                     Connection.Close();
                 }
             }
-            Response.Redirect("~/ViewSubmittedForm.aspx");
+            Response.Redirect("~/ManagerReviewForm.aspx");
         }
         ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "move"));
         /****************/
