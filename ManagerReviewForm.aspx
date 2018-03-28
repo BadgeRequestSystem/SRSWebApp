@@ -101,6 +101,9 @@
 
         
     </div>
+        <p>
+            <asp:TextBox ID="requestIDTxtBx" runat="server" ReadOnly="True" Visible="False"></asp:TextBox>
+        </p>
     </form>
 </body>
 </html>

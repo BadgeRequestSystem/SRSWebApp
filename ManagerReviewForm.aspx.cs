@@ -9,7 +9,6 @@ using System.Text.RegularExpressions;
 
 public partial class ManagerReviewForm : System.Web.UI.Page
 {
-
     protected void Page_Load(object sender, EventArgs e)
     {
         HttpCookie aCookie = Request.Cookies["userInfo"];
@@ -29,8 +28,9 @@ public partial class ManagerReviewForm : System.Web.UI.Page
             if (cCookie["Accounts"] == "True")
                 AccountsCheckBox.Checked = true;
             NotesTextBox.Text = cCookie["Notes"];
+            requestIDTxtBx.Text = cCookie["RequestID"];
 
-            Response.Cookies["draftInfo"].Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies["submittedCookieInfo"].Expires = DateTime.Now.AddDays(-1);
 
 
         }
@@ -45,11 +45,31 @@ public partial class ManagerReviewForm : System.Web.UI.Page
 
     protected void ApproveButton_Click(object sender, EventArgs e)
     {
-        
+        using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+        {
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(@"Update Requests
+                    SET [RequestState] = 'Approved'
+                    WHERE RequestID=@RequestID;", Connection);
+            cmd.Parameters.AddWithValue("@RequestID", requestIDTxtBx.Text);
+            cmd.ExecuteNonQuery();
+            Connection.Close();
+        }
+        Response.Redirect("~/PendingActionForm.aspx");
     }
 
     protected void DenyButton_Click(object sender, EventArgs e)
     {
-       
+        using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+        {
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(@"Update Requests
+                    SET [RequestState] = 'Denied'
+                    WHERE RequestID=@RequestID;", Connection);
+            cmd.Parameters.AddWithValue("@RequestID", requestIDTxtBx.Text);
+            cmd.ExecuteNonQuery();
+            Connection.Close();
+        }
+        Response.Redirect("~/PendingActionForm.aspx");
     }
 }

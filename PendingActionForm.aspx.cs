@@ -49,6 +49,7 @@ public partial class PendingActionForm : System.Web.UI.Page
                         bCookie["Emergency"] = reader["EmergencyAccess"].ToString();
                         bCookie["Accounts"] = reader["ContinueAccounts"].ToString();
                         bCookie["Notes"] = reader["Notes"].ToString();
+                        bCookie["RequestID"] = reader["RequestID"].ToString();
                     }
                     Connection.Close();
                 } 
