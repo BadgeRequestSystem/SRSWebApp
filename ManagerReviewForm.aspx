@@ -87,7 +87,7 @@
             <asp:CheckBox ID="AccountsCheckBox" runat="server" />
         </div> 
         <br />
-        <asp:Label ID="NotesLabel" Text="Notes:(max 500 char)" runat="server" />
+        <asp:Label ID="NotesLabel" Text="Additional Info:(max 500 char)" runat="server" />
         <div>
                 <asp:TextBox ID="NotesTextBox" Columns ="20" MaxLength="500" runat="server" Height="200px" TextMode="MultiLine" Width="400px" />
         </div>
