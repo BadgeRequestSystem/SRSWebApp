@@ -21,6 +21,7 @@ public partial class Login : System.Web.UI.Page
         bool isHR = false;
         string tempID;
         string tempMan;
+        string tempEmail;
         using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
         {
             try
@@ -63,12 +64,18 @@ public partial class Login : System.Web.UI.Page
                     cmdGetManagerName.Parameters.AddWithValue("@tempID", tempID);
                     tempMan = (string)cmdGetManagerName.ExecuteScalar();
 
+                    SqlCommand cmdGetEmail = new SqlCommand(@"SELECT Email FROM Credentials
+                                                    WHERE Username=@uname and Password=@pass", Connection);
+                    cmdGetManagerName.Parameters.AddWithValue("@tempID", tempID);
+                    tempEmail = (string)cmdGetManagerName.ExecuteScalar();
+
                     HttpCookie aCookie = new HttpCookie("userInfo");
                     aCookie.Values["userName"] = userBox.Text;
                     aCookie.Values["isManager"] = isManager.ToString();
                     aCookie.Values["isHR"] = isHR.ToString();
                     aCookie.Values["UserID"] = tempID;
                     aCookie.Values["Manager"] = tempMan;
+                    aCookie.Values["Email"] = tempEmail;
                     Response.Cookies.Add(aCookie);
 
                     Connection.Close();
