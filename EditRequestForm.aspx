@@ -4,15 +4,39 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>SRS-Badge Request</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
+    <link href="css/custom.css" rel="stylesheet">
+
 </head>
 <body bgcolor="aliceblue">
-    <form id="EditRequest" runat="server">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand">
+                	<span class="glyphicon glyphicon-fire"></span> 
+                	 SRS Badge Request System
+                </a>
+               
+
+        </div></div></nav>
+    <div class="jumbotron feature">
+		<div class="container">
+			<center><h1><span class="glyphicon glyphicon-equalizer"></span>Request Form</h1></center>
+			<form id="EditRequest" runat="server">
     <div>
         <br />
 
          <Center>
-           <asp:Label ID="RequestLabel" runat="server" text="Request Form"  Font-Bold="True" Font-Size="23pt" />
+           <asp:Label ID="RequestLabel" runat="server" text=""  Font-Bold="True" Font-Size="23pt" />
              
         <div>
             <br />
@@ -102,5 +126,9 @@
         
     </div>
     </form>
+
+            </div></div>
+<body bgcolor="aliceblue">
+    
 </body>
 </html>
