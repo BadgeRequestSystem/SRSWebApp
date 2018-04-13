@@ -66,8 +66,9 @@ public partial class Login : System.Web.UI.Page
 
                     SqlCommand cmdGetEmail = new SqlCommand(@"SELECT Email FROM Credentials
                                                     WHERE Username=@uname and Password=@pass", Connection);
-                    cmdGetManagerName.Parameters.AddWithValue("@tempID", tempID);
-                    tempEmail = (string)cmdGetManagerName.ExecuteScalar();
+                    cmdGetEmail.Parameters.AddWithValue("@uname", userBox.Text);
+                    cmdGetEmail.Parameters.AddWithValue("@pass", passBox.Text);
+                    tempEmail = (string)cmdGetEmail.ExecuteScalar();
 
                     HttpCookie aCookie = new HttpCookie("userInfo");
                     aCookie.Values["userName"] = userBox.Text;
