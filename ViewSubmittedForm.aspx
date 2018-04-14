@@ -80,6 +80,7 @@
         <br />
         <br />
         <asp:Button ID="backButton" runat="server" OnClick="backButton_Click" Text="Back"  Width="100px" Font-Bold="true"/>
+        <asp:Button ID="editButton" runat="server" Text="Edit" />
         <br />
         <br />
         <br />
