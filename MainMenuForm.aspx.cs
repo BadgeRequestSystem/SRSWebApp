@@ -15,13 +15,11 @@ public partial class MainMenuForm : System.Web.UI.Page
             Label2.Text = "Welcome, " + aCookie["userName"];
         if (aCookie["isManager"] == "True")
         {
-            ButtonReviewRequests.Enabled = true;
-            ButtonReviewRequests.BackColor = System.Drawing.Color.Orange;
+            ButtonReviewRequests.Visible = true;
         }
         if (aCookie["isHR"] == "True")
         {
-            ButtonUpdateEmployees.Enabled = true;
-            ButtonUpdateEmployees.BackColor = System.Drawing.Color.Orange;
+            ButtonUpdateEmployees.Visible = true;
         }
             
         
