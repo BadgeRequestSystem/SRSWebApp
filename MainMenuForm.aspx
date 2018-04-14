@@ -5,80 +5,106 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>SRS-Badge Request</title>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
-    <link href="css/custom.css" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body bgcolor="aliceblue">
+<form id="form1" runat="server">
+    <body bgcolor="aliceblue">
 
 
-    <form id="form1" runat="server">
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand">
-                	<span class="glyphicon glyphicon-fire"></span> 
-                	 SRS Badge Request System
-                </a>
-                 <asp:Button ID="ButtonLogout" runat="server" Text="Logout" OnClick="ButtonLogout_Click1" Width="100px" Font-Bold="true"/>
-                    
-
-
-        </div></div></nav>
-    
-        
-    <div>
-    <div class="jumbotron feature">
-		<div class="container">
-            <asp:Label ID="Label2" runat="server" Text="Welcome, " Font-Size="14pt" ForeColor="Black"></asp:Label>
-            <br />
-            <center>
-			<h1><span class="glyphicon glyphicon-equalizer"></span>Main Menu<a class="navbar-brand">
-                </a>
-               
-                <p>
-            <asp:Button ID="ButtonNewRequest" runat="server" Text="New Request" OnClick="ButtonNewRequest_Click" Height="40px" Width="300px" Font-Size="14pt" ForeColor="Black"/>
-        </p>
-        <p>
-        <asp:Button ID="ButtonViewSavedRequests" runat="server" Text="View Drafts" OnClick="ButtonViewSavedRequests_Click" Height="40px" Width="300px" Font-Size="14pt" ForeColor="Black"/>
+        <div id="overtop">
+            <p></p>
+        </div>
+        <div id="overbottom">
+            <p>&nbsp;</p>
+        </div>
+        <div id="overright">
+            <p></p>
+        </div>
+        <div id="overleft">
+            <p>&nbsp;</p>
+        </div>
+        <div id="overmiddle">
+            <p>
+            </p>
+        </div>
+        <div id="mainpageWelcome">
+            <p>
+                <asp:Label ID="Label2" runat="server" Text="Welcome, " Font-Size="XX-Large" ForeColor="Orange" Font-Bold="True"></asp:Label>
+                <p></p>
+                <asp:Button ID="ButtonLogout" runat="server" Text="Logout" OnClick="ButtonLogout_Click1" Width="100px" Font-Bold="true" BackColor="#FF9900" />
+            </p>
+        </div>
+        <div id="overmiddleleft">
+            <p>
+                <asp:Button ID="ButtonNewRequest" runat="server" Text="New Request" OnClick="ButtonNewRequest_Click" Height="105px" Width="379px" Font-Size="14pt" ForeColor="Black" BackColor="#FF9900" />
             </p>
             <p>
-            <asp:Button ID="ButtonViewSubmittedRequests" runat="server" Text="View Submitted Requests" OnClick="ButtonViewSubmittedRequests_Click" Height="40px" Width="300px" Font-Size="14pt" ForeColor="Black"/>
+                <br />
+                <br />
+                <br />
+                <asp:Button ID="ButtonViewSavedRequests" runat="server" Text="View Drafts" OnClick="ButtonViewSavedRequests_Click" Height="107px" Width="376px" Font-Size="14pt" ForeColor="Black" BackColor="#FF9900" />
             </p>
-        <p>
-            <asp:Button ID="ButtonReviewRequests" runat="server" Text="Review Requests" OnClick="ButtonReviewRequests_Click" Visible="False" Height="40px" Width="300px" Font-Size="14pt" ForeColor="Black"/>
-        </p>
-        <p>
-            <asp:Button ID="ButtonUpdateEmployees" runat="server" Text="Update Employees" OnClick="ButtonUpdateEmployees_Click" Visible="False" Height="40px" Width="300px" Font-Size="14pt" ForeColor="Black"/>
+            <p>
+                <br />
+                <br />
+                <br />
+                <asp:Button ID="ButtonViewSubmittedRequests" runat="server" Text="View Submitted Requests" OnClick="ButtonViewSubmittedRequests_Click" Height="102px" Width="376px" Font-Size="14pt" ForeColor="Black" BackColor="#FF9900" />
             </p>
-            </h1></center>
-			
+        </div>
+        <div id="overmiddleright">
+            <p>
+                <asp:Button ID="ButtonReviewRequests" runat="server" Text="Review Requests" OnClick="ButtonReviewRequests_Click" Height="115px" Width="396px" Font-Size="14pt" ForeColor="Black" BackColor="Gray" Enabled="False" />
+            </p>
+            <p>
+                
+                <br />
+                
+                <br />
+                <br />
+                <asp:Button ID="ButtonUpdateEmployees" runat="server" Text="Update Employees" OnClick="ButtonUpdateEmployees_Click" Height="111px" Width="404px" Font-Size="14pt" ForeColor="Black" BackColor="Gray" Enabled="False" />
+            </p>
+        </div>
 
-            </div></div>
+        <div id="overmiddleleftABOVEtext">
+            <p><asp:Label ID="employees_label" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="#FF9900" Text="Employees"></asp:Label></p>
+        </div>
+        <div id="overmiddlerightABOVEtext">
+            <p><asp:Label ID="managerAndHR_label" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="#FF9900" Text="Manager and HR"></asp:Label></p>
+        </div>
 
 
 
 
 
-    </div>
+
+
+        </div>
          <div align="right"></div>
         <br />
         <center>
         
-           
+            
+            
+        </p>
+        <p>
+        
+            </p>
+            <p>
+            
+            </p>
+        <p>
+            
+        </p>
+        <p>
+            
+            </p>
         
         <p>
+            
             </center>
-           
         </p>
-    </form>
+        <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+</form>
 </body>
 </html>

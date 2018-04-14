@@ -9,14 +9,22 @@ public partial class MainMenuForm : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (!Label2.Text.Contains(aCookie["userName"]))
             Label2.Text = "Welcome, " + aCookie["userName"];
         if (aCookie["isManager"] == "True")
-            ButtonReviewRequests.Visible = true;
+        {
+            ButtonReviewRequests.Enabled = true;
+            ButtonReviewRequests.BackColor = System.Drawing.Color.Orange;
+        }
         if (aCookie["isHR"] == "True")
-            ButtonUpdateEmployees.Visible = true;
+        {
+            ButtonUpdateEmployees.Enabled = true;
+            ButtonUpdateEmployees.BackColor = System.Drawing.Color.Orange;
+        }
+            
+        
 
     }
 
