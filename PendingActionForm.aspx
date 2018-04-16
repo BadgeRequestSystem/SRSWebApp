@@ -35,7 +35,7 @@
             </div>
             <div id="listboxFormPanel">
                 <p>
-                    <asp:ListBox ID="ListBox1" runat="server" DataSourceID="SqlDataSource1" DataTextField="PendingDisplay" DataValueField="RequestID" Height="309px" Font-Size="X-Large" BackColor="#CCCCCC" Font-Bold="True" Width="479px"></asp:ListBox>
+                    <asp:ListBox ID="ListBox1" runat="server" DataSourceID="SqlDataSource1" DataTextField="PendingDisplay" DataValueField="RequestID" Height="309px" Font-Size="Medium" BackColor="#CCCCCC" Font-Bold="True" Width="479px"></asp:ListBox>
                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;Persist Security Info=True;User ID=pwndatnerd;Password=AaronDavidRandall!3" SelectCommand="Select CAST([RequestID] AS varchar(200)) + '   ' + [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay, [RequestID] From Requests JOIN Employees ON [Employee] = ([First Name] + ' ' + [Middle Name] + ' ' + [Last Name]) WHERE ([RequestState] = @RequestState AND [Username] = @CookieUsername) OR ([RequestState] = @RequestState AND [Manager Name] = @CookieManager)" ProviderName="System.Data.SqlClient">
 
                         <SelectParameters>
