@@ -5,51 +5,68 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>SRS-Badge Request</title>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
-    <link href="css/custom.css" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body bgcolor="aliceblue">
+    <form id="form1" runat="server">
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand">
-                	<span class="glyphicon glyphicon-fire"></span> 
-                	 SRS Badge Request System
-                </a>
-               
+<div id="overtop">
+    <p></p>
+</div>
+<div id="overbottom">
+    <p>
+        <br></br>
+        <p>
+            SRS - Badge Request System: Augusta University Senior Capstone Project
+        </p>
+        <p></p>
+    </p>
+</div>
+<div id="overright">
+    <p></p>
+</div>
+<div id="overleft">
+    <p></p>
+</div>
+<div id="overmiddle">
+    <p>
+        <div id="reviewRequestsCustom">
+            <p>
+                &nbsp;
+            </p>
+            <p>
+                <asp:button id="pendingButton" runat="server" text="Pending" onclick="pendingButton_Click" height="64px" width="159px" font-size="Large" backcolor="#CCCCCC" bordercolor="#FF9900" font-bold="True" />
 
-        </div></div></nav>
-    <div class="jumbotron feature">
-		<div class="container">
-			<center><h1><span class="glyphicon glyphicon-equalizer"></span>Review Requests</h1></center>
-			<form id="form1" runat="server">
-        <div>
-            <br /><br /><br />
-            <center>
-        <asp:Button ID="pendingButton" runat="server" Text="Pending" OnClick="pendingButton_Click" Height="40px" Width="100px" Font-Size="14pt"/>
-        <br /><br />
-        <asp:Button ID="approvedButton" runat="server" Text="Approved" OnClick="approvedButton_Click" Height="40px" Width="100px" Font-Size="14pt"/>
-        <br /><br />
-        <asp:Button ID="deniedButton" runat="server" Text="Denied" OnClick="deniedButton_Click" Height="40px" Width="100px" Font-Size="14pt"/>
-        <br />
-             </center>
+            </p>
+            <p>
+                &nbsp;</p>
+            <p>
+                <asp:button id="approvedButton" runat="server" text="Approved" onclick="approvedButton_Click" height="64px" width="159px" font-size="Large" backcolor="#CCCCCC" bordercolor="#FF9900" font-bold="True" />
 
-            <asp:Button ID="backButton" runat="server" OnClick="backButton_Click" Text="Back" Width="100px" Font-Bold="true"/>
+            </p>
+            <p>
+                &nbsp;</p>
+            <p>
+                <asp:button id="deniedButton" runat="server" text="Denied" onclick="deniedButton_Click" height="64px" width="159px" font-size="Large" backcolor="#CCCCCC" bordercolor="#FF9900" font-bold="True" />
 
+            </p>
         </div>
-    </form>
+        <div id="listboxFormPanelText">
+            <p>
+                <asp:label id="Label1" runat="server" font-bold="True" font-size="XX-Large" forecolor="#FF9900" text="Review Requests" BorderStyle="Inset"></asp:label>
+            </p>
+        </div>
+        <div id="reviewRequestsBackButton">
+            <p>
+                &nbsp;</p>
+            <p>
+                <asp:button id="backButton" runat="server" onclick="backButton_Click" text="Back" width="100px" font-bold="True" backcolor="#CCCCCC" bordercolor="#FF9900" font-size="Large" />
+            </p>
+        </div>
+    </p>
+</div>
 
-            </div></div>
-<body bgcolor="aliceblue">
-    
-</body>
+
+
+</form>
+
 </html>

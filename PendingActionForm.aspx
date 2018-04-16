@@ -48,7 +48,7 @@
             </div>
             <div id="listboxFormPanelButtons">
                 <p>
-                    <asp:Button ID="Button1" runat="server" Text="Back" OnClick="Button1_Click" Width="100px" Font-Bold="True" BorderColor="#FF9900" Font-Size="Large" />
+                    <asp:Button ID="Button1" runat="server" Text="Back" OnClick="Button1_Click" Width="100px" Font-Bold="True" BorderColor="#FF9900" Font-Size="Large" BackColor="#CCCCCC" />
                     
                 </p>
             </div>

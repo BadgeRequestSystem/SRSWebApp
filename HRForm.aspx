@@ -47,16 +47,16 @@
         </div>
         <div id="listboxFormPanelButtons">
             <p>
-                <asp:Button ID="backButton" runat="server" Text="Back" OnClick="backButton_Click" BorderColor="#FF9900" Font-Bold="True" Font-Size="Large" Height="47px" Width="91px" />
+                <asp:Button ID="backButton" runat="server" Text="Back" OnClick="backButton_Click" BorderColor="#FF9900" Font-Bold="True" Font-Size="Large" Height="47px" Width="91px" BackColor="#CCCCCC" />
             </p>
             <p>
-                <asp:Button ID="newButton" runat="server" Text="New" OnClick="newButton_Click" BorderColor="#FF9900" Font-Bold="True" Font-Size="Large" Height="47px" Width="91px" />
+                <asp:Button ID="newButton" runat="server" Text="New" OnClick="newButton_Click" BorderColor="#FF9900" Font-Bold="True" Font-Size="Large" Height="47px" Width="91px" BackColor="#CCCCCC" />
             </p>
             <p>
-                <asp:Button ID="updateButton" runat="server" Text="Update" OnClick="updateButton_Click" BorderColor="#FF9900" Font-Bold="True" Font-Size="Large" Height="47px" Width="91px" />
+                <asp:Button ID="updateButton" runat="server" Text="Update" OnClick="updateButton_Click" BorderColor="#FF9900" Font-Bold="True" Font-Size="Large" Height="47px" Width="91px" BackColor="#CCCCCC" />
             </p>
             <p>
-                <asp:Button ID="deleteButton" runat="server" Text="Delete" OnClick="deleteButton_Click" BorderColor="#FF9900" Font-Bold="True" Font-Size="Large" Height="47px" Width="91px" />
+                <asp:Button ID="deleteButton" runat="server" Text="Delete" OnClick="deleteButton_Click" BorderColor="#FF9900" Font-Bold="True" Font-Size="Large" Height="47px" Width="91px" BackColor="#CCCCCC" />
             </p>
         </div>
         <div id="listboxFormPanelText">
