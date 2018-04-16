@@ -12,6 +12,7 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //NotesTextBox.Text = returnEmail("Aaron Something Prather");
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (Request.Cookies["draftInfo"] != null)
         {
@@ -61,8 +62,8 @@ public partial class EditRequestForm : System.Web.UI.Page
 
 
 
-//dontreplyplz @workmail.com
-//Password!1
+    //dontreplyplz @workmail.com
+    //Password!1
 
     /* the email method with correct config set up, just need a real email address to send it to
  try
@@ -97,22 +98,34 @@ catch (Exception ex)
 
 
 
-//public string returnEmail(string Employee)
-//{
-//    HttpCookie aCookie = Request.Cookies["userInfo"];
-//    string email = string.Empty;
-//    using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
-//    {
-//        Connection.Open();
-//        SqlCommand cmd = new SqlCommand(@"SELECT UserID FROM Employees WHERE [First Name]=@Fname, [Last Name]=@Lname,", Connection);
-//    }
+    public string returnEmail(string Employee)
+    {
+        HttpCookie aCookie = Request.Cookies["userInfo"];
+        string email = string.Empty;
+        using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+        {
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(@"Select Email FROM Credentials WHERE UserID =
+                                            (Select UserID FROM Employees WHERE ([First Name] + ' ' + [Middle Name]  + ' ' + [Last Name]) =@employee)", Connection);
+            cmd.Parameters.AddWithValue("@employee", Employee);
+            email = (string)cmd.ExecuteScalar();
+            //SqlCommand cmd = new SqlCommand(@"SELECT UserID FROM Employees WHERE ([First Name] + ' ' + [Middle Name] + ' ' + [Last Name]) = @manager", Connection);
+            //cmd.Parameters.AddWithValue("@manager", aCookie["Manager"]);
+            //string ID = (string)cmd.ExecuteScalar();
+
+            //SqlCommand cmd2 = new SqlCommand(@"Select Email FROM Credentials  WHERE UserID =@userID", Connection);
+            //cmd2.Parameters.AddWithValue("@userID", ID);
+            //email = (string)cmd2.ExecuteScalar();
 
 
-//        return email;
+        }
 
-//}
 
-protected void SubmmitButton_Click(object sender, EventArgs e)
+        return email;
+
+    }
+
+    protected void SubmmitButton_Click(object sender, EventArgs e)
     {
         try
         {
