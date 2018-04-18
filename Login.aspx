@@ -30,7 +30,7 @@
         <div id="overmiddle">
             <br /><br /><br />
             <img alt="Savannah River Site Logo" class="auto-style1" src="Images/SRSLogo.png" /><br /><br />
-            <asp:Label ID="RequestLabel" runat="server" Text="Badge Request System" Font-Bold="True" Font-Size="25pt" ForeColor="#FF9900" BorderStyle="Inset" /><br />
+            <asp:Label ID="RequestLabel" runat="server" Text="Badge Request System" Font-Bold="True" Font-Size="25pt" ForeColor="#FF9900" /><br />
             <br />
 
         </div>

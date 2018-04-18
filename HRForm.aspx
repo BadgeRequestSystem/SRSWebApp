@@ -63,7 +63,7 @@
             <p>
                 &nbsp;</p>
             <p>
-                <asp:Label ID="Label1" runat="server" Text="Employees" Font-Bold="True" Font-Size="XX-Large" ForeColor="#FF9900" BorderStyle="Inset"></asp:Label>
+                <asp:Label ID="Label1" runat="server" Text="Employees" Font-Bold="True" Font-Size="XX-Large" ForeColor="#FF9900"></asp:Label>
             </p>
         </div>
 

@@ -120,7 +120,7 @@
         </div>
         <div id="editRequestFormTopRightText">
             <p>
-                <asp:Label ID="Label1" runat="server" Text="Edit Request" Font-Bold="True" Font-Size="XX-Large" ForeColor="#FF9900" BorderStyle="Inset"></asp:Label>
+                <asp:Label ID="Label1" runat="server" Text="Edit Request" Font-Bold="True" Font-Size="XX-Large" ForeColor="#FF9900"></asp:Label>
         </div>
 
 

@@ -114,12 +114,12 @@
         <p>
             <asp:Button ID="ApproveButton" Text="Approve" runat="server" OnClick="ApproveButton_Click" Width="125px" Font-Bold="True" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Size="Large" />
             <asp:Button ID="DenyButton" Text="Deny" runat="server" OnClick="DenyButton_Click" Width="125px" Font-Bold="True" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Size="Large" />
-            <asp:Button ID="InfoButton" Text="Needs More Info" runat="server" OnClick="InfoButton_Click" Width="125px" Font-Bold="True" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Size="Large" />
+            <asp:Button ID="InfoButton" Text="Needs More Info" runat="server" OnClick="InfoButton_Click" Width="170px" Font-Bold="True" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Size="Large" />
         </p>
     </div>
     <div id="editRequestFormTopRightText">
         <p>
-            <asp:label id="Label1" runat="server" borderstyle="Inset" font-bold="True" font-size="XX-Large" forecolor="#FF9900" text="Manager Review Form"></asp:label></p>
+            <asp:label id="Label1" runat="server" font-bold="True" font-size="XX-Large" forecolor="#FF9900" text="Manager Review Form"></asp:label></p>
     </div>
 
 

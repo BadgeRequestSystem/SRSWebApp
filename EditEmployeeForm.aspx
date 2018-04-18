@@ -37,7 +37,7 @@
             </div>
             <div id="editRequestFormTopRightText">
                 <p>
-                    <asp:label id="Label11" runat="server" borderstyle="Inset" font-bold="True" font-size="XX-Large" forecolor="#FF9900" text="Edit Employees"></asp:label>
+                    <asp:label id="Label11" runat="server" font-bold="True" font-size="XX-Large" forecolor="#FF9900" text="Edit Employees"></asp:label>
                 </p>
             </div>
         </p>

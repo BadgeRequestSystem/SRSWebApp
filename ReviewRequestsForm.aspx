@@ -52,7 +52,7 @@
         </div>
         <div id="listboxFormPanelText">
             <p>
-                <asp:label id="Label1" runat="server" font-bold="True" font-size="XX-Large" forecolor="#FF9900" text="Review Requests" BorderStyle="Inset"></asp:label>
+                <asp:label id="Label1" runat="server" font-bold="True" font-size="XX-Large" forecolor="#FF9900" text="Review Requests"></asp:label>
             </p>
         </div>
         <div id="reviewRequestsBackButton">

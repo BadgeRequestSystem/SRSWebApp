@@ -50,7 +50,7 @@
                 <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Back" Width="100px" Font-Bold="True" BorderColor="#FF9900" Font-Size="Large" BackColor="#CCCCCC" /></p>
         </div>
         <div id="listboxFormPanelText">
-            <p><asp:Label ID="Label1" runat="server" BorderStyle="Inset" Font-Bold="True" Font-Size="XX-Large" ForeColor="#FF9900" Text="Saved Drafts"></asp:Label></p>
+            <p><asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="XX-Large" ForeColor="#FF9900" Text="Saved Drafts"></asp:Label></p>
         </div>
     </form>
 

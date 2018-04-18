@@ -53,7 +53,7 @@
                 </p>
             </div>
             <div id="listboxFormPanelText">
-                <p><asp:Label ID="Label1" runat="server" BorderStyle="Inset" Font-Bold="True" Font-Size="XX-Large" ForeColor="#FF9900" Text="Pending Action"></asp:Label></p>
+                <p><asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="XX-Large" ForeColor="#FF9900" Text="Pending Action"></asp:Label></p>
             </div>
         </form>
     </body>
