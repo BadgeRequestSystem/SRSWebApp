@@ -37,7 +37,7 @@ public partial class Login : System.Web.UI.Page
         {
             try
             {
-                //Connection.Open();
+                Connection.Open();
                 //SqlCommand cmd = new SqlCommand(@"SELECT Count(*) FROM Credentials 
                 //                        WHERE Username=@uname and 
                 //                        Password=@pass", Connection);
@@ -48,8 +48,7 @@ public partial class Login : System.Web.UI.Page
 
 
                 //userBox.Text = "Bang1";
-                SqlCommand cmd = new SqlCommand(@"Select PasswordHash FROM Credentials
-                                                    WHERE Username=@uname", Connection);
+                SqlCommand cmd = new SqlCommand(@"Select PasswordHash FROM Credentials   WHERE Username=@uname", Connection);
                 cmd.Parameters.AddWithValue("@uname", userBox.Text);
 
                 string temp2 = (string)cmd.ExecuteScalar();
