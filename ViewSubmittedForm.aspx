@@ -5,93 +5,81 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>SRS-Badge Request</title>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
-    <link href="css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
-<body bgcolor="aliceblue">
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand">
-                	<span class="glyphicon glyphicon-fire"></span> 
-                	 SRS Badge Request System
-                </a>
-               
+<form id="form1" runat="server">
 
-        </div></div></nav>
-    <div class="jumbotron feature">
-		<div class="container">
-			<center><h1><span class="glyphicon glyphicon-equalizer"></span>View Submitted Form</h1></center>
-			 <form id="form1" runat="server">
-    <div>
-    <center>
+    <div id="overtop">
+        <p></p>
+    </div>
+    <div id="overbottom">
+        <p>
+            <br></br>
+            <p>
+                SRS - Badge Request System: Augusta University Senior Capstone Project
+            </p>
+            <p></p>
+        </p>
+    </div>
+    <div id="overright">
+        <p></p>
+    </div>
+    <div id="overleft">
+        <p></p>
+    </div>
+    <div id="overmiddle">
+        <p>
+            &nbsp;<asp:label id="employeeLabel" runat="server" text="Employee: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="initialsLabel" runat="server" text="Initials: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="useridLabel" runat="server" text="UserID: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="ecompanyLabel" runat="server" text="Employee Company: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="departmentLabel" runat="server" text="Department: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="worklocationLabel" runat="server" text="Work Location: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="workphoneLabel" runat="server" text="Work Phone: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="emanagerLabel" runat="server" text="Employee Manager: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="mworklocationLabel" runat="server" text="Manager Work Location: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="mworkphoneLabel" runat="server" text="Manager Work Phone: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="reasonforrequestLabel" runat="server" text="Reason for Request: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="ssnLabel" runat="server" text="SSN: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="getdateLabel" runat="server" text="G.E.T. Date: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="dateofbirthLabel" runat="server" text="Date of Birth: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="typeofbadgeLabel" runat="server" text="Type of badge required: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="proximitycardLabel" runat="server" text="Proximity Card? " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="emergencyaccessLabel" runat="server" text="Emergency Access? " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:label id="continuecomputeraccountsLabel" runat="server" text="Continue Computer Accounts? " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <br />
+            <br />
+            <asp:label id="notesLabel" runat="server" text="Notes: " font-size="22px" Font-Bold="True" ForeColor="#FF9900"></asp:label>
+            <br />
+            <asp:textbox id="TextBox1" runat="server" height="112px" textmode="MultiLine" width="250px" font-size="22px" BackColor="#CCCCCC"></asp:textbox>
+        </p>
+        <p>
+            <br />
+            <br />
+            <asp:button id="backButton" runat="server" onclick="backButton_Click" text="Back" width="100px" font-bold="True" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Size="Large" />
+            <asp:button id="editButton" runat="server" text="Edit" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Bold="True" Font-Size="Large" Width="100px" />
+        </p>
 
-        <br /><br /><br />
-        <asp:Label ID="employeeLabel" runat="server" Text="Employee: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="initialsLabel" runat="server" Text="Initials: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="useridLabel" runat="server" Text="UserID: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="ecompanyLabel" runat="server" Text="Employee Company: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="departmentLabel" runat="server" Text="Department: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="worklocationLabel" runat="server" Text="Work Location: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="workphoneLabel" runat="server" Text="Work Phone: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="emanagerLabel" runat="server" Text="Employee Manager: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="mworklocationLabel" runat="server" Text="Manager Work Location: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="mworkphoneLabel" runat="server" Text="Manager Work Phone: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="reasonforrequestLabel" runat="server" Text="Reason for Request: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="ssnLabel" runat="server" Text="SSN: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="getdateLabel" runat="server" Text="G.E.T. Date: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="dateofbirthLabel" runat="server" Text="Date of Birth: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="typeofbadgeLabel" runat="server" Text="Type of badge required: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="proximitycardLabel" runat="server" Text="Proximity Card? " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="emergencyaccessLabel" runat="server" Text="Emergency Access? " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:Label ID="continuecomputeraccountsLabel" runat="server" Text="Continue Computer Accounts? " Font-Size="22px"></asp:Label>
-        <br />
-        <br />
-        <br />
-        <asp:Label ID="notesLabel" runat="server" Text="Notes: " Font-Size="22px"></asp:Label>
-        <br />
-        <asp:TextBox ID="TextBox1" runat="server" Height="112px" TextMode="MultiLine" Width="250px" Font-Size="22px"></asp:TextBox>
-        <br />
-        <br />
-        <asp:Button ID="backButton" runat="server" OnClick="backButton_Click" Text="Back"  Width="100px" Font-Bold="true"/>
-        <asp:Button ID="editButton" runat="server" Text="Edit" />
-        <br />
-        <br />
-        <br />
-
-
-    </center>
     </div>
     </form>
-
-            </div></div>
-<body bgcolor="aliceblue">
-   
-</body>
 </html>
