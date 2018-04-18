@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Net.Mail;
 
 public partial class EditRequestForm : System.Web.UI.Page
 {
@@ -62,38 +63,56 @@ public partial class EditRequestForm : System.Web.UI.Page
 
 
 
-    //dontreplyplz @workmail.com
-    //Password!1
-
-    /* the email method with correct config set up, just need a real email address to send it to
- try
- {
-        MailMessage mail = new MailMessage();
-        SmtpClient SmtpServer = new SmtpClient("smtp.mail.com");
-
-        mail.From = new MailAddress("dontreplyplz@workmail.com");
-        mail.To.Add("test@example.com");
-        mail.Subject = "Test Mail";
-        mail.Body = "Test email test";
-
-        SmtpServer.Port = 587;
-        SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplyplz@workmail.com", "Password!1");
-        SmtpServer.EnableSsl = true;
-
-        SmtpServer.Send(mail);
-        Console.WriteLine("Sucesss");
-
-}
-catch (Exception ex)
-{
-        Console.WriteLine("Fail");
-}
-
-    */
 
 
 
 
+    public void sendNotification(string Employee, string Manager)
+    {
+        //dontreplyplz @workmail.com
+        //Password!1
+
+        // the email method with correct config set up, just need a real email address to send it to
+     try
+     {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.mail.com");
+
+            mail.From = new MailAddress("dontreplyplz@workmail.com");
+            mail.To.Add(returnEmail(Employee));
+            mail.Subject = "SRS Badge Request Received";
+            mail.Body = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been received." +
+                "\nYou will be notified on the status of your request shortly. We thank you for your patience. \nSincerely,\nThe SRS Badge Request System", Employee);
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplyplz@workmail.com", "Password!1");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+            MailMessage mail2 = new MailMessage();
+            SmtpClient SmtpServer2 = new SmtpClient("smtp.mail.com");
+
+            mail2.From = new MailAddress("dontreplyplz@workmail.com");
+            mail2.To.Add(returnEmail(Manager));
+            mail2.Subject = "SRS Badge Request Attention Needed";
+            mail2.Body = String.Format("Dear {0},\n\tWe wanted to inform you that {1} has put in a request for a new badge." +
+                "\nPlease review the request at your earliest convenience. We thank you for your time. \nSincerely,\nThe SRS Badge Request System", Manager, Employee);
+
+            SmtpServer2.Port = 587;
+            SmtpServer2.Credentials = new System.Net.NetworkCredential("dontreplyplz@workmail.com", "Password!1");
+            SmtpServer2.EnableSsl = true;
+            SmtpServer2.Send(mail2);
+            //Console.WriteLine("Sucesss");
+
+        }
+    catch (Exception ex)
+    {
+            //Console.WriteLine("Fail");
+    }
+
+
+    }
 
 
 
@@ -155,7 +174,8 @@ catch (Exception ex)
 
                 cmd.ExecuteNonQuery();
             }
-            
+
+            sendNotification(EmployeeDDL.Text, aCookie["Manager"]);
             Response.Redirect("~/MainMenuForm.aspx");
         }
         catch (Exception ex)
