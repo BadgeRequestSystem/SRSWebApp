@@ -30,13 +30,37 @@ public partial class HRForm : System.Web.UI.Page
 
     protected void deleteButton_Click(object sender, EventArgs e) //Pop-up dialog, if sucessful confirmation, we activate Button1_Click()
     {
-        if(ListBox1.SelectedItem != null)
+        if (ListBox1.SelectedItem != null)
         {
+            HttpCookie bCookie = new HttpCookie("EmployeeToDelete");
+            Response.Cookies.Add(bCookie);
+
+            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+            {
+                SqlCommand cmd = new SqlCommand(@"SELECT * FROM Employees WHERE UserID=@UID", Connection);
+                cmd.Parameters.AddWithValue("@UID", ListBox1.SelectedValue);
+                Connection.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        bCookie["Last Name"] = reader["Last Name"].ToString().Trim();
+                        bCookie["First Name"] = reader["First Name"].ToString().Trim();
+                        bCookie["Middle Name"] = reader["Middle Name"].ToString().Trim();
+
+                    }
+                    Connection.Close();
+                }
+            }
             ClientScript.RegisterStartupScript(typeof(Page), "exampleScript",
-            "if(confirm(\"Are you sure you want to delete INSERT EMPLOYEE NAME? \"))" +
+            "if(confirm(\"Are you sure you want to delete " + bCookie["First Name"] + " " + bCookie["Middle Name"] + " " + bCookie["Last Name"] + "? \"))" +
             "{ document.getElementById('Button1').click(); }", true);
+
+            Response.Cookies["EmployeeToDelete"].Expires = DateTime.Now.AddDays(-1);
         }
-    
+
+
     }
 
     protected void Button1_Click(object sender, EventArgs e) //Does the deleting after the pop-up dialog
@@ -56,7 +80,7 @@ public partial class HRForm : System.Web.UI.Page
 
     protected void updateButton_Click(object sender, EventArgs e)
     {
-        if(ListBox1.SelectedItem != null)
+        if (ListBox1.SelectedItem != null)
         {
             HttpCookie bCookie = new HttpCookie("selectedEmployee");
             Response.Cookies.Add(bCookie);
