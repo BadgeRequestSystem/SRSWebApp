@@ -9,26 +9,26 @@ public partial class ViewSubmittedForm : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         HttpCookie aCookie = Request.Cookies["submittedCookieInfo"];
-        employeeLabel.Text = "Employee: " + aCookie.Values["Employee"];
-        reasonforrequestLabel.Text = "Reason for Request: " + aCookie.Values["Reason"];
-        getdateLabel.Text = "G.E.T. Date: " + aCookie.Values["GET"].Replace(" 12:00:00 AM", "");
-        ssnLabel.Text = "SSN: " + aCookie.Values["SSN"];
-        dateofbirthLabel.Text = "Date of Birth: " + aCookie.Values["DOB"].Replace(" 12:00:00 AM", "");
-        typeofbadgeLabel.Text = "Type of Badge Required: " + aCookie.Values["TOB"];
-        proximitycardLabel.Text = "Proximity Card Required: " + aCookie.Values["Proximity"];
-        emergencyaccessLabel.Text = "Emergency Access Required: " + aCookie.Values["Emergency"];
-        continuecomputeraccountsLabel.Text = "Continue Computer Accounts: " + aCookie.Values["Accounts"];
+        employeeLabel0.Text = aCookie.Values["Employee"];
+        reasonforrequestLabel0.Text = aCookie.Values["Reason"];
+        getdateLabel0.Text = aCookie.Values["GET"].Replace(" 12:00:00 AM", "");
+        ssnLabel0.Text = aCookie.Values["SSN"];
+        dateofbirthLabel0.Text = aCookie.Values["DOB"].Replace(" 12:00:00 AM", "");
+        typeofbadgeLabel0.Text = aCookie.Values["TOB"];
+        proximitycardLabel0.Text = aCookie.Values["Proximity"];
+        emergencyaccessLabel0.Text = aCookie.Values["Emergency"];
+        continuecomputeraccountsLabel0.Text = aCookie.Values["Accounts"];
         TextBox1.Text = aCookie.Values["Notes"];
 
-        initialsLabel.Text = "Initials: " + aCookie["Initials"];
-        useridLabel.Text = "UserID: " + aCookie["UserID"];
-        ecompanyLabel.Text = "Employee Company: " + aCookie["Company"];
-        departmentLabel.Text = "Department: " + aCookie["Department"];
-        worklocationLabel.Text = "Work Location: " + aCookie["Location"];
-        workphoneLabel.Text = "Work Phone: " + aCookie["Phone"];
-        emanagerLabel.Text = "Employee Manager: " + aCookie["Manager"];
-        mworklocationLabel.Text = "Manager Work Location: " + aCookie["ManagerLocation"];
-        mworkphoneLabel.Text = "Manager Work Phone: " + aCookie["ManagerPhone"];
+        initialsLabel0.Text = aCookie["Initials"];
+        useridLabel0.Text = aCookie["UserID"];
+        ecompanyLabel0.Text = aCookie["Company"];
+        departmentLabel0.Text = aCookie["Department"];
+        worklocationLabel0.Text = aCookie["Location"];
+        workphoneLabel0.Text = aCookie["Phone"];
+        emanagerLabel0.Text = aCookie["Manager"];
+        mworklocationLabel0.Text = aCookie["ManagerLocation"];
+        mworkphoneLabel0.Text = aCookie["ManagerPhone"];
     }
 
     protected void backButton_Click(object sender, EventArgs e)
