@@ -125,7 +125,7 @@
     <div id="editRequestFormBottomButtons">
         <p>
             <asp:button id="backButton" runat="server" onclick="backButton_Click" text="Back" width="100px" font-bold="True" backcolor="#CCCCCC" bordercolor="#FF9900" font-size="Large" />
-            <asp:button id="editButton" runat="server" text="Edit" backcolor="#CCCCCC" bordercolor="#FF9900" font-bold="True" font-size="Large" width="100px" />
+            <asp:button id="editButton" runat="server" text="Edit" backcolor="#CCCCCC" bordercolor="#FF9900" font-bold="True" font-size="Large" width="100px" OnClick="editButton_Click" />
         </p>
     </div>
     <div id="editRequestFormTopRightText">

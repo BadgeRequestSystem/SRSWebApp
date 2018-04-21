@@ -38,6 +38,15 @@ public partial class ViewSubmittedForm : System.Web.UI.Page
             Response.Cookies["submittedCookieInfo"].Expires = DateTime.Now.AddDays(-1);
         }
         Response.Redirect("~/ReviewRequestsForm.aspx");
-        
+
+    }
+
+    protected void editButton_Click(object sender, EventArgs e)
+    {
+
+        Response.Redirect("~/EditRequestForm.aspx"); //We are taking the 'submittedCookieInfo' cookie and bringing it to EditRequestForm so we can use it there.
+
+
+
     }
 }

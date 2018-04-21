@@ -29,6 +29,7 @@ public partial class PendingForm : System.Web.UI.Page
             {
                 SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE RequestID=@RequestID", Connection);
                 cmd.Parameters.AddWithValue("@RequestID", ListBox1.SelectedValue);
+                bCookie["RequestID"] = ListBox1.SelectedValue;
                 Connection.Open();
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -45,6 +46,7 @@ public partial class PendingForm : System.Web.UI.Page
                         bCookie["Emergency"] = reader["EmergencyAccess"].ToString();
                         bCookie["Accounts"] = reader["ContinueAccounts"].ToString();
                         bCookie["Notes"] = reader["Notes"].ToString();
+                        
                     }
                     Connection.Close();
                 }

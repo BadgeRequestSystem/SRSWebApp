@@ -15,14 +15,14 @@ public partial class EditRequestForm : System.Web.UI.Page
     {
         //NotesTextBox.Text = returnEmail("Aaron Something Prather");
         HttpCookie aCookie = Request.Cookies["userInfo"];
-        if (Request.Cookies["draftInfo"] != null)
+        if (Request.Cookies["draftInfo"] != null) //checking if we are loading a draft
         {
             HttpCookie cCookie = Request.Cookies["draftInfo"];
             EmployeeDDL.Text = cCookie["Employee"];
             ReasonDDL.Text = cCookie["Reason"];
-            GetTextBox.Text = cCookie["GET"].Replace(" 12:00:00 AM", ""); ;
+            GetTextBox.Text = cCookie["GET"].Replace(" 12:00:00 AM", "");
             SSNTextBox.Text = cCookie["SSN"];
-            DOBTextBox.Text = cCookie["DOB"].Replace(" 12:00:00 AM", ""); ;
+            DOBTextBox.Text = cCookie["DOB"].Replace(" 12:00:00 AM", "");
             BadgeTypeDDL.Text = cCookie["TOB"];
             if (cCookie["Proximity"] == "True")
                 ProximityCheckBox.Checked = true;
@@ -34,9 +34,31 @@ public partial class EditRequestForm : System.Web.UI.Page
 
             Response.Cookies["draftInfo"].Expires = DateTime.Now.AddDays(-1);
 
-            
+
         }
-        else if (aCookie["isManager"] != "True" )
+        else if (Request.Cookies["submittedCookieInfo"] != null && viewSubmittedFlagLabel.Text.Contains("1")) //checking to see if we are loading a pending request (someone editing an existing request)
+        {
+            viewSubmittedFlagLabel.Text = viewSubmittedFlagLabel.Text.Replace("1",""); //So this solves the problem of the undeleted cookie putting back the original values. When user hits submit, it will skip over this 'if statement' because there wont be a '1' in the viewSubmittedFlagLabel text. Hey it works right lol
+            SaveButton.Visible = false; //Disabled 'Save Draft' if we are loading in from a pending request
+            HttpCookie fCookie = Request.Cookies["submittedCookieInfo"];
+            EmployeeDDL.Text = fCookie["Employee"];
+            ReasonDDL.Text = fCookie["Reason"];
+            GetTextBox.Text = fCookie["GET"].Replace(" 12:00:00 AM", "");
+            SSNTextBox.Text = fCookie["SSN"];
+            DOBTextBox.Text = fCookie["DOB"].Replace(" 12:00:00 AM", "");
+            BadgeTypeDDL.Text = fCookie["TOB"];
+            if (fCookie["Proximity"] == "True")
+                ProximityCheckBox.Checked = true;
+            if (fCookie["Emergency"] == "True")
+                EmergencyCheckBox.Checked = true;
+            if (fCookie["Accounts"] == "True")
+                AccountsCheckBox.Checked = true;
+            NotesTextBox.Text = fCookie["Notes"];
+
+            //we dont want to remove the submittedCookieInfo cookie yet. (we will remove it on 'Cancel' and on 'Submit') *this is so that we can know if we are updating an existing request or not :)
+        }
+
+        if (aCookie["isManager"] != "True")
         {
             SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]='" + aCookie["UserID"] + "'";
             //SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]=@UserID";
@@ -73,8 +95,8 @@ public partial class EditRequestForm : System.Web.UI.Page
         //Password!1
 
         // the email method with correct config set up, just need a real email address to send it to
-     try
-     {
+        try
+        {
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.mail.com");
 
@@ -106,10 +128,10 @@ public partial class EditRequestForm : System.Web.UI.Page
             //Console.WriteLine("Sucesss");
 
         }
-    catch (Exception ex)
-    {
+        catch (Exception ex)
+        {
             //Console.WriteLine("Fail");
-    }
+        }
 
 
     }
@@ -146,48 +168,99 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     protected void SubmmitButton_Click(object sender, EventArgs e)
     {
-        try
+        if (Request.Cookies["submittedCookieInfo"] != null) //existing pending request update
         {
-            string strippedSSN = Regex.Replace(SSNTextBox.Text, "[^0-9]", "");
-            HttpCookie aCookie = Request.Cookies["userInfo"];
-            string state = "Pending";
-            //Creates Connection to database and updates Requests with new request.
-            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+            try
             {
-                Connection.Open();
-                SqlCommand cmd = new SqlCommand(@"INSERT INTO Requests
-                    VALUES (@Employee, @Reason, @GET, @SSN, @DOB, @BadgeType, @Proximity, @Emergency, @Accounts, @Notes, @CurrentDate, @State, @Username);", Connection);
-                cmd.Parameters.AddWithValue("@Employee", EmployeeDDL.Text);
-                cmd.Parameters.AddWithValue("@Reason", ReasonDDL.Text);
-                cmd.Parameters.AddWithValue("@GET", GetTextBox.Text);
-                //cmd.Parameters.AddWithValue("@SSN", SSNTextBox.Text);
-                cmd.Parameters.AddWithValue("@SSN", strippedSSN);
-                cmd.Parameters.AddWithValue("@DOB", DOBTextBox.Text);
-                cmd.Parameters.AddWithValue("@BadgeType", BadgeTypeDDL.Text);
-                cmd.Parameters.AddWithValue("@Proximity", ProximityCheckBox.Checked);
-                cmd.Parameters.AddWithValue("@Emergency", EmergencyCheckBox.Checked);
-                cmd.Parameters.AddWithValue("@Accounts", AccountsCheckBox.Checked);
-                cmd.Parameters.AddWithValue("@Notes", NotesTextBox.Text);
-                cmd.Parameters.AddWithValue("@Username", aCookie["userName"]);
-                cmd.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
-                cmd.Parameters.AddWithValue("@State", state);
+                string strippedSSN = Regex.Replace(SSNTextBox.Text, "[^0-9]", "");
+                HttpCookie aCookie = Request.Cookies["userInfo"];
+                HttpCookie vCookie = Request.Cookies["submittedCookieInfo"]; //so we can grab the request ID
+                string state = "Pending";
+                //Creates Connection to database and updates Requests with new request.
+                using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+                {
+                    Connection.Open();
+                    SqlCommand cmd2 = new SqlCommand(@"Update Requests SET [Employee]=@Employee, [ReasonForRequest]=@Reason, [GETDate]=@GET, [SSN]=@SSN, [DateOfBirth]=@DOB, [TypeOfBadge]=@BadgeType, [ProximityCard]=@Proximity, [EmergencyAccess]=@Emergency, [ContinueAccounts]=@Accounts, [Notes]=@Notes, [CurrentDate]=@CurrentDate, [RequestState]=@State, [Username]=@Username WHERE RequestID=@reqID;", Connection);
+                    cmd2.Parameters.AddWithValue("@Employee", EmployeeDDL.Text);
+                    cmd2.Parameters.AddWithValue("@Reason", ReasonDDL.Text);
+                    cmd2.Parameters.AddWithValue("@GET", GetTextBox.Text);
+                    
+                    cmd2.Parameters.AddWithValue("@SSN", strippedSSN);
+                    cmd2.Parameters.AddWithValue("@DOB", DOBTextBox.Text);
+                    cmd2.Parameters.AddWithValue("@BadgeType", BadgeTypeDDL.Text);
+                    cmd2.Parameters.AddWithValue("@Proximity", ProximityCheckBox.Checked);
+                    cmd2.Parameters.AddWithValue("@Emergency", EmergencyCheckBox.Checked);
+                    cmd2.Parameters.AddWithValue("@Accounts", AccountsCheckBox.Checked);
+                    cmd2.Parameters.AddWithValue("@Notes", NotesTextBox.Text);
+                    //cmd2.Parameters.AddWithValue("@Notes", "SQL TEST");
+                    cmd2.Parameters.AddWithValue("@Username", aCookie["userName"]);
+                    cmd2.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
+                    cmd2.Parameters.AddWithValue("@State", state);
+                    cmd2.Parameters.AddWithValue("@reqID", vCookie["RequestID"]);
 
-                cmd.ExecuteNonQuery();
+                    cmd2.ExecuteNonQuery();
+                }
+
+                sendNotification(EmployeeDDL.Text, aCookie["Manager"]); //Should we use a different email response if a user is updating his pending request?
+                Response.Cookies["submittedCookieInfo"].Expires = DateTime.Now.AddDays(-1); //we finally remove the cookie
+                Response.Redirect("~/MainMenuForm.aspx",false); //had to add false as second parameter because without it, the current page execution would stop and wouldnt update the database.
             }
+            catch (Exception ex)
+            {
+                string msg = "There was an error submitting the request form. Please make sure all fields are filled out correctly and try again.";
+                Response.Write("<script>alert('" + msg + "')</script>");
+            }
+        }
 
-            sendNotification(EmployeeDDL.Text, aCookie["Manager"]);
-            Response.Redirect("~/MainMenuForm.aspx");
-        }
-        catch (Exception ex)
+        else //normal request creation
         {
-            string msg = "There was an error submitting the request form. Please make sure all fields are filled out correctly and try again.";
-            Response.Write("<script>alert('" + msg + "')</script>");
+            try
+            {
+                string strippedSSN = Regex.Replace(SSNTextBox.Text, "[^0-9]", "");
+                HttpCookie aCookie = Request.Cookies["userInfo"];
+                string state = "Pending";
+                //Creates Connection to database and updates Requests with new request.
+                using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+                {
+                    Connection.Open();
+                    SqlCommand cmd = new SqlCommand(@"INSERT INTO Requests
+                    VALUES (@Employee, @Reason, @GET, @SSN, @DOB, @BadgeType, @Proximity, @Emergency, @Accounts, @Notes, @CurrentDate, @State, @Username);", Connection);
+                    cmd.Parameters.AddWithValue("@Employee", EmployeeDDL.Text);
+                    cmd.Parameters.AddWithValue("@Reason", ReasonDDL.Text);
+                    cmd.Parameters.AddWithValue("@GET", GetTextBox.Text);
+                    //cmd.Parameters.AddWithValue("@SSN", SSNTextBox.Text);
+                    cmd.Parameters.AddWithValue("@SSN", strippedSSN);
+                    cmd.Parameters.AddWithValue("@DOB", DOBTextBox.Text);
+                    cmd.Parameters.AddWithValue("@BadgeType", BadgeTypeDDL.Text);
+                    cmd.Parameters.AddWithValue("@Proximity", ProximityCheckBox.Checked);
+                    cmd.Parameters.AddWithValue("@Emergency", EmergencyCheckBox.Checked);
+                    cmd.Parameters.AddWithValue("@Accounts", AccountsCheckBox.Checked);
+                    cmd.Parameters.AddWithValue("@Notes", NotesTextBox.Text);
+                    cmd.Parameters.AddWithValue("@Username", aCookie["userName"]);
+                    cmd.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
+                    cmd.Parameters.AddWithValue("@State", state);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                sendNotification(EmployeeDDL.Text, aCookie["Manager"]);
+                Response.Redirect("~/MainMenuForm.aspx");
+            }
+            catch (Exception ex)
+            {
+                string msg = "There was an error submitting the request form. Please make sure all fields are filled out correctly and try again.";
+                Response.Write("<script>alert('" + msg + "')</script>");
+            }
         }
-        
+
+
     }
 
     protected void CancelButton_Click(object sender, EventArgs e)
     {
+        if (Request.Cookies["submittedCookieInfo"] != null)
+            Response.Cookies["submittedCookieInfo"].Expires = DateTime.Now.AddDays(-1); //Removes the cookie that stored the loaded in pending request (from ViewSubmittedForm edit button)
+
         Response.Redirect("~/MainMenuForm.aspx");
     }
 

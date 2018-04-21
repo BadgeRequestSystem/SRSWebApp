@@ -22,7 +22,9 @@
             </p>
         </div>
         <div id="overright">
-            <p></p>
+            <p>
+                <asp:Label ID="viewSubmittedFlagLabel" runat="server" Text="viewSubmittedFlag1" Visible="False"></asp:Label>
+            </p>
         </div>
         <div id="overleft">
             <p></p>
