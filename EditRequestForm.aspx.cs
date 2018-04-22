@@ -181,7 +181,7 @@ public partial class EditRequestForm : System.Web.UI.Page
                 using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
                 {
                     Connection.Open();
-                    SqlCommand cmd2 = new SqlCommand(@"Update Requests SET [Employee]=@Employee, [ReasonForRequest]=@Reason, [GETDate]=@GET, [SSN]=@SSN, [DateOfBirth]=@DOB, [TypeOfBadge]=@BadgeType, [ProximityCard]=@Proximity, [EmergencyAccess]=@Emergency, [ContinueAccounts]=@Accounts, [Notes]=@Notes, [CurrentDate]=@CurrentDate, [RequestState]=@State, [Username]=@Username WHERE RequestID=@reqID;", Connection);
+                    SqlCommand cmd2 = new SqlCommand(@"Update Requests SET [Employee]=@Employee, [ReasonForRequest]=@Reason, [GETDate]=@GET, [SSN]=@SSN, [DateOfBirth]=@DOB, [TypeOfBadge]=@BadgeType, [ProximityCard]=@Proximity, [EmergencyAccess]=@Emergency, [ContinueAccounts]=@Accounts, [Notes]=@Notes, [CurrentDate]=@CurrentDate, [RequestState]=@State, [Username]=@Username, [Editable]=@canEdit WHERE RequestID=@reqID;", Connection);
                     cmd2.Parameters.AddWithValue("@Employee", EmployeeDDL.Text);
                     cmd2.Parameters.AddWithValue("@Reason", ReasonDDL.Text);
                     cmd2.Parameters.AddWithValue("@GET", GetTextBox.Text);
@@ -198,6 +198,7 @@ public partial class EditRequestForm : System.Web.UI.Page
                     cmd2.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
                     cmd2.Parameters.AddWithValue("@State", state);
                     cmd2.Parameters.AddWithValue("@reqID", vCookie["RequestID"]);
+                    cmd2.Parameters.AddWithValue("@canEdit", false); //User can't edit pending request again until manager checks off on it.
 
                     cmd2.ExecuteNonQuery();
                 }
@@ -225,7 +226,7 @@ public partial class EditRequestForm : System.Web.UI.Page
                 {
                     Connection.Open();
                     SqlCommand cmd = new SqlCommand(@"INSERT INTO Requests
-                    VALUES (@Employee, @Reason, @GET, @SSN, @DOB, @BadgeType, @Proximity, @Emergency, @Accounts, @Notes, @CurrentDate, @State, @Username);", Connection);
+                    VALUES (@Employee, @Reason, @GET, @SSN, @DOB, @BadgeType, @Proximity, @Emergency, @Accounts, @Notes, @CurrentDate, @State, @Username, @canEdit);", Connection);
                     cmd.Parameters.AddWithValue("@Employee", EmployeeDDL.Text);
                     cmd.Parameters.AddWithValue("@Reason", ReasonDDL.Text);
                     cmd.Parameters.AddWithValue("@GET", GetTextBox.Text);
@@ -240,6 +241,7 @@ public partial class EditRequestForm : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@Username", aCookie["userName"]);
                     cmd.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
                     cmd.Parameters.AddWithValue("@State", state);
+                    cmd.Parameters.AddWithValue("@canEdit", false); //by default, a user cannot edit a pending request until a manager checks off on it.
 
                     cmd.ExecuteNonQuery();
                 }

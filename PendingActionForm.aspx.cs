@@ -50,6 +50,7 @@ public partial class PendingActionForm : System.Web.UI.Page
                         bCookie["Accounts"] = reader["ContinueAccounts"].ToString();
                         bCookie["Notes"] = reader["Notes"].ToString();
                         bCookie["RequestID"] = reader["RequestID"].ToString();
+                        bCookie["Editable"] = reader["Editable"].ToString(); //Flag that checks if a manager has allowed user to edit this request.
                     }
                     Connection.Close();
                 } 

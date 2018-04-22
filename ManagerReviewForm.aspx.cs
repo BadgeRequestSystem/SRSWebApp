@@ -58,7 +58,18 @@ public partial class ManagerReviewForm : System.Web.UI.Page
 
     protected void InfoButton_Click(object sender, EventArgs e)
     {
-        
+        using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+        {
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(@"Update Requests
+                    SET [Editable]=@canEdit
+                    WHERE RequestID=@RequestID;", Connection);
+            cmd.Parameters.AddWithValue("@canEdit", true); //user can now edit that request
+            cmd.Parameters.AddWithValue("@RequestID", requestIDTxtBx.Text);
+            cmd.ExecuteNonQuery();
+            Connection.Close();
+        }
+        Response.Redirect("~/PendingActionForm.aspx");
 
 
     }

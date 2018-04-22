@@ -10,6 +10,9 @@
     <form id="ManagerReview" runat="server">
 
 
+        <asp:CheckBox ID="isEditableCheckBox" runat="server" Visible="False" />
+
+
     <div id="overtop">
         <p></p>
     </div>

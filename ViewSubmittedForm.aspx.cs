@@ -29,6 +29,16 @@ public partial class ViewSubmittedForm : System.Web.UI.Page
         emanagerLabel0.Text = aCookie["Manager"];
         mworklocationLabel0.Text = aCookie["ManagerLocation"];
         mworkphoneLabel0.Text = aCookie["ManagerPhone"];
+
+        if (aCookie["Editable"] != null) //We only get this cookie from PendingForm, so this is a check to make sure the request is pending.
+        {
+            if (aCookie["Editable"] == "False") //We got here from PendingForm and the request is uneditable so we hide editbutton
+                editButton.Visible = false;
+
+        }
+        else
+            editButton.Visible = false; //We got here from Approved or Denied form, so we hide the editbutton (only requests that are pending can be edited)
+
     }
 
     protected void backButton_Click(object sender, EventArgs e)

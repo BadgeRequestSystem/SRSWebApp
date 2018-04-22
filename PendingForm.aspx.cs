@@ -46,6 +46,7 @@ public partial class PendingForm : System.Web.UI.Page
                         bCookie["Emergency"] = reader["EmergencyAccess"].ToString();
                         bCookie["Accounts"] = reader["ContinueAccounts"].ToString();
                         bCookie["Notes"] = reader["Notes"].ToString();
+                        bCookie["Editable"] = reader["Editable"].ToString(); //'Is this request editable' flag
                         
                     }
                     Connection.Close();
