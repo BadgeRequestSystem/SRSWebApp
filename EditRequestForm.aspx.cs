@@ -98,31 +98,32 @@ public partial class EditRequestForm : System.Web.UI.Page
         try
         {
             MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.mail.com");
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-            mail.From = new MailAddress("dontreplyplz@workmail.com");
+            mail.From = new MailAddress("dontreplysrsmail@gmail.com");
             mail.To.Add(returnEmail(Employee));
             mail.Subject = "SRS Badge Request Received";
-            mail.Body = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been received." +
-                "\nYou will be notified on the status of your request shortly. We thank you for your patience. \nSincerely,\nThe SRS Badge Request System", Employee);
+            mail.IsBodyHtml = true;
+            string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been received." + "\nYou will be notified on the status of your request shortly. We thank you for your patience. \nSincerely,\nThe SRS Badge Request System\n", Employee);
+            mail.Body = body1 + "<a href = 'https://google.com' > HERE! </a>";
 
             SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplyplz@workmail.com", "Password!1");
+            SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);
 
             MailMessage mail2 = new MailMessage();
-            SmtpClient SmtpServer2 = new SmtpClient("smtp.mail.com");
+            SmtpClient SmtpServer2 = new SmtpClient("smtp.gmail.com");
 
-            mail2.From = new MailAddress("dontreplyplz@workmail.com");
+            mail2.From = new MailAddress("dontreplysrsmail@gmail.com");
             mail2.To.Add(returnEmail(Manager));
             mail2.Subject = "SRS Badge Request Attention Needed";
             mail2.Body = String.Format("Dear {0},\n\tWe wanted to inform you that {1} has put in a request for a new badge." +
                 "\nPlease review the request at your earliest convenience. We thank you for your time. \nSincerely,\nThe SRS Badge Request System", Manager, Employee);
 
             SmtpServer2.Port = 587;
-            SmtpServer2.Credentials = new System.Net.NetworkCredential("dontreplyplz@workmail.com", "Password!1");
+            SmtpServer2.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
             SmtpServer2.EnableSsl = true;
             SmtpServer2.Send(mail2);
             //Console.WriteLine("Sucesss");
