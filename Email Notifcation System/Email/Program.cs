@@ -34,7 +34,7 @@ namespace Email
 
                     bool expired = false;
 
-                    for (int i = 0; i < 50; i++)
+                    for (int i = 0; i < 1000; i++) //you can scale this up a lot more if you know that your system has a TON of requests
                     {
                         Console.WriteLine("\n\n\n");
                         EmployeeName = grabRequest(0, i);
