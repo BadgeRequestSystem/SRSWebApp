@@ -53,7 +53,7 @@ namespace Email
                             if (RequestStatus == "Pending")
                             {
                                 if (DateTime.Now >= notifDate)
-                                    sendNotification(ManagerEmail, EmployeeName, DEBUG_MODE);
+                                    sendNotification(ManagerEmail, EmployeeName, i, DEBUG_MODE);
                             }
                             else
                             {
@@ -75,7 +75,7 @@ namespace Email
 
 
 
-        static public void sendNotification(string Email, string Employee, bool DEBUG)
+        static public void sendNotification(string Email, string Employee,int requestID, bool DEBUG)
         {
             try
             {
@@ -86,9 +86,9 @@ namespace Email
 
                     mail.From = new MailAddress("dontreplysrsmail@gmail.com");
                     mail.To.Add(Email);
-                    mail.Subject = Employee + " - Request Reminder";
+                    mail.Subject = "RequestID: " + requestID + " Automatic Notification";
                     mail.IsBodyHtml = true;
-                    string body1 = String.Format("This is an automatic notifcation: " + Employee + "'s request has been awaiting review for more than 3 days.\nPlease sign-in on the SRS Badge Request page and review his or her request.\nThanks.");
+                    string body1 = String.Format("This is an automatic notifcation: " + Employee + "'s request, has been awaiting review for more than 3 days.\nPlease sign-in on the SRS Badge Request page and review his or her request.\nThanks.");
                     mail.Body = body1;
 
                     SmtpServer.Port = 587;
@@ -100,12 +100,12 @@ namespace Email
 
 
 
-                Console.WriteLine("Email sent out for: " + Employee);
+                Console.WriteLine("Email sent out for the manager of : " + Employee);
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Email failure for " + Employee);
+                Console.WriteLine("Email failure for the manager of " + Employee);
             }
 
 
