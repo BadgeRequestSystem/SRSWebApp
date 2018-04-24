@@ -9,6 +9,10 @@ public partial class MainMenuForm : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Request.Browser.IsMobileDevice == true)
+        {
+            Image1.Visible = false; //SRS logo on main page bugs out on mobile, lets remove it for mobile only.
+        }
 
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (!Label2.Text.Contains(aCookie["userName"]))
@@ -21,8 +25,8 @@ public partial class MainMenuForm : System.Web.UI.Page
         {
             ButtonUpdateEmployees.Visible = true;
         }
-            
-        
+
+
 
     }
 

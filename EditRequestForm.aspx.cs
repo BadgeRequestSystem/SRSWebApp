@@ -105,7 +105,7 @@ public partial class EditRequestForm : System.Web.UI.Page
             mail.Subject = "SRS Badge Request Received";
             mail.IsBodyHtml = true;
             string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been received." + "\nYou will be notified on the status of your request shortly. We thank you for your patience. \nSincerely,\nThe SRS Badge Request System\n", Employee);
-            mail.Body = body1 + "<a href = 'https://google.com' > HERE! </a>";
+            mail.Body = body1 + "<a href = 'http://srswebapp-test.us-west-2.elasticbeanstalk.com/Login.aspx' > Login to view your request! </a>";
 
             SmtpServer.Port = 587;
             SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");

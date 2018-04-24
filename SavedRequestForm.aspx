@@ -34,7 +34,7 @@
         </div>
         <div id="listboxFormPanel">
             <p>
-                <asp:ListBox ID="ListBox1" runat="server" DataSourceID="SqlDataSource1" DataTextField="Employee" DataValueField="Employee" Height="218px" Font-Size="X-Large" BackColor="#CCCCCC" Font-Bold="True" Width="383px"></asp:ListBox>
+                <asp:ListBox ID="ListBox1" runat="server" DataSourceID="SqlDataSource1" DataTextField="Employee" DataValueField="Employee" Height="218px" Font-Size="X-Large" BackColor="#CCCCCC" Font-Bold="True" Width="100%"></asp:ListBox>
                 <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:badge_requestConnectionString %>" SelectCommand="Select [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay From Drafts WHERE (([RequestState] = @RequestState) AND ([Username] = @Username))">--%>
                 
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;Persist Security Info=True;User ID=pwndatnerd;Password=AaronDavidRandall!3" SelectCommand="Select [Employee], [CurrentDate] From Drafts WHERE (([RequestState] = @RequestState) AND ([Username] = @Username))" ProviderName="System.Data.SqlClient">
@@ -47,7 +47,7 @@
         </div>
         <div id="listboxFormPanelButtons">
             <p>
-                <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Back" Width="100px" Font-Bold="True" BorderColor="#FF9900" Font-Size="Large" BackColor="#CCCCCC" /></p>
+                <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Back" Width="100%" Font-Bold="True" BorderColor="#FF9900" Font-Size="Large" BackColor="#CCCCCC" /></p>
         </div>
         <div id="listboxFormPanelText">
             <p><asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="XX-Large" ForeColor="#FF9900" Text="Saved Drafts"></asp:Label></p>

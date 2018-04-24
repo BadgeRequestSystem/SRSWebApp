@@ -123,7 +123,7 @@ public partial class ManagerReviewForm : System.Web.UI.Page
                 mail.Subject = String.Format("SRS Badge Request {0}", Response);
                 mail.IsBodyHtml = true;
                 string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been {1}." + "\nWe thank you for your patience. \nSincerely,\nThe SRS Badge Request System\n", Employee, Response);
-                mail.Body = body1 + "Please click " + "<a href = 'https://google.com' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
+                mail.Body = body1 + "Please click " + "<a href = 'http://srswebapp-test.us-west-2.elasticbeanstalk.com/Login.aspx' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
 
                 SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
@@ -141,7 +141,7 @@ public partial class ManagerReviewForm : System.Web.UI.Page
                 mail.Subject = String.Format("SRS Badge Request Needs Review");
                 mail.IsBodyHtml = true;
                 string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been flagged due to an error." + "\nPlease review your pending requests and make any needed corrections.\nSincerely,\nThe SRS Badge Request System\n", Employee);
-                mail.Body = body1 + "Please click " + "<a href = 'https://google.com' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
+                mail.Body = body1 + "Please click " + "<a href = 'http://srswebapp-test.us-west-2.elasticbeanstalk.com/Login.aspx' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
 
                 SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");

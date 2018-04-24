@@ -119,13 +119,13 @@
             <br />
             <asp:label id="notesLabel" runat="server" text="Notes: " font-size="22px" font-bold="True" forecolor="Black"></asp:label>
             <br />
-            <asp:textbox id="TextBox1" runat="server" height="112px" textmode="MultiLine" width="250px" font-size="22px" backcolor="#CCCCCC"></asp:textbox>
+            <asp:textbox id="TextBox1" runat="server" height="112px" textmode="MultiLine" width="100%" font-size="22px" backcolor="#CCCCCC"></asp:textbox>
         </p>
     </div>
     <div id="editRequestFormBottomButtons">
         <p>
-            <asp:button id="backButton" runat="server" onclick="backButton_Click" text="Back" width="100px" font-bold="True" backcolor="#CCCCCC" bordercolor="#FF9900" font-size="Large" />
-            <asp:button id="editButton" runat="server" text="Edit" backcolor="#CCCCCC" bordercolor="#FF9900" font-bold="True" font-size="Large" width="100px" OnClick="editButton_Click" />
+            <asp:button id="backButton" runat="server" onclick="backButton_Click" text="Back" width="100%" font-bold="True" backcolor="#CCCCCC" bordercolor="#FF9900" font-size="Large" />
+            <asp:button id="editButton" runat="server" text="Edit" backcolor="#CCCCCC" bordercolor="#FF9900" font-bold="True" font-size="Large" width="100%" OnClick="editButton_Click" />
         </p>
     </div>
     <div id="editRequestFormTopRightText">

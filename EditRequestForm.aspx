@@ -109,7 +109,7 @@
                 <br />
                 <asp:Label ID="NotesLabel" Text="Notes:(max 500 char)" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
                 <div>
-                    <asp:TextBox ID="NotesTextBox" Columns="20" MaxLength="500" runat="server" Height="165px" TextMode="MultiLine" Width="362px" BackColor="#CCCCCC" />
+                    <asp:TextBox ID="NotesTextBox" Columns="20" MaxLength="500" runat="server" Height="165px" TextMode="MultiLine" Width="100%" BackColor="#CCCCCC" />
                 </div>
             </p>
         </div>

@@ -37,7 +37,7 @@
             <p>
                 <asp:Label ID="Label2" runat="server" Text="Welcome, " Font-Size="XX-Large" ForeColor="Orange" Font-Bold="True"></asp:Label>
                 <p></p>
-                <asp:Button ID="ButtonLogout" runat="server" Text="Logout" OnClick="ButtonLogout_Click1" Width="100px" Font-Bold="true" BackColor="#FF9900" />
+                <asp:Button ID="ButtonLogout" runat="server" Text="Logout" OnClick="ButtonLogout_Click1" Width="25%" Font-Bold="true" BackColor="#FF9900" />
             </p>
         </div>
         <div id="overmiddleleft">
@@ -45,23 +45,23 @@
             <br />
             <br />
             <p>
-                <asp:Button ID="ButtonNewRequest" runat="server" Text="New Request" OnClick="ButtonNewRequest_Click" Height="65px" Width="320px" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Bold="True" />
+                <asp:Button ID="ButtonNewRequest" runat="server" Text="New Request" OnClick="ButtonNewRequest_Click" Width="75%" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Bold="True" />
             </p>
             <p>
 
-                <asp:Button ID="ButtonViewSavedRequests" runat="server" Text="View Drafts" OnClick="ButtonViewSavedRequests_Click" Height="65px" Width="320px" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Bold="True" />
+                <asp:Button ID="ButtonViewSavedRequests" runat="server" Text="View Drafts" OnClick="ButtonViewSavedRequests_Click" Width="75%" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Bold="True" />
             </p>
             <p>
 
-                <asp:Button ID="ButtonViewSubmittedRequests" runat="server" Text="View Submitted Requests" OnClick="ButtonViewSubmittedRequests_Click" Height="65px" Width="320px" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Bold="True" />
+                <asp:Button ID="ButtonViewSubmittedRequests" runat="server" Text="View Submitted Requests" OnClick="ButtonViewSubmittedRequests_Click" Width="75%" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Bold="True" />
             </p>
-            <asp:Button ID="ButtonUpdateEmployees" runat="server" Text="Update Employees" OnClick="ButtonUpdateEmployees_Click" Height="65px" Width="320px" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Visible="False" Font-Bold="True" />
+            <asp:Button ID="ButtonUpdateEmployees" runat="server" Text="Update Employees" OnClick="ButtonUpdateEmployees_Click" Width="75%" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Visible="False" Font-Bold="True" />
             <p>
-                <asp:Button ID="ButtonReviewRequests" runat="server" Text="Review Requests" OnClick="ButtonReviewRequests_Click" Height="65px" Width="320px" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Visible="False" Font-Bold="True" />
+                <asp:Button ID="ButtonReviewRequests" runat="server" Text="Review Requests" OnClick="ButtonReviewRequests_Click" Width="75%" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Visible="False" Font-Bold="True" />
             </p>
         </div>
         <div id="overmiddleright">
-            <asp:Image ID="Image1" runat="server" Height="394px" ImageUrl="~/Images/srs logo main menu.png" Width="426px" />
+            <asp:Image ID="Image1" runat="server" Height="100%" ImageUrl="~/Images/srs logo main menu.png" Width="100%" />
         </div>
 
 

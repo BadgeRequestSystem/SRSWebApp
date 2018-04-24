@@ -34,7 +34,7 @@
         <p>
             <div id="listboxFormPanel">
                 <p>
-                    <asp:listbox id="ListBox1" runat="server" datasourceid="SqlDataSource1" datatextfield="PendingDisplay" datavaluefield="RequestID" height="323px" font-size="Medium" BackColor="#CCCCCC" Font-Bold="True" ForeColor="Black" Width="322px"></asp:listbox>
+                    <asp:listbox id="ListBox1" runat="server" datasourceid="SqlDataSource1" datatextfield="PendingDisplay" datavaluefield="RequestID" height="323px" font-size="Medium" BackColor="#CCCCCC" Font-Bold="True" ForeColor="Black" Width="100%"></asp:listbox>
 
                     <asp:sqldatasource id="SqlDataSource1" runat="server" connectionstring="Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;Persist Security Info=True;User ID=pwndatnerd;Password=AaronDavidRandall!3" selectcommand="Select CAST([RequestID] AS varchar(200)) + '   ' + [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay, [RequestID] From Requests WHERE (([RequestState] = @RequestState) AND ([Username] = @Username))" providername="System.Data.SqlClient">
                 <SelectParameters>
@@ -51,7 +51,7 @@
             </div>
             <div id="listboxFormPanelButtons">
                 <p>
-                    <asp:button id="Button1" runat="server" text="Back" onclick="Button1_Click" width="100px" font-bold="True" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Size="Large" />
+                    <asp:button id="Button1" runat="server" text="Back" onclick="Button1_Click" width="100%" font-bold="True" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Size="Large" />
                 </p>
             </div>
         </p>
