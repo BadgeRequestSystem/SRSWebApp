@@ -26,7 +26,7 @@ public partial class ApprovedForm : System.Web.UI.Page
             HttpCookie bCookie = new HttpCookie("submittedCookieInfo");
             Response.Cookies.Add(bCookie);
 
-            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.database.windows.net;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
             {
                 SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE RequestID=@RequestID", Connection);
                 cmd.Parameters.AddWithValue("@RequestID", ListBox1.SelectedValue);
@@ -53,13 +53,7 @@ public partial class ApprovedForm : System.Web.UI.Page
                 string fName = bCookie["Employee"].Substring(0, firstIndex);
                 int secondIndex = bCookie["Employee"].LastIndexOf(' ');
                 string lName = bCookie["Employee"].Substring(secondIndex + 1);
-                //string mName = bCookie["Employee"].Substring(firstIndex + 2, bCookie["Employee"].Length - lName.Length - 1);
 
-
-                //SqlCommand cmd2 = new SqlCommand(@"SELECT * FROM Employees WHERE [First Name]=@fName AND [Last Name]=@lName AND [Middle Name]=@mName", Connection);
-                //cmd2.Parameters.AddWithValue("@fName", fName);
-                //cmd2.Parameters.AddWithValue("@lName", lName);
-                //cmd2.Parameters.AddWithValue("@mName", mName);
                 SqlCommand cmd2 = new SqlCommand(@"SELECT * FROM Employees WHERE [First Name]=@fName AND [Last Name]=@lName", Connection);
                 cmd2.Parameters.AddWithValue("@fName", fName);
                 cmd2.Parameters.AddWithValue("@lName", lName);

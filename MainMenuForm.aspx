@@ -5,34 +5,98 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>SRS-Badge Request</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body bgcolor="aliceblue">
-    <form id="form1" runat="server">
-    <div>
-    
-    </div>
-         <div align="right"><asp:Label ID="Label2" runat="server" Text="Welcome, " Font-Size="14pt"></asp:Label></div>
+<form id="form1" runat="server">
+    <body bgcolor="aliceblue">
+
+
+
+        <div id="overtop">
+            <p></p>
+        </div>
+        <div id="overbottom">
+            <p>
+                <br></br>
+                <p>SRS - Badge Request System: Augusta University Senior Capstone Project
+            </p>
+                <p></p>
+            </p>
+        </div>
+        <div id="overright">
+            <p></p>
+        </div>
+        <div id="overleft">
+            <p>&nbsp;</p>
+        </div>
+        <div id="overmiddle">
+            <p>
+            </p>
+        </div>
+        <div id="mainpageWelcome">
+            <p>
+                <asp:Label ID="Label2" runat="server" Text="Welcome, " Font-Size="XX-Large" ForeColor="Orange" Font-Bold="True"></asp:Label>
+                <p></p>
+                <asp:Button ID="ButtonLogout" runat="server" Text="Logout" OnClick="ButtonLogout_Click1" Width="25%" Font-Bold="true" BackColor="#FF9900" />
+            </p>
+        </div>
+        <div id="overmiddleleft">
+            <br />
+            <br />
+            <br />
+            <p>
+                <asp:Button ID="ButtonNewRequest" runat="server" Text="New Request" OnClick="ButtonNewRequest_Click" Width="75%" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Bold="True" />
+            </p>
+            <p>
+
+                <asp:Button ID="ButtonViewSavedRequests" runat="server" Text="View Drafts" OnClick="ButtonViewSavedRequests_Click" Width="75%" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Bold="True" />
+            </p>
+            <p>
+
+                <asp:Button ID="ButtonViewSubmittedRequests" runat="server" Text="View Submitted Requests" OnClick="ButtonViewSubmittedRequests_Click" Width="75%" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Bold="True" />
+            </p>
+            <asp:Button ID="ButtonUpdateEmployees" runat="server" Text="Update Employees" OnClick="ButtonUpdateEmployees_Click" Width="75%" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Visible="False" Font-Bold="True" />
+            <p>
+                <asp:Button ID="ButtonReviewRequests" runat="server" Text="Review Requests" OnClick="ButtonReviewRequests_Click" Width="75%" Font-Size="X-Large" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#FF9900" Visible="False" Font-Bold="True" />
+            </p>
+        </div>
+        <div id="overmiddleright">
+            <asp:Image ID="Image1" runat="server" Height="100%" ImageUrl="~/Images/srs logo main menu.png" Width="100%" />
+        </div>
+
+
+
+
+
+
+
+
+        </div>
+         <div align="right"></div>
         <br />
         <center>
-        <asp:Label ID="Label1" runat="server" Text="Main Menu" Font-Size="25pt"></asp:Label>
-           
-        <p>
-            <asp:Button ID="ButtonNewRequest" runat="server" Text="New Request" OnClick="ButtonNewRequest_Click" Height="40px" Width="300px" Font-Size="14pt"/>
-        </p>
-        <asp:Button ID="ButtonViewSavedRequests" runat="server" Text="View Drafts" OnClick="ButtonViewSavedRequests_Click" Height="40px" Width="300px" Font-Size="14pt"/>
-        <p>
-            <asp:Button ID="ButtonViewSubmittedRequests" runat="server" Text="View Submitted Requests" OnClick="ButtonViewSubmittedRequests_Click" Height="40px" Width="300px" Font-Size="14pt"/>
+        
+            
+            
         </p>
         <p>
-            <asp:Button ID="ButtonReviewRequests" runat="server" Text="Review Requests" OnClick="ButtonReviewRequests_Click" Visible="False" Height="40px" Width="300px" Font-Size="14pt"/>
+        
+            </p>
+            <p>
+            
+            </p>
+        <p>
+            
         </p>
         <p>
-            <asp:Button ID="ButtonUpdateEmployees" runat="server" Text="Update Employees" OnClick="ButtonUpdateEmployees_Click" Visible="False" Height="40px" Width="300px" Font-Size="14pt"/>
-        </p>
+            
+            </p>
+        
         <p>
+            
             </center>
-            <asp:Button ID="ButtonLogout" runat="server" Text="Logout" OnClick="ButtonLogout_Click1" Width="100px" Font-Bold="true"/>
         </p>
-    </form>
+        <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+</form>
 </body>
 </html>

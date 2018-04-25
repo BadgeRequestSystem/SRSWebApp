@@ -4,24 +4,69 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>SRS-Badge Request</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body bgcolor="aliceblue">
     <form id="form1" runat="server">
-        <div>
-            <br /><br /><br />
-            <center>
-        <asp:Button ID="pendingButton" runat="server" Text="Pending" OnClick="pendingButton_Click" Height="40px" Width="100px" Font-Size="14pt"/>
-        <br /><br />
-        <asp:Button ID="approvedButton" runat="server" Text="Approved" OnClick="approvedButton_Click" Height="40px" Width="100px" Font-Size="14pt"/>
-        <br /><br />
-        <asp:Button ID="deniedButton" runat="server" Text="Denied" OnClick="deniedButton_Click" Height="40px" Width="100px" Font-Size="14pt"/>
-        <br />
-             </center>
 
-            <asp:Button ID="backButton" runat="server" OnClick="backButton_Click" Text="Back" Width="100px" Font-Bold="true"/>
+<div id="overtop">
+    <p></p>
+</div>
+<div id="overbottom">
+    <p>
+        <br></br>
+        <p>
+            SRS - Badge Request System: Augusta University Senior Capstone Project
+        </p>
+        <p></p>
+    </p>
+</div>
+<div id="overright">
+    <p></p>
+</div>
+<div id="overleft">
+    <p></p>
+</div>
+<div id="overmiddle">
+    <p>
+        <div id="reviewRequestsCustom">
+            <p>
+                &nbsp;
+            </p>
+            <p>
+                <asp:button id="pendingButton" runat="server" text="Pending" onclick="pendingButton_Click" height="64px" width="159px" font-size="Large" backcolor="#CCCCCC" bordercolor="#FF9900" font-bold="True" />
 
+            </p>
+            <p>
+                &nbsp;</p>
+            <p>
+                <asp:button id="approvedButton" runat="server" text="Approved" onclick="approvedButton_Click" height="64px" width="159px" font-size="Large" backcolor="#CCCCCC" bordercolor="#FF9900" font-bold="True" />
+
+            </p>
+            <p>
+                &nbsp;</p>
+            <p>
+                <asp:button id="deniedButton" runat="server" text="Denied" onclick="deniedButton_Click" height="64px" width="159px" font-size="Large" backcolor="#CCCCCC" bordercolor="#FF9900" font-bold="True" />
+
+            </p>
         </div>
-    </form>
-</body>
+        <div id="listboxFormPanelText">
+            <p>
+                <asp:label id="Label1" runat="server" font-bold="True" font-size="XX-Large" forecolor="#FF9900" text="Review Requests"></asp:label>
+            </p>
+        </div>
+        <div id="reviewRequestsBackButton">
+            <p>
+                &nbsp;</p>
+            <p>
+                <asp:button id="backButton" runat="server" onclick="backButton_Click" text="Back" width="100px" font-bold="True" backcolor="#CCCCCC" bordercolor="#FF9900" font-size="Large" />
+            </p>
+        </div>
+    </p>
+</div>
+
+
+
+</form>
+
 </html>

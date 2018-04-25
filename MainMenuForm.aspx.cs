@@ -9,14 +9,24 @@ public partial class MainMenuForm : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        if (Request.Browser.IsMobileDevice == true)
+        {
+            Image1.Visible = false; //SRS logo on main page bugs out on mobile, lets remove it for mobile only.
+        }
+
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (!Label2.Text.Contains(aCookie["userName"]))
             Label2.Text = "Welcome, " + aCookie["userName"];
         if (aCookie["isManager"] == "True")
+        {
             ButtonReviewRequests.Visible = true;
+        }
         if (aCookie["isHR"] == "True")
+        {
             ButtonUpdateEmployees.Visible = true;
+        }
+
+
 
     }
 
@@ -56,6 +66,6 @@ public partial class MainMenuForm : System.Web.UI.Page
 
     protected void ButtonUpdateEmployees_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/HRForm.aspx");
     }
 }
