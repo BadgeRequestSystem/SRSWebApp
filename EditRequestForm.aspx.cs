@@ -13,7 +13,6 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //NotesTextBox.Text = returnEmail("Aaron Something Prather");
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (Request.Cookies["draftInfo"] != null) //checking if we are loading a draft
         {
@@ -60,7 +59,6 @@ public partial class EditRequestForm : System.Web.UI.Page
 
         if (aCookie["isManager"] != "True")
         {
-            //SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]='" + aCookie["UserID"] + "'";
             SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]=@UserID";
             SqlDataSource1.SelectParameters.Add("UserID", aCookie["UserID"]);
         }
@@ -76,7 +74,7 @@ public partial class EditRequestForm : System.Web.UI.Page
                 temp = (string)cmdGetDepartment.ExecuteScalar();
                 Connection.Close();
             }
-            //SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [Department]='" + temp + "'";
+            //This statement could be used to select employees by manager, but we are currently searching by department in case manager field is empty.
             //SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [Manager Name]=@manager";
             //SqlDataSource1.SelectParameters.Add("manager", aCookie["Manager"]);
             SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [Department]=@department";
@@ -95,10 +93,6 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     public void sendNotification(string Employee, string Manager)
     {
-        //dontreplyplz @workmail.com
-        //Password!1
-
-        // the email method with correct config set up, just need a real email address to send it to
         try
         {
             MailMessage mail = new MailMessage();
@@ -130,12 +124,12 @@ public partial class EditRequestForm : System.Web.UI.Page
             SmtpServer2.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
             SmtpServer2.EnableSsl = true;
             SmtpServer2.Send(mail2);
-            //Console.WriteLine("Sucesss");
+
 
         }
         catch (Exception ex)
         {
-            //Console.WriteLine("Fail");
+
         }
 
 
@@ -155,15 +149,6 @@ public partial class EditRequestForm : System.Web.UI.Page
                                             (Select UserID FROM Employees WHERE ([First Name] + ' ' + [Middle Name]  + ' ' + [Last Name]) =@employee)", Connection);
             cmd.Parameters.AddWithValue("@employee", Employee);
             email = (string)cmd.ExecuteScalar();
-            //SqlCommand cmd = new SqlCommand(@"SELECT UserID FROM Employees WHERE ([First Name] + ' ' + [Middle Name] + ' ' + [Last Name]) = @manager", Connection);
-            //cmd.Parameters.AddWithValue("@manager", aCookie["Manager"]);
-            //string ID = (string)cmd.ExecuteScalar();
-
-            //SqlCommand cmd2 = new SqlCommand(@"Select Email FROM Credentials  WHERE UserID =@userID", Connection);
-            //cmd2.Parameters.AddWithValue("@userID", ID);
-            //email = (string)cmd2.ExecuteScalar();
-
-
         }
 
 
@@ -278,7 +263,7 @@ public partial class EditRequestForm : System.Web.UI.Page
             string strippedSSN = Regex.Replace(SSNTextBox.Text, "[^0-9]", "");
             HttpCookie aCookie = Request.Cookies["userInfo"];
             string state = "Draft";
-            //---------TODO-Change DOB and GET to check for no date given
+
             using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
             {
                 Connection.Open();

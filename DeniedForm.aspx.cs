@@ -52,13 +52,7 @@ public partial class DeniedForm : System.Web.UI.Page
                 string fName = bCookie["Employee"].Substring(0, firstIndex);
                 int secondIndex = bCookie["Employee"].LastIndexOf(' ');
                 string lName = bCookie["Employee"].Substring(secondIndex + 1);
-                //string mName = bCookie["Employee"].Substring(firstIndex + 2, bCookie["Employee"].Length - lName.Length - 1);
 
-
-                //SqlCommand cmd2 = new SqlCommand(@"SELECT * FROM Employees WHERE [First Name]=@fName AND [Last Name]=@lName AND [Middle Name]=@mName", Connection);
-                //cmd2.Parameters.AddWithValue("@fName", fName);
-                //cmd2.Parameters.AddWithValue("@lName", lName);
-                //cmd2.Parameters.AddWithValue("@mName", mName);
                 SqlCommand cmd2 = new SqlCommand(@"SELECT * FROM Employees WHERE [First Name]=@fName AND [Last Name]=@lName", Connection);
                 cmd2.Parameters.AddWithValue("@fName", fName);
                 cmd2.Parameters.AddWithValue("@lName", lName);
