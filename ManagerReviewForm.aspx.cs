@@ -32,6 +32,11 @@ public partial class ManagerReviewForm : System.Web.UI.Page
         ReasonDDL.Enabled = false;
         BadgeTypeDDL.Enabled = false;
 
+        GetTextBox.Enabled = false;
+        SSNTextBox.Enabled = false;
+        NotesTextBox.Enabled = false;
+        DOBTextBox.Enabled = false;
+
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (Request.Cookies["submittedCookieInfo"] != null)
         {
