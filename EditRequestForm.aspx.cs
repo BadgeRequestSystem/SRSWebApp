@@ -60,9 +60,9 @@ public partial class EditRequestForm : System.Web.UI.Page
 
         if (aCookie["isManager"] != "True")
         {
-            SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]='" + aCookie["UserID"] + "'";
-            //SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]=@UserID";
-            //SqlDataSource1.SelectParameters.Add("@UserID", aCookie["UserID"]);
+            //SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]='" + aCookie["UserID"] + "'";
+            SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]=@UserID";
+            SqlDataSource1.SelectParameters.Add("UserID", aCookie["UserID"]);
         }
         else
         {
@@ -76,7 +76,11 @@ public partial class EditRequestForm : System.Web.UI.Page
                 temp = (string)cmdGetDepartment.ExecuteScalar();
                 Connection.Close();
             }
-            SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [Department]='" + temp + "'";
+            //SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [Department]='" + temp + "'";
+            //SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [Manager Name]=@manager";
+            //SqlDataSource1.SelectParameters.Add("manager", aCookie["Manager"]);
+            SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [Department]=@department";
+            SqlDataSource1.SelectParameters.Add("department", temp);
         }
     }
 
