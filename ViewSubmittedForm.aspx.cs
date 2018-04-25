@@ -8,11 +8,12 @@ public partial class ViewSubmittedForm : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        Methods m = new Methods(); //Contains useful methods we can use like santizing input
         HttpCookie aCookie = Request.Cookies["submittedCookieInfo"];
         employeeLabel0.Text = aCookie.Values["Employee"];
         reasonforrequestLabel0.Text = aCookie.Values["Reason"];
         getdateLabel0.Text = aCookie.Values["GET"].Replace(" 12:00:00 AM", "");
-        ssnLabel0.Text = aCookie.Values["SSN"];
+        ssnLabel0.Text = m.lastFourOnly(aCookie.Values["SSN"]); //so now we should only be seeing the last four of the social security number (this shouldn't affect functionality whatsoever)
         dateofbirthLabel0.Text = aCookie.Values["DOB"].Replace(" 12:00:00 AM", "");
         typeofbadgeLabel0.Text = aCookie.Values["TOB"];
         proximitycardLabel0.Text = aCookie.Values["Proximity"];

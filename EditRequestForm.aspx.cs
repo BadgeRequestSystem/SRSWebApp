@@ -13,6 +13,7 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         //NotesTextBox.Text = returnEmail("Aaron Something Prather");
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (Request.Cookies["draftInfo"] != null) //checking if we are loading a draft
@@ -38,7 +39,7 @@ public partial class EditRequestForm : System.Web.UI.Page
         }
         else if (Request.Cookies["submittedCookieInfo"] != null && viewSubmittedFlagLabel.Text.Contains("1")) //checking to see if we are loading a pending request (someone editing an existing request)
         {
-            viewSubmittedFlagLabel.Text = viewSubmittedFlagLabel.Text.Replace("1",""); //So this solves the problem of the undeleted cookie putting back the original values. When user hits submit, it will skip over this 'if statement' because there wont be a '1' in the viewSubmittedFlagLabel text. Hey it works right lol
+            viewSubmittedFlagLabel.Text = viewSubmittedFlagLabel.Text.Replace("1", ""); //So this solves the problem of the undeleted cookie putting back the original values. When user hits submit, it will skip over this 'if statement' because there wont be a '1' in the viewSubmittedFlagLabel text. Hey it works right lol
             SaveButton.Visible = false; //Disabled 'Save Draft' if we are loading in from a pending request
             HttpCookie fCookie = Request.Cookies["submittedCookieInfo"];
             EmployeeDDL.Text = fCookie["Employee"];
@@ -169,6 +170,8 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     protected void SubmmitButton_Click(object sender, EventArgs e)
     {
+        Methods m = new Methods(); //Contains useful methods we can use like santizing input
+
         if (Request.Cookies["submittedCookieInfo"] != null) //existing pending request update
         {
             try
@@ -186,13 +189,14 @@ public partial class EditRequestForm : System.Web.UI.Page
                     cmd2.Parameters.AddWithValue("@Reason", ReasonDDL.Text);
                     cmd2.Parameters.AddWithValue("@GET", GetTextBox.Text);
                     
+
                     cmd2.Parameters.AddWithValue("@SSN", strippedSSN);
                     cmd2.Parameters.AddWithValue("@DOB", DOBTextBox.Text);
                     cmd2.Parameters.AddWithValue("@BadgeType", BadgeTypeDDL.Text);
                     cmd2.Parameters.AddWithValue("@Proximity", ProximityCheckBox.Checked);
                     cmd2.Parameters.AddWithValue("@Emergency", EmergencyCheckBox.Checked);
                     cmd2.Parameters.AddWithValue("@Accounts", AccountsCheckBox.Checked);
-                    cmd2.Parameters.AddWithValue("@Notes", NotesTextBox.Text);
+                    cmd2.Parameters.AddWithValue("@Notes", m.sanitizeInput(NotesTextBox.Text));
                     //cmd2.Parameters.AddWithValue("@Notes", "SQL TEST");
                     cmd2.Parameters.AddWithValue("@Username", aCookie["userName"]);
                     cmd2.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
@@ -205,7 +209,7 @@ public partial class EditRequestForm : System.Web.UI.Page
 
                 sendNotification(EmployeeDDL.Text, aCookie["Manager"]); //Should we use a different email response if a user is updating his pending request?
                 Response.Cookies["submittedCookieInfo"].Expires = DateTime.Now.AddDays(-1); //we finally remove the cookie
-                Response.Redirect("~/MainMenuForm.aspx",false); //had to add false as second parameter because without it, the current page execution would stop and wouldnt update the database.
+                Response.Redirect("~/MainMenuForm.aspx", false); //had to add false as second parameter because without it, the current page execution would stop and wouldnt update the database.
             }
             catch (Exception ex)
             {
@@ -305,4 +309,7 @@ public partial class EditRequestForm : System.Web.UI.Page
             Response.Write("<script>alert('" + msg + "')</script>");
         }
     }
+
+
+
 }

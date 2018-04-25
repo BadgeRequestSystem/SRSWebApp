@@ -35,11 +35,12 @@ public partial class ManagerReviewForm : System.Web.UI.Page
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (Request.Cookies["submittedCookieInfo"] != null)
         {
+            Methods m = new Methods(); //Contains useful methods we can use like santizing input
             HttpCookie cCookie = Request.Cookies["submittedCookieInfo"];
             EmployeeDDL.Text = cCookie["Employee"];
             ReasonDDL.Text = cCookie["Reason"];
             GetTextBox.Text = cCookie["GET"].Replace(" 12:00:00 AM", ""); ;
-            SSNTextBox.Text = cCookie["SSN"];
+            SSNTextBox.Text = m.lastFourOnly(cCookie["SSN"]); //so now we should only be seeing the last four of the social security number (this shouldn't affect functionality whatsoever)
             DOBTextBox.Text = cCookie["DOB"].Replace(" 12:00:00 AM", ""); ;
             BadgeTypeDDL.Text = cCookie["TOB"];
             if (cCookie["Proximity"] == "True")

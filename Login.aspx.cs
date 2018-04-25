@@ -28,6 +28,7 @@ public partial class Login : System.Web.UI.Page
 
     protected void LoginBtn_Click(object sender, EventArgs e)
     {
+        Methods m = new Methods();
         bool isManager = false;
         bool isHR = false;
         string tempID;
@@ -49,7 +50,7 @@ public partial class Login : System.Web.UI.Page
 
                 //userBox.Text = "Bang1";
                 SqlCommand cmd = new SqlCommand(@"Select PasswordHash FROM Credentials   WHERE Username=@uname", Connection);
-                cmd.Parameters.AddWithValue("@uname", userBox.Text);
+                cmd.Parameters.AddWithValue("@uname", m.sanitizeInput(userBox.Text));
 
                 string temp2 = (string)cmd.ExecuteScalar();
                 //userBox.Text = "Bang2";
