@@ -14,7 +14,6 @@ public partial class EditRequestForm : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Methods m = new Methods();
-        //NotesTextBox.Text = returnEmail("Aaron Something Prather");
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (Request.Cookies["draftInfo"] != null) //checking if we are loading a draft
         {
@@ -82,22 +81,6 @@ public partial class EditRequestForm : System.Web.UI.Page
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     protected void SubmmitButton_Click(object sender, EventArgs e)
     {
         Methods m = new Methods(); //Contains useful methods we can use like santizing input
@@ -132,54 +115,27 @@ public partial class EditRequestForm : System.Web.UI.Page
                 m.SIMPLE_POPUP("There was an error submitting the request form. Please make sure all fields are filled out correctly and try again.");
             }
         }
-
-
     }
 
     protected void CancelButton_Click(object sender, EventArgs e)
     {
-        if (Request.Cookies["submittedCookieInfo"] != null)
-            Response.Cookies["submittedCookieInfo"].Expires = DateTime.Now.AddDays(-1); //Removes the cookie that stored the loaded in pending request (from ViewSubmittedForm edit button)
-
+        Methods m = new Methods(); 
+        m.DeleteCookie("submittedCookieInfo"); //Removes the cookie that stored the loaded in pending request (from ViewSubmittedForm edit button)
         Response.Redirect("~/MainMenuForm.aspx");
     }
 
     protected void SaveButton_Click(object sender, EventArgs e)
     {
+        Methods m = new Methods();
         try
         {
-            string strippedSSN = Regex.Replace(SSNTextBox.Text, "[^0-9]", "");
             HttpCookie aCookie = Request.Cookies["userInfo"];
-            string state = "Draft";
-
-            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
-            {
-                Connection.Open();
-                SqlCommand cmd = new SqlCommand(@"INSERT INTO Drafts
-                    VALUES (@Employee, @Reason, @GET, @SSN, @DOB, @BadgeType, @Proximity, @Emergency, @Accounts, @Notes, @CurrentDate, @State, @Username);", Connection);
-                cmd.Parameters.AddWithValue("@Employee", EmployeeDDL.Text);
-                cmd.Parameters.AddWithValue("@Reason", ReasonDDL.Text);
-                cmd.Parameters.AddWithValue("@GET", GetTextBox.Text);
-                //cmd.Parameters.AddWithValue("@SSN", SSNTextBox.Text);
-                cmd.Parameters.AddWithValue("@SSN", strippedSSN);
-                cmd.Parameters.AddWithValue("@DOB", DOBTextBox.Text);
-                cmd.Parameters.AddWithValue("@BadgeType", BadgeTypeDDL.Text);
-                cmd.Parameters.AddWithValue("@Proximity", ProximityCheckBox.Checked);
-                cmd.Parameters.AddWithValue("@Emergency", EmergencyCheckBox.Checked);
-                cmd.Parameters.AddWithValue("@Accounts", AccountsCheckBox.Checked);
-                cmd.Parameters.AddWithValue("@Notes", NotesTextBox.Text);
-                cmd.Parameters.AddWithValue("@Username", aCookie["userName"]);
-                cmd.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
-                cmd.Parameters.AddWithValue("@State", state);
-
-                cmd.ExecuteNonQuery();
-            }
+            m.SaveRequest(EmployeeDDL.Text, ReasonDDL.Text, GetTextBox.Text, m.stripSSN(SSNTextBox.Text), DOBTextBox.Text, BadgeTypeDDL.Text, ProximityCheckBox.Checked, EmergencyCheckBox.Checked, AccountsCheckBox.Checked, NotesTextBox.Text, aCookie["userName"]);
             Response.Redirect("~/MainMenuForm.aspx");
         }
         catch (Exception ex)
         {
-            string msg = "Something went wrong saving your draft. Our bad. Probably had something to do with the SSN field, too many numbers or something.";
-            Response.Write("<script>alert('" + msg + "')</script>");
+            m.SIMPLE_POPUP("Something went wrong saving your draft. Our bad. Probably had something to do with the SSN field, too many numbers or something.");
         }
     }
 

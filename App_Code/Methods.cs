@@ -359,4 +359,29 @@ public class Methods : System.Web.UI.Page
             Connection.Close();
         }
     }
+
+    public void SaveRequest(string Employee, string Reason, string GET, string SSN, string DOB, string BadgeType, bool Proximity, bool Emergency, bool Accounts, string Notes, string Username)
+    {
+        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        {
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(@"INSERT INTO Drafts
+                    VALUES (@Employee, @Reason, @GET, @SSN, @DOB, @BadgeType, @Proximity, @Emergency, @Accounts, @Notes, @CurrentDate, @State, @Username);", Connection);
+            cmd.Parameters.AddWithValue("@Employee", Employee);
+            cmd.Parameters.AddWithValue("@Reason", Reason);
+            cmd.Parameters.AddWithValue("@GET", GET);
+            cmd.Parameters.AddWithValue("@SSN", SSN);
+            cmd.Parameters.AddWithValue("@DOB", DOB);
+            cmd.Parameters.AddWithValue("@BadgeType", BadgeType);
+            cmd.Parameters.AddWithValue("@Proximity", Proximity);
+            cmd.Parameters.AddWithValue("@Emergency", Emergency);
+            cmd.Parameters.AddWithValue("@Accounts", Accounts);
+            cmd.Parameters.AddWithValue("@Notes", Notes);
+            cmd.Parameters.AddWithValue("@Username", Username);
+            cmd.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
+            cmd.Parameters.AddWithValue("@State", "Draft");
+
+            cmd.ExecuteNonQuery();
+        }
+    }
 }

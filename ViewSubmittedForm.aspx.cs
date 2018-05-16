@@ -44,10 +44,8 @@ public partial class ViewSubmittedForm : System.Web.UI.Page
 
     protected void backButton_Click(object sender, EventArgs e)
     {
-        if (Request.Cookies["submittedCookieInfo"] != null)
-        {
-            Response.Cookies["submittedCookieInfo"].Expires = DateTime.Now.AddDays(-1);
-        }
+        Methods m = new Methods();
+        m.DeleteCookie("submittedCookieInfo");
         Response.Redirect("~/ReviewRequestsForm.aspx");
 
     }
