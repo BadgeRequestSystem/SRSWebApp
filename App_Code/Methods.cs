@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Web;
 
+
 /// <summary>
 /// Summary description for Methods
 /// </summary>
-public class Methods
+public class Methods : System.Web.UI.Page
 {
     //So we won't have the connection string hanging around every page and changing it here will change it everywhere!
     public string SQL_STRING = "Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3";
@@ -37,6 +38,15 @@ public class Methods
         return toReturn;
 
     }
+
+    public void DeleteCookie(string CookieName)
+    {
+        HttpContext.Current.Response.Cookies[CookieName].Expires = DateTime.Now.AddDays(-1);
+    }
+
+
+
+    /*SQL RELATED METHODS BELOW!*/
 
     public void EditEmployee(string CASE, string LName, string FName, string MName, string Initials, string UserID, string ECompany, string Department, string WLocation, string WPhone, string MWLocation, string MWPhone, string EManager)
     {
@@ -74,8 +84,50 @@ public class Methods
                 cmd.Parameters.AddWithValue("@EManager", sanitizeInput(EManager));
             }
             cmd.ExecuteNonQuery();
+            Connection.Close();
         }
     }
 
+    public void HRForm_Read(HttpCookie bCookie, string UID)
+    {
+        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        {
+            SqlCommand cmd = new SqlCommand(@"SELECT * FROM Employees WHERE UserID=@UID", Connection);
+            cmd.Parameters.AddWithValue("@UID", UID);
+            Connection.Open();
 
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    bCookie["Last Name"] = reader["Last Name"].ToString().Trim();
+                    bCookie["First Name"] = reader["First Name"].ToString().Trim();
+                    bCookie["Middle Name"] = reader["Middle Name"].ToString().Trim();
+                    bCookie["Initials"] = reader["Initials"].ToString().Trim();
+                    bCookie["UserID"] = reader["UserID"].ToString().Trim();
+                    bCookie["Employee Company"] = reader["Employee Company"].ToString().Trim();
+                    bCookie["Department"] = reader["Department"].ToString().Trim();
+                    bCookie["Work Location"] = reader["Work Location"].ToString().Trim();
+                    bCookie["Work Phone Number"] = reader["Work Phone Number"].ToString().Trim();
+                    bCookie["Manager Name"] = reader["Manager Name"].ToString().Trim();
+                    bCookie["Manager Work Location"] = reader["Manager Work Location"].ToString().Trim();
+                    bCookie["Manager Work Phone Number"] = reader["Manager Work Phone Number"].ToString().Trim();
+
+                }
+                Connection.Close();
+            }
+        }
+    }
+
+    public void DeleteFromEmployeesByUID(string UID)
+    {
+        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        {
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(@"DELETE FROM Employees WHERE [UserID] = @uid", Connection);
+            cmd.Parameters.AddWithValue("@uid", UID);
+            cmd.ExecuteNonQuery();
+            Connection.Close();
+        }
+    }
 }
