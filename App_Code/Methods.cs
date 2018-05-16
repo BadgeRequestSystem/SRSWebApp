@@ -44,6 +44,27 @@ public class Methods : System.Web.UI.Page
         HttpContext.Current.Response.Cookies[CookieName].Expires = DateTime.Now.AddDays(-1);
     }
 
+    public string sliceEmployee(string Employee, string CASE) //given an employee, return either the First or Last name
+    {
+        int firstIndex, secondIndex = -1;
+        string lName, fName = string.Empty;
+
+        if (CASE == "First Name")
+        {
+            firstIndex = Employee.IndexOf(' ');
+            fName = Employee.Substring(0, firstIndex);
+            return fName;
+        }
+        if (CASE == "Last Name")
+        {
+            secondIndex = Employee.LastIndexOf(' ');
+            lName = Employee.Substring(secondIndex + 1);
+            return lName;
+        }
+        else
+            return "";
+
+    }
 
 
     /*SQL RELATED METHODS BELOW!*/
@@ -128,6 +149,112 @@ public class Methods : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@uid", UID);
             cmd.ExecuteNonQuery();
             Connection.Close();
+        }
+    }
+
+    public void Request_Read(HttpCookie bCookie,string REQID)
+    {
+        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        {
+            SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE RequestID=@RequestID", Connection);
+            cmd.Parameters.AddWithValue("@RequestID", REQID);
+            Connection.Open();
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    bCookie["Employee"] = reader["Employee"].ToString();
+                    bCookie["Reason"] = reader["ReasonForRequest"].ToString();
+                    bCookie["GET"] = reader["GETDate"].ToString();
+                    bCookie["SSN"] = reader["SSN"].ToString();
+                    bCookie["DOB"] = reader["DateOfBirth"].ToString();
+                    bCookie["TOB"] = reader["TypeOfBadge"].ToString();
+                    bCookie["Proximity"] = reader["ProximityCard"].ToString();
+                    bCookie["Emergency"] = reader["EmergencyAccess"].ToString();
+                    bCookie["Accounts"] = reader["ContinueAccounts"].ToString();
+                    bCookie["Notes"] = reader["Notes"].ToString();
+                }
+                Connection.Close();
+            }
+
+            SqlCommand cmd2 = new SqlCommand(@"SELECT * FROM Employees WHERE [First Name]=@fName AND [Last Name]=@lName", Connection);
+            cmd2.Parameters.AddWithValue("@fName", sliceEmployee(bCookie["Employee"],"First Name"));
+            cmd2.Parameters.AddWithValue("@lName", sliceEmployee(bCookie["Employee"], "Last Name"));
+
+
+
+            Connection.Open();
+            using (SqlDataReader reader2 = cmd2.ExecuteReader())
+            {
+                while (reader2.Read())
+                {
+                    bCookie["Initials"] = reader2["Initials"].ToString();
+                    bCookie["UserID"] = reader2["UserID"].ToString();
+                    bCookie["Company"] = reader2["Employee Company"].ToString();
+                    bCookie["Department"] = reader2["Department"].ToString();
+                    bCookie["Location"] = reader2["Work Location"].ToString();
+                    bCookie["Phone"] = reader2["Work Phone Number"].ToString();
+                    bCookie["Manager"] = reader2["Manager Name"].ToString();
+                    bCookie["ManagerLocation"] = reader2["Manager Work Location"].ToString();
+                    bCookie["ManagerPhone"] = reader2["Manager Work Phone Number"].ToString();
+                }
+                Connection.Close();
+            }
+        }
+    }
+
+    public void Pending_Request_Read(HttpCookie bCookie, string REQID)
+    {
+        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        {
+            SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE RequestID=@RequestID", Connection);
+            cmd.Parameters.AddWithValue("@RequestID", REQID);
+            bCookie["RequestID"] = REQID;
+            Connection.Open();
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    bCookie["Employee"] = reader["Employee"].ToString();
+                    bCookie["Reason"] = reader["ReasonForRequest"].ToString();
+                    bCookie["GET"] = reader["GETDate"].ToString();
+                    bCookie["SSN"] = reader["SSN"].ToString();
+                    bCookie["DOB"] = reader["DateOfBirth"].ToString();
+                    bCookie["TOB"] = reader["TypeOfBadge"].ToString();
+                    bCookie["Proximity"] = reader["ProximityCard"].ToString();
+                    bCookie["Emergency"] = reader["EmergencyAccess"].ToString();
+                    bCookie["Accounts"] = reader["ContinueAccounts"].ToString();
+                    bCookie["Notes"] = reader["Notes"].ToString();
+                    bCookie["Editable"] = reader["Editable"].ToString(); //'Is this request editable' flag
+                }
+                Connection.Close();
+            }
+
+            SqlCommand cmd2 = new SqlCommand(@"SELECT * FROM Employees WHERE [First Name]=@fName AND [Last Name]=@lName", Connection);
+            cmd2.Parameters.AddWithValue("@fName", sliceEmployee(bCookie["Employee"], "First Name"));
+            cmd2.Parameters.AddWithValue("@lName", sliceEmployee(bCookie["Employee"], "Last Name"));
+
+
+
+            Connection.Open();
+            using (SqlDataReader reader2 = cmd2.ExecuteReader())
+            {
+                while (reader2.Read())
+                {
+                    bCookie["Initials"] = reader2["Initials"].ToString();
+                    bCookie["UserID"] = reader2["UserID"].ToString();
+                    bCookie["Company"] = reader2["Employee Company"].ToString();
+                    bCookie["Department"] = reader2["Department"].ToString();
+                    bCookie["Location"] = reader2["Work Location"].ToString();
+                    bCookie["Phone"] = reader2["Work Phone Number"].ToString();
+                    bCookie["Manager"] = reader2["Manager Name"].ToString();
+                    bCookie["ManagerLocation"] = reader2["Manager Work Location"].ToString();
+                    bCookie["ManagerPhone"] = reader2["Manager Work Phone Number"].ToString();
+                }
+                Connection.Close();
+            }
         }
     }
 }

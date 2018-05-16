@@ -31,7 +31,7 @@ public partial class HRForm : System.Web.UI.Page
             HttpCookie bCookie = new HttpCookie("EmployeeToDelete");
             Response.Cookies.Add(bCookie);
             string UID = ListBox1.SelectedValue;
-            m.HRForm_Read(bCookie, UID);
+            m.HRForm_Read(bCookie, UID); //Read from database
 
             /*BEGIN POP-UP*/
             ClientScript.RegisterStartupScript(typeof(Page), "exampleScript",
@@ -64,7 +64,7 @@ public partial class HRForm : System.Web.UI.Page
             HttpCookie bCookie = new HttpCookie("selectedEmployee");
             Response.Cookies.Add(bCookie);
             string UID = ListBox1.SelectedValue;
-            m.HRForm_Read(bCookie, UID);
+            m.HRForm_Read(bCookie, UID); //Read from database
             Response.Redirect("~/EditEmployeeForm.aspx");
         }
 
