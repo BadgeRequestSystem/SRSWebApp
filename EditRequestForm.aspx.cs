@@ -13,7 +13,7 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        Methods m = new Methods();
         //NotesTextBox.Text = returnEmail("Aaron Something Prather");
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (Request.Cookies["draftInfo"] != null) //checking if we are loading a draft
@@ -33,7 +33,8 @@ public partial class EditRequestForm : System.Web.UI.Page
                 AccountsCheckBox.Checked = true;
             NotesTextBox.Text = cCookie["Notes"];
 
-            Response.Cookies["draftInfo"].Expires = DateTime.Now.AddDays(-1);
+            m.DeleteCookie("draftInfo");
+
 
 
         }
@@ -67,7 +68,7 @@ public partial class EditRequestForm : System.Web.UI.Page
         else
         {
             string temp;
-            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+            using (SqlConnection Connection = new SqlConnection(m.SQL_STRING))
             {
                 Connection.Open();
                 SqlCommand cmdGetDepartment = new SqlCommand(@"SELECT Department FROM Employees 
@@ -90,118 +91,30 @@ public partial class EditRequestForm : System.Web.UI.Page
 
 
 
-    public void sendNotification(string Employee, string Manager)
-    {
-        try
-        {
-            MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
-            mail.From = new MailAddress("dontreplysrsmail@gmail.com");
-            mail.To.Add(returnEmail(Employee));
-            mail.Subject = "SRS Badge Request Received";
-            mail.IsBodyHtml = true;
-            string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been received." + "\nYou will be notified on the status of your request shortly. We thank you for your patience. \nSincerely,\nThe SRS Badge Request System\n", Employee);
-            mail.Body = body1 + "<a href = 'http://srswebapp-test.us-west-2.elasticbeanstalk.com/Login.aspx' > Login to view your request! </a>";
-
-            SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
-            SmtpServer.EnableSsl = true;
-
-            SmtpServer.Send(mail);
-
-            MailMessage mail2 = new MailMessage();
-            SmtpClient SmtpServer2 = new SmtpClient("smtp.gmail.com");
-
-            mail2.From = new MailAddress("dontreplysrsmail@gmail.com");
-            mail2.To.Add(returnEmail(Manager));
-            mail2.Subject = "SRS Badge Request Attention Needed";
-            mail2.Body = String.Format("Dear {0},\n\tWe wanted to inform you that {1} has put in a request for a new badge." +
-                "\nPlease review the request at your earliest convenience. We thank you for your time. \nSincerely,\nThe SRS Badge Request System", Manager, Employee);
-
-            SmtpServer2.Port = 587;
-            SmtpServer2.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
-            SmtpServer2.EnableSsl = true;
-            SmtpServer2.Send(mail2);
-
-
-        }
-        catch (Exception ex)
-        {
-
-        }
-
-
-    }
 
 
 
 
-    public string returnEmail(string Employee)
-    {
-        HttpCookie aCookie = Request.Cookies["userInfo"];
-        string email = string.Empty;
-        using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
-        {
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(@"Select Email FROM Credentials WHERE UserID =
-                                            (Select UserID FROM Employees WHERE ([First Name] + ' ' + [Middle Name]  + ' ' + [Last Name]) =@employee)", Connection);
-            cmd.Parameters.AddWithValue("@employee", Employee);
-            email = (string)cmd.ExecuteScalar();
-        }
 
 
-        return email;
-
-    }
 
     protected void SubmmitButton_Click(object sender, EventArgs e)
     {
         Methods m = new Methods(); //Contains useful methods we can use like santizing input
-
         if (Request.Cookies["submittedCookieInfo"] != null) //existing pending request update
         {
             try
             {
-                string strippedSSN = Regex.Replace(SSNTextBox.Text, "[^0-9]", "");
                 HttpCookie aCookie = Request.Cookies["userInfo"];
                 HttpCookie vCookie = Request.Cookies["submittedCookieInfo"]; //so we can grab the request ID
-                string state = "Pending";
-                //Creates Connection to database and updates Requests with new request.
-                using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
-                {
-                    Connection.Open();
-                    SqlCommand cmd2 = new SqlCommand(@"Update Requests SET [Employee]=@Employee, [ReasonForRequest]=@Reason, [GETDate]=@GET, [SSN]=@SSN, [DateOfBirth]=@DOB, [TypeOfBadge]=@BadgeType, [ProximityCard]=@Proximity, [EmergencyAccess]=@Emergency, [ContinueAccounts]=@Accounts, [Notes]=@Notes, [CurrentDate]=@CurrentDate, [RequestState]=@State, [Username]=@Username, [Editable]=@canEdit WHERE RequestID=@reqID;", Connection);
-                    cmd2.Parameters.AddWithValue("@Employee", EmployeeDDL.Text);
-                    cmd2.Parameters.AddWithValue("@Reason", ReasonDDL.Text);
-                    cmd2.Parameters.AddWithValue("@GET", GetTextBox.Text);
-                    
-
-                    cmd2.Parameters.AddWithValue("@SSN", strippedSSN);
-                    cmd2.Parameters.AddWithValue("@DOB", DOBTextBox.Text);
-                    cmd2.Parameters.AddWithValue("@BadgeType", BadgeTypeDDL.Text);
-                    cmd2.Parameters.AddWithValue("@Proximity", ProximityCheckBox.Checked);
-                    cmd2.Parameters.AddWithValue("@Emergency", EmergencyCheckBox.Checked);
-                    cmd2.Parameters.AddWithValue("@Accounts", AccountsCheckBox.Checked);
-                    cmd2.Parameters.AddWithValue("@Notes", m.sanitizeInput(NotesTextBox.Text));
-                    //cmd2.Parameters.AddWithValue("@Notes", "SQL TEST");
-                    cmd2.Parameters.AddWithValue("@Username", aCookie["userName"]);
-                    cmd2.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
-                    cmd2.Parameters.AddWithValue("@State", state);
-                    cmd2.Parameters.AddWithValue("@reqID", vCookie["RequestID"]);
-                    cmd2.Parameters.AddWithValue("@canEdit", false); //User can't edit pending request again until manager checks off on it.
-
-                    cmd2.ExecuteNonQuery();
-                }
-
-                sendNotification(EmployeeDDL.Text, aCookie["Manager"]); //Should we use a different email response if a user is updating his pending request?
-                Response.Cookies["submittedCookieInfo"].Expires = DateTime.Now.AddDays(-1); //we finally remove the cookie
-                Response.Redirect("~/MainMenuForm.aspx", false); //had to add false as second parameter because without it, the current page execution would stop and wouldnt update the database.
+                m.SubmitRequest(EmployeeDDL.Text, ReasonDDL.Text, GetTextBox.Text, m.stripSSN(SSNTextBox.Text), DOBTextBox.Text, BadgeTypeDDL.Text, ProximityCheckBox.Checked, EmergencyCheckBox.Checked, AccountsCheckBox.Checked, NotesTextBox.Text, aCookie["userName"], "Pending", false, vCookie["RequestID"]);
+                m.sendNotification(EmployeeDDL.Text, aCookie["Manager"]); //Should we use a different email response if a user is updating his pending request?
+                m.DeleteCookie("submittedCookieInfo");//we finally remove the cookie
+                Response.Redirect("~/MainMenuForm.aspx", false);
             }
             catch (Exception ex)
             {
-                string msg = "There was an error submitting the request form. Please make sure all fields are filled out correctly and try again.";
-                Response.Write("<script>alert('" + msg + "')</script>");
+                m.SIMPLE_POPUP("There was an error submitting the request form. Please make sure all fields are filled out correctly and try again.");
             }
         }
 
@@ -209,41 +122,14 @@ public partial class EditRequestForm : System.Web.UI.Page
         {
             try
             {
-                string strippedSSN = Regex.Replace(SSNTextBox.Text, "[^0-9]", "");
                 HttpCookie aCookie = Request.Cookies["userInfo"];
-                string state = "Pending";
-                //Creates Connection to database and updates Requests with new request.
-                using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
-                {
-                    Connection.Open();
-                    SqlCommand cmd = new SqlCommand(@"INSERT INTO Requests
-                    VALUES (@Employee, @Reason, @GET, @SSN, @DOB, @BadgeType, @Proximity, @Emergency, @Accounts, @Notes, @CurrentDate, @State, @Username, @canEdit);", Connection);
-                    cmd.Parameters.AddWithValue("@Employee", EmployeeDDL.Text);
-                    cmd.Parameters.AddWithValue("@Reason", ReasonDDL.Text);
-                    cmd.Parameters.AddWithValue("@GET", GetTextBox.Text);
-                    //cmd.Parameters.AddWithValue("@SSN", SSNTextBox.Text);
-                    cmd.Parameters.AddWithValue("@SSN", strippedSSN);
-                    cmd.Parameters.AddWithValue("@DOB", DOBTextBox.Text);
-                    cmd.Parameters.AddWithValue("@BadgeType", BadgeTypeDDL.Text);
-                    cmd.Parameters.AddWithValue("@Proximity", ProximityCheckBox.Checked);
-                    cmd.Parameters.AddWithValue("@Emergency", EmergencyCheckBox.Checked);
-                    cmd.Parameters.AddWithValue("@Accounts", AccountsCheckBox.Checked);
-                    cmd.Parameters.AddWithValue("@Notes", NotesTextBox.Text);
-                    cmd.Parameters.AddWithValue("@Username", aCookie["userName"]);
-                    cmd.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
-                    cmd.Parameters.AddWithValue("@State", state);
-                    cmd.Parameters.AddWithValue("@canEdit", false); //by default, a user cannot edit a pending request until a manager checks off on it.
-
-                    cmd.ExecuteNonQuery();
-                }
-
-                sendNotification(EmployeeDDL.Text, aCookie["Manager"]);
+                m.SubmitRequest(EmployeeDDL.Text, ReasonDDL.Text, GetTextBox.Text, m.stripSSN(SSNTextBox.Text), DOBTextBox.Text, BadgeTypeDDL.Text, ProximityCheckBox.Checked, EmergencyCheckBox.Checked, AccountsCheckBox.Checked, NotesTextBox.Text, aCookie["userName"], "Pending", false, "");
+                m.sendNotification(EmployeeDDL.Text, aCookie["Manager"]);
                 Response.Redirect("~/MainMenuForm.aspx");
             }
             catch (Exception ex)
             {
-                string msg = "There was an error submitting the request form. Please make sure all fields are filled out correctly and try again.";
-                Response.Write("<script>alert('" + msg + "')</script>");
+                m.SIMPLE_POPUP("There was an error submitting the request form. Please make sure all fields are filled out correctly and try again.");
             }
         }
 

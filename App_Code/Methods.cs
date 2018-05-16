@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Web;
 
 
@@ -9,8 +11,9 @@ using System.Web;
 /// </summary>
 public class Methods : System.Web.UI.Page
 {
-    //So we won't have the connection string hanging around every page and changing it here will change it everywhere!
+    //So we won't have the connection string hanging around every page and changing it here will change it everywhere! (Except for the aspx.cs pages but I want to fix that too!)
     public string SQL_STRING = "Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3";
+    public string WEB_LINK = "http://srswebapp-test.us-west-2.elasticbeanstalk.com/Login.aspx";
     //~~
 
     public Methods()
@@ -38,10 +41,15 @@ public class Methods : System.Web.UI.Page
         return toReturn;
 
     }
-
-    public void DeleteCookie(string CookieName)
+    public string stripSSN(string SSN)
     {
-        HttpContext.Current.Response.Cookies[CookieName].Expires = DateTime.Now.AddDays(-1);
+        return Regex.Replace(SSN, "[^0-9]", "");
+    }
+
+    public void DeleteCookie(string CookieName) //Check if cookie exists, and if it does it will delete it.
+    {
+        if (HttpContext.Current.Request.Cookies[CookieName] != null)
+            HttpContext.Current.Response.Cookies[CookieName].Expires = DateTime.Now.AddDays(-1);
     }
 
     public string sliceEmployee(string Employee, string CASE) //given an employee, return either the First or Last name
@@ -64,6 +72,65 @@ public class Methods : System.Web.UI.Page
         else
             return "";
 
+    }
+    public void sendNotification(string Employee, string Manager)
+    {
+        try
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("dontreplysrsmail@gmail.com");
+            mail.To.Add(returnEmail(Employee));
+            mail.Subject = "SRS Badge Request Received";
+            mail.IsBodyHtml = true;
+            string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been received." + "\nYou will be notified on the status of your request shortly. We thank you for your patience. \nSincerely,\nThe SRS Badge Request System\n", Employee);
+            mail.Body = body1 + "<a href = '" + WEB_LINK + "' > Login to view your request! </a>";
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+            MailMessage mail2 = new MailMessage();
+            SmtpClient SmtpServer2 = new SmtpClient("smtp.gmail.com");
+
+            mail2.From = new MailAddress("dontreplysrsmail@gmail.com");
+            mail2.To.Add(returnEmail(Manager));
+            mail2.Subject = "SRS Badge Request Attention Needed";
+            mail2.Body = String.Format("Dear {0},\n\tWe wanted to inform you that {1} has put in a request for a new badge." +
+                "\nPlease review the request at your earliest convenience. We thank you for your time. \nSincerely,\nThe SRS Badge Request System", Manager, Employee);
+
+            SmtpServer2.Port = 587;
+            SmtpServer2.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
+            SmtpServer2.EnableSsl = true;
+            SmtpServer2.Send(mail2);
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+    public string returnEmail(string Employee)
+    {
+        HttpCookie aCookie = Request.Cookies["userInfo"];
+        string email = string.Empty;
+        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        {
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(@"Select Email FROM Credentials WHERE UserID =
+                                            (Select UserID FROM Employees WHERE ([First Name] + ' ' + [Middle Name]  + ' ' + [Last Name]) =@employee)", Connection);
+            cmd.Parameters.AddWithValue("@employee", Employee);
+            email = (string)cmd.ExecuteScalar();
+            Connection.Close();
+        }
+        return email;
+    }
+
+    public void SIMPLE_POPUP(string message)
+    {
+        HttpContext.Current.Response.Write("<script>alert('" + message + "')</script>");
     }
 
 
@@ -152,7 +219,7 @@ public class Methods : System.Web.UI.Page
         }
     }
 
-    public void Request_Read(HttpCookie bCookie,string REQID)
+    public void Request_Read(HttpCookie bCookie, string REQID)
     {
         using (SqlConnection Connection = new SqlConnection(SQL_STRING))
         {
@@ -179,7 +246,7 @@ public class Methods : System.Web.UI.Page
             }
 
             SqlCommand cmd2 = new SqlCommand(@"SELECT * FROM Employees WHERE [First Name]=@fName AND [Last Name]=@lName", Connection);
-            cmd2.Parameters.AddWithValue("@fName", sliceEmployee(bCookie["Employee"],"First Name"));
+            cmd2.Parameters.AddWithValue("@fName", sliceEmployee(bCookie["Employee"], "First Name"));
             cmd2.Parameters.AddWithValue("@lName", sliceEmployee(bCookie["Employee"], "Last Name"));
 
 
@@ -255,6 +322,41 @@ public class Methods : System.Web.UI.Page
                 }
                 Connection.Close();
             }
+        }
+    }
+
+    public void SubmitRequest(string Employee,string Reason,string GET,string SSN,string DOB,string BadgeType,bool Proximity, bool Emergency, bool Accounts, string Notes, string Username, string State, bool canEdit, string REQID)
+    {
+        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        {
+            SqlCommand query = new SqlCommand(); //store the command here
+            if (REQID == "") //Normal case
+                query = new SqlCommand(@"INSERT INTO Requests
+                    VALUES (@Employee, @Reason, @GET, @SSN, @DOB, @BadgeType, @Proximity, @Emergency, @Accounts, @Notes, @CurrentDate, @State, @Username, @canEdit);", Connection);
+            if (REQID != "") //if REQID has something, then we are updating a request.
+                query = new SqlCommand(@"Update Requests SET [Employee]=@Employee, [ReasonForRequest]=@Reason, [GETDate]=@GET, [SSN]=@SSN, [DateOfBirth]=@DOB, [TypeOfBadge]=@BadgeType, [ProximityCard]=@Proximity, [EmergencyAccess]=@Emergency, [ContinueAccounts]=@Accounts, [Notes]=@Notes, [CurrentDate]=@CurrentDate, [RequestState]=@State, [Username]=@Username, [Editable]=@canEdit WHERE RequestID=@reqID;", Connection);
+
+            Connection.Open();
+            SqlCommand cmd = query;
+            cmd.Parameters.AddWithValue("@Employee", Employee);
+            cmd.Parameters.AddWithValue("@Reason", Reason);
+            cmd.Parameters.AddWithValue("@GET", GET);
+            cmd.Parameters.AddWithValue("@SSN", SSN);
+            cmd.Parameters.AddWithValue("@DOB", DOB);
+            cmd.Parameters.AddWithValue("@BadgeType", BadgeType);
+            cmd.Parameters.AddWithValue("@Proximity", Proximity);
+            cmd.Parameters.AddWithValue("@Emergency", Emergency);
+            cmd.Parameters.AddWithValue("@Accounts", Accounts);
+            cmd.Parameters.AddWithValue("@Notes", Notes);
+            cmd.Parameters.AddWithValue("@Username", Username);
+            cmd.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
+            cmd.Parameters.AddWithValue("@State", State);
+            cmd.Parameters.AddWithValue("@canEdit", false); //by default, a user cannot edit a pending request until a manager checks off on it.
+            if(REQID != "")
+                cmd.Parameters.AddWithValue("@reqID", REQID);
+
+            cmd.ExecuteNonQuery();
+            Connection.Close();
         }
     }
 }
