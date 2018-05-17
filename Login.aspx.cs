@@ -13,6 +13,7 @@ public partial class Login : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        ClientScript.RegisterStartupScript(this.GetType(), "script", "LoginFadeIn();", true); //fade effects script (see JS.js file)
         /*
         ************************Currently just used to generate password hashes*************************
         byte[] salt;

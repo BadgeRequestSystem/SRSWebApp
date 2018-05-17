@@ -5,21 +5,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>SRS-Badge Request</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
-<form id="form1" runat="server">
-    <body bgcolor="aliceblue">
-
-
-
+<body>
+    <form id="form1" runat="server">
         <div id="overtop">
             <p></p>
         </div>
         <div id="overbottom">
             <p>
                 <br></br>
-                <p>SRS - Badge Request System: Augusta University Senior Capstone Project
-            </p>
+                <p>
+                    SRS - Badge Request System: Augusta University Senior Capstone Project
+                </p>
                 <p></p>
             </p>
         </div>
@@ -66,37 +64,8 @@
 
 
 
-
-
-
-
-
-        </div>
-         <div align="right"></div>
-        <br />
-        <center>
-        
-            
-            
-        </p>
-        <p>
-        
-            </p>
-            <p>
-            
-            </p>
-        <p>
-            
-        </p>
-        <p>
-            
-            </p>
-        
-        <p>
-            
-            </center>
-        </p>
-        <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
-</form>
+    </form>
+    <script type="text/javascript" src="jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="JS.js"></script>
 </body>
 </html>

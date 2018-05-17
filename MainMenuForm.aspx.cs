@@ -9,6 +9,8 @@ public partial class MainMenuForm : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        ClientScript.RegisterStartupScript(this.GetType(), "script", "MainMenuFadeIn();", true); //fade effects script (see JS.js file)
+
         if (Request.Browser.IsMobileDevice == true)
             Image1.Visible = false; //SRS logo on main page bugs out on mobile, lets remove it for mobile only.
 
