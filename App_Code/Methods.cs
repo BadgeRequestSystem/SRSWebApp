@@ -14,6 +14,10 @@ public class Methods : System.Web.UI.Page
     //So we won't have the connection string hanging around every page and changing it here will change it everywhere! (Except for the aspx.cs pages but I want to fix that too!)
     public string SQL_STRING = "Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3";
     public string WEB_LINK = "http://srswebapp-test.us-west-2.elasticbeanstalk.com/Login.aspx";
+    public string companyEmail = "dontreplysrsmail@gmail.com"; //For live demo purposes we should probably disable email notifications but leave the feature available in the github
+    public string companyEmailPassword = "Password!1";
+    public int companyEmailPort = 587;
+    public string companyEmailServer = "smtp.gmail.com";
     //~~
 
     public Methods()
@@ -78,32 +82,32 @@ public class Methods : System.Web.UI.Page
         try
         {
             MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            SmtpClient SmtpServer = new SmtpClient(companyEmailServer);
 
-            mail.From = new MailAddress("dontreplysrsmail@gmail.com");
+            mail.From = new MailAddress(companyEmail);
             mail.To.Add(returnEmail(Employee));
             mail.Subject = "SRS Badge Request Received";
             mail.IsBodyHtml = true;
             string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been received." + "\nYou will be notified on the status of your request shortly. We thank you for your patience. \nSincerely,\nThe SRS Badge Request System\n", Employee);
             mail.Body = body1 + "<a href = '" + WEB_LINK + "' > Login to view your request! </a>";
 
-            SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
+            SmtpServer.Port = companyEmailPort;
+            SmtpServer.Credentials = new System.Net.NetworkCredential(companyEmail, companyEmailPassword);
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);
 
             MailMessage mail2 = new MailMessage();
-            SmtpClient SmtpServer2 = new SmtpClient("smtp.gmail.com");
+            SmtpClient SmtpServer2 = new SmtpClient(companyEmailServer);
 
-            mail2.From = new MailAddress("dontreplysrsmail@gmail.com");
+            mail2.From = new MailAddress(companyEmail);
             mail2.To.Add(returnEmail(Manager));
             mail2.Subject = "SRS Badge Request Attention Needed";
             mail2.Body = String.Format("Dear {0},\n\tWe wanted to inform you that {1} has put in a request for a new badge." +
                 "\nPlease review the request at your earliest convenience. We thank you for your time. \nSincerely,\nThe SRS Badge Request System", Manager, Employee);
 
-            SmtpServer2.Port = 587;
-            SmtpServer2.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
+            SmtpServer2.Port = companyEmailPort;
+            SmtpServer2.Credentials = new System.Net.NetworkCredential(companyEmail, companyEmailPassword);
             SmtpServer2.EnableSsl = true;
             SmtpServer2.Send(mail2);
         }
@@ -120,17 +124,17 @@ public class Methods : System.Web.UI.Page
             {
                 //Response should be either "Accepted" or "Denied"
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                SmtpClient SmtpServer = new SmtpClient(companyEmailServer);
 
-                mail.From = new MailAddress("dontreplysrsmail@gmail.com");
+                mail.From = new MailAddress(companyEmail);
                 mail.To.Add(returnEmail(Employee));
                 mail.Subject = String.Format("SRS Badge Request {0}", Response);
                 mail.IsBodyHtml = true;
                 string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been {1}." + "\nWe thank you for your patience. \nSincerely,\nThe SRS Badge Request System\n", Employee, Response);
-                mail.Body = body1 + "Please click " + "<a href = 'http://srswebapp-test.us-west-2.elasticbeanstalk.com/Login.aspx' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
+                mail.Body = body1 + "Please click " + "<a href = '" + WEB_LINK + "' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
 
-                SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
+                SmtpServer.Port = companyEmailPort;
+                SmtpServer.Credentials = new System.Net.NetworkCredential(companyEmail, companyEmailPassword);
                 SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
@@ -138,17 +142,17 @@ public class Methods : System.Web.UI.Page
             else
             {
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                SmtpClient SmtpServer = new SmtpClient(companyEmailServer);
 
-                mail.From = new MailAddress("dontreplysrsmail@gmail.com");
+                mail.From = new MailAddress(companyEmail);
                 mail.To.Add(returnEmail(Employee));
                 mail.Subject = String.Format("SRS Badge Request Needs Review");
                 mail.IsBodyHtml = true;
                 string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been flagged due to an error." + "\nPlease review your pending requests and make any needed corrections.\nSincerely,\nThe SRS Badge Request System\n", Employee);
-                mail.Body = body1 + "Please click " + "<a href = 'http://srswebapp-test.us-west-2.elasticbeanstalk.com/Login.aspx' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
+                mail.Body = body1 + "Please click " + "<a href = '" + WEB_LINK + "' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
 
-                SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
+                SmtpServer.Port = companyEmailPort;
+                SmtpServer.Credentials = new System.Net.NetworkCredential(companyEmail, companyEmailPassword);
                 SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
@@ -198,7 +202,6 @@ public class Methods : System.Web.UI.Page
                 query = new SqlCommand(@"Update Employees
                     SET [First Name]=@FName, [Last Name]=@LName, [Middle Name]=@MName, [Initials]=@Initials, [Employee Company]=@ECompany, [Department]=@Department, [Work Location]=@WLocation, [Work Phone Number]=@WPhone, [Manager Name]=@EManager, [Manager Work Location]=@MWLocation, [Manager Work Phone Number]=@MWPhone
                     WHERE UserID=@UserID;", Connection);
-            //NewEmployee(TextBox3.Text,TextBox1.Text,TextBox2.Text,TextBox4.Text,TextBox5.Text,TextBox6.Text,TextBox7.Text,TextBox8.Text,TextBox9.Text,TextBox10.Text,TextBox11.Text,EmployeeDDL.SelectedItem.Text);
             Connection.Open();
             SqlCommand cmd = query;
             cmd.Parameters.AddWithValue("@LName", sanitizeInput(LName));
@@ -374,7 +377,7 @@ public class Methods : System.Web.UI.Page
         }
     }
 
-    public void SubmitRequest(string Employee,string Reason,string GET,string SSN,string DOB,string BadgeType,bool Proximity, bool Emergency, bool Accounts, string Notes, string Username, string State, bool canEdit, string REQID)
+    public void SubmitRequest(string Employee, string Reason, string GET, string SSN, string DOB, string BadgeType, bool Proximity, bool Emergency, bool Accounts, string Notes, string Username, string State, bool canEdit, string REQID)
     {
         using (SqlConnection Connection = new SqlConnection(SQL_STRING))
         {
@@ -401,7 +404,7 @@ public class Methods : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@CurrentDate", DateTime.Today);
             cmd.Parameters.AddWithValue("@State", State);
             cmd.Parameters.AddWithValue("@canEdit", false); //by default, a user cannot edit a pending request until a manager checks off on it.
-            if(REQID != "")
+            if (REQID != "")
                 cmd.Parameters.AddWithValue("@reqID", REQID);
 
             cmd.ExecuteNonQuery();
@@ -434,20 +437,20 @@ public class Methods : System.Web.UI.Page
         }
     }
 
-    public void ReviewForm(string REQID,string action) //ManagerReviewForm - Approve, deny, or needs more info
+    public void ReviewForm(string REQID, string action) //ManagerReviewForm - Approve, deny, or needs more info
     {
         using (SqlConnection Connection = new SqlConnection(SQL_STRING))
         {
             SqlCommand query = new SqlCommand(); //store the command here
-            if(action == "Approve")
+            if (action == "Approve")
                 query = new SqlCommand(@"Update Requests
                     SET [RequestState] = 'Approved'
                     WHERE RequestID=@RequestID;", Connection);
-            else if(action == "Deny")
+            else if (action == "Deny")
                 query = new SqlCommand(@"Update Requests
                     SET [RequestState] = 'Denied'
                     WHERE RequestID=@RequestID;", Connection);
-            else if(action == "Info")
+            else if (action == "Info")
                 query = new SqlCommand(@"Update Requests
                     SET [Editable]=@canEdit
                     WHERE RequestID=@RequestID;", Connection);
