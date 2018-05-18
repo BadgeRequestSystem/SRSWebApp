@@ -18,20 +18,29 @@ public partial class PendingForm : System.Web.UI.Page
         HttpCookie usernameCookie = new HttpCookie("USERname");
         usernameCookie.Value = aCookie.Values["userName"];
         Response.Cookies.Add(usernameCookie);
-
-
         /*DOUBLE CLICK EVENT FOR LISTBOX*/
-        if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "move")
+        try
         {
-            HttpCookie bCookie = new HttpCookie("submittedCookieInfo");
-            Response.Cookies.Add(bCookie);
-            string REQID = ListBox1.SelectedValue;
-            m.Pending_Request_Read(bCookie, REQID);
+            if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "move")
+            {
+                HttpCookie bCookie = new HttpCookie("submittedCookieInfo");
+                Response.Cookies.Add(bCookie);
 
-            Response.Redirect("~/ViewSubmittedForm.aspx");
+                string REQID = ListBox1.SelectedValue;
+                m.Pending_Request_Read(bCookie, REQID);
+                Response.Redirect("~/ViewSubmittedForm.aspx");
+
+            }
+        }
+        catch
+        {
+
         }
         ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "move"));
+
         /****************/
+
+
 
 
     }

@@ -9,31 +9,21 @@ public partial class EditEmployeeForm : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        EmployeeDDL.Items.Add("No Manager");
+        Methods m = new Methods();
+        EmployeeDDL.Items.Add("No Manager"); //Manually adding the 'No Manager' option to the drop down list.
         if (Request.Cookies["selectedEmployee"] != null)
         {
+            /*Populate the fields with the cookie information*/
             HttpCookie cCookie = Request.Cookies["selectedEmployee"];
-            TextBox1.Text = cCookie["First Name"];
-            TextBox2.Text = cCookie["Middle Name"];
-            TextBox3.Text = cCookie["Last Name"];
-            TextBox4.Text = cCookie["Initials"];
-            TextBox5.Text = cCookie["UserID"];
-            TextBox5.ReadOnly = true;
-            TextBox6.Text = cCookie["Employee Company"];
-            TextBox7.Text = cCookie["Department"];
-            TextBox8.Text = cCookie["Work Location"];
-            TextBox9.Text = cCookie["Work Phone Number"];
-            TextBox10.Text = cCookie["Manager Work Location"];
-            TextBox11.Text = cCookie["Manager Work Phone Number"];
+            TextBox1.Text = cCookie["First Name"]; TextBox2.Text = cCookie["Middle Name"]; TextBox3.Text = cCookie["Last Name"]; TextBox4.Text = cCookie["Initials"]; TextBox5.Text = cCookie["UserID"]; TextBox5.ReadOnly = true; TextBox6.Text = cCookie["Employee Company"]; TextBox7.Text = cCookie["Department"]; TextBox8.Text = cCookie["Work Location"]; TextBox9.Text = cCookie["Work Phone Number"]; TextBox10.Text = cCookie["Manager Work Location"]; TextBox11.Text = cCookie["Manager Work Phone Number"];
+            /************************************************/
+
             if (cCookie["Manager Name"] == "")
-            {
                 EmployeeDDL.Text = "No Manager";
-            }
             else
-            {
                 EmployeeDDL.Text = cCookie["Manager Name"];
-            }
-            Response.Cookies["selectedEmployee"].Expires = DateTime.Now.AddDays(-1);
+
+            m.DeleteCookie("selectedEmployee");
 
         }
 
@@ -45,10 +35,7 @@ public partial class EditEmployeeForm : System.Web.UI.Page
 
     }
 
-    protected void SaveButton_Click(object sender, EventArgs e) //dont use
-    {
-        //dont use me plz
-    }
+
 
     protected void SubmmitButton_Click(object sender, EventArgs e) //save button
     {
@@ -66,6 +53,29 @@ public partial class EditEmployeeForm : System.Web.UI.Page
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /************************************UNUSED STUFF BELOW************************************/
+    /******************************************************************************************/
+    /******************************************************************************************/
+    /******************************************************************************************/
     protected void EmployeeDDL_Load(object sender, EventArgs e)
     {
     }
@@ -73,5 +83,9 @@ public partial class EditEmployeeForm : System.Web.UI.Page
     protected void TextBox8_TextChanged(object sender, EventArgs e)
     {
 
+    }
+    protected void SaveButton_Click(object sender, EventArgs e) //dont use
+    {
+        //dont use me plz
     }
 }

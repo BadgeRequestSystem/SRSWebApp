@@ -22,14 +22,21 @@ public partial class ApprovedForm : System.Web.UI.Page
 
 
         /*DOUBLE CLICK EVENT FOR LISTBOX*/
-        if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "move")
+        try
         {
-            HttpCookie bCookie = new HttpCookie("submittedCookieInfo");
-            Response.Cookies.Add(bCookie);
-            string REQID = ListBox1.SelectedValue;
-            m.Request_Read(bCookie, REQID);
-            
-            Response.Redirect("~/ViewSubmittedForm.aspx");
+            if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "move")
+            {
+                HttpCookie bCookie = new HttpCookie("submittedCookieInfo");
+                Response.Cookies.Add(bCookie);
+                string REQID = ListBox1.SelectedValue;
+                m.Request_Read(bCookie, REQID);
+
+                Response.Redirect("~/ViewSubmittedForm.aspx");
+            }
+        }
+        catch
+        {
+
         }
         ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "move"));
         /****************/
