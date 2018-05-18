@@ -13,7 +13,7 @@ public class Methods : System.Web.UI.Page
 {
     //So we won't have the connection string hanging around every page and changing it here will change it everywhere! (Except for the aspx.cs pages but I want to fix that too!)
     public string SQL_STRING = "Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3";
-    public string WEB_LINK = "http://srswebapp-test.us-west-2.elasticbeanstalk.com/Login.aspx";
+    public string WEB_LINK = "http://srswebapp-test.us-west-2.elasticbeanstalk.com";
     public string companyEmail = "dontreplysrsmail@gmail.com"; //For live demo purposes we should probably disable email notifications but leave the feature available in the github
     public string companyEmailPassword = "Password!1";
     public int companyEmailPort = 587;
