@@ -15,13 +15,12 @@
         <p></p>
     </div>
     <div id="overbottom">
-        <p>
-            <br></br>
             <p>
-                SRS - Badge Request System: Augusta University Senior Capstone Project
+                <br></br>
+               SRS - Badge Request System: Augusta University Senior Capstone Project
+            
+                <p></p>
             </p>
-            <p></p>
-        </p>
     </div>
     <div id="overright">
         <p></p>
