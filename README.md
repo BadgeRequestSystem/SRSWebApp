@@ -4,7 +4,7 @@ Senior Capstone project.
 
 Aaron, David, Randall
 
-Live link can be found here: http://srswebapp-test.us-west-2.elasticbeanstalk.com/Login.aspx
+Live link can be found here: http://srswebapp-test.us-west-2.elasticbeanstalk.com
 
 
 ![ScreenShot](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Images/Screenshot_1.png)
