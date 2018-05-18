@@ -13,24 +13,21 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        ClientScript.RegisterStartupScript(this.GetType(), "script", "EditRequestFadeIn();", true); //fade effects script (see JS.js file)
         Methods m = new Methods();
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (Request.Cookies["draftInfo"] != null) //checking if we are loading a draft
         {
+            /*Populate fields based on cookie information*/
             HttpCookie cCookie = Request.Cookies["draftInfo"];
-            EmployeeDDL.Text = cCookie["Employee"];
-            ReasonDDL.Text = cCookie["Reason"];
-            GetTextBox.Text = cCookie["GET"].Replace(" 12:00:00 AM", "");
-            SSNTextBox.Text = cCookie["SSN"];
-            DOBTextBox.Text = cCookie["DOB"].Replace(" 12:00:00 AM", "");
-            BadgeTypeDDL.Text = cCookie["TOB"];
+            EmployeeDDL.Text = cCookie["Employee"]; ReasonDDL.Text = cCookie["Reason"]; GetTextBox.Text = cCookie["GET"].Replace(" 12:00:00 AM", ""); SSNTextBox.Text = cCookie["SSN"]; DOBTextBox.Text = cCookie["DOB"].Replace(" 12:00:00 AM", ""); BadgeTypeDDL.Text = cCookie["TOB"]; NotesTextBox.Text = cCookie["Notes"];
             if (cCookie["Proximity"] == "True")
                 ProximityCheckBox.Checked = true;
             if (cCookie["Emergency"] == "True")
                 EmergencyCheckBox.Checked = true;
             if (cCookie["Accounts"] == "True")
                 AccountsCheckBox.Checked = true;
-            NotesTextBox.Text = cCookie["Notes"];
+            /*******************************************/
 
             m.DeleteCookie("draftInfo");
 
@@ -41,22 +38,19 @@ public partial class EditRequestForm : System.Web.UI.Page
         {
             viewSubmittedFlagLabel.Text = viewSubmittedFlagLabel.Text.Replace("1", ""); //So this solves the problem of the undeleted cookie putting back the original values. When user hits submit, it will skip over this 'if statement' because there wont be a '1' in the viewSubmittedFlagLabel text. Hey it works right lol
             SaveButton.Visible = false; //Disabled 'Save Draft' if we are loading in from a pending request
+
+            /*Populate fields based on cookie information*/
             HttpCookie fCookie = Request.Cookies["submittedCookieInfo"];
-            EmployeeDDL.Text = fCookie["Employee"];
-            ReasonDDL.Text = fCookie["Reason"];
-            GetTextBox.Text = fCookie["GET"].Replace(" 12:00:00 AM", "");
-            SSNTextBox.Text = fCookie["SSN"];
-            DOBTextBox.Text = fCookie["DOB"].Replace(" 12:00:00 AM", "");
-            BadgeTypeDDL.Text = fCookie["TOB"];
+            EmployeeDDL.Text = fCookie["Employee"]; ReasonDDL.Text = fCookie["Reason"]; GetTextBox.Text = fCookie["GET"].Replace(" 12:00:00 AM", ""); SSNTextBox.Text = fCookie["SSN"]; DOBTextBox.Text = fCookie["DOB"].Replace(" 12:00:00 AM", ""); BadgeTypeDDL.Text = fCookie["TOB"]; NotesTextBox.Text = fCookie["Notes"];
             if (fCookie["Proximity"] == "True")
                 ProximityCheckBox.Checked = true;
             if (fCookie["Emergency"] == "True")
                 EmergencyCheckBox.Checked = true;
             if (fCookie["Accounts"] == "True")
                 AccountsCheckBox.Checked = true;
-            NotesTextBox.Text = fCookie["Notes"];
+            /*******************************************/
 
-            //we dont want to remove the submittedCookieInfo cookie yet. (we will remove it on 'Cancel' and on 'Submit') *this is so that we can know if we are updating an existing request or not :)
+            //we dont want to remove the submittedCookieInfo cookie yet. (we will remove it on 'Cancel' and on 'Submit') this is so that we can know if we are updating an existing request or not :)
         }
 
         if (aCookie["isManager"] != "True")
@@ -84,6 +78,7 @@ public partial class EditRequestForm : System.Web.UI.Page
     protected void SubmmitButton_Click(object sender, EventArgs e)
     {
         Methods m = new Methods(); //Contains useful methods we can use like santizing input
+
         if (Request.Cookies["submittedCookieInfo"] != null) //existing pending request update
         {
             try

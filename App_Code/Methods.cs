@@ -112,6 +112,55 @@ public class Methods : System.Web.UI.Page
 
         }
     }
+    public void Review_sendNotifcation(string Employee, string Response) //ManagerReviewForm version
+    {
+        try
+        {
+            if (Response != "Need")
+            {
+                //Response should be either "Accepted" or "Denied"
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("dontreplysrsmail@gmail.com");
+                mail.To.Add(returnEmail(Employee));
+                mail.Subject = String.Format("SRS Badge Request {0}", Response);
+                mail.IsBodyHtml = true;
+                string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been {1}." + "\nWe thank you for your patience. \nSincerely,\nThe SRS Badge Request System\n", Employee, Response);
+                mail.Body = body1 + "Please click " + "<a href = 'http://srswebapp-test.us-west-2.elasticbeanstalk.com/Login.aspx' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
+
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
+                SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+            }
+            else
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("dontreplysrsmail@gmail.com");
+                mail.To.Add(returnEmail(Employee));
+                mail.Subject = String.Format("SRS Badge Request Needs Review");
+                mail.IsBodyHtml = true;
+                string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been flagged due to an error." + "\nPlease review your pending requests and make any needed corrections.\nSincerely,\nThe SRS Badge Request System\n", Employee);
+                mail.Body = body1 + "Please click " + "<a href = 'http://srswebapp-test.us-west-2.elasticbeanstalk.com/Login.aspx' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
+
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
+                SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+
+    }
     public string returnEmail(string Employee)
     {
         HttpCookie aCookie = Request.Cookies["userInfo"];
@@ -271,7 +320,7 @@ public class Methods : System.Web.UI.Page
         }
     }
 
-    public void Pending_Request_Read(HttpCookie bCookie, string REQID)
+    public void Pending_Request_Read(HttpCookie bCookie, string REQID) //Special case for Pending
     {
         using (SqlConnection Connection = new SqlConnection(SQL_STRING))
         {
@@ -360,7 +409,7 @@ public class Methods : System.Web.UI.Page
         }
     }
 
-    public void SaveRequest(string Employee, string Reason, string GET, string SSN, string DOB, string BadgeType, bool Proximity, bool Emergency, bool Accounts, string Notes, string Username)
+    public void SaveRequest(string Employee, string Reason, string GET, string SSN, string DOB, string BadgeType, bool Proximity, bool Emergency, bool Accounts, string Notes, string Username) //Saving request as a DRAFT
     {
         using (SqlConnection Connection = new SqlConnection(SQL_STRING))
         {
@@ -382,6 +431,32 @@ public class Methods : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@State", "Draft");
 
             cmd.ExecuteNonQuery();
+        }
+    }
+
+    public void ReviewForm(string REQID,string action) //ManagerReviewForm - Approve, deny, or needs more info
+    {
+        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        {
+            SqlCommand query = new SqlCommand(); //store the command here
+            if(action == "Approve")
+                query = new SqlCommand(@"Update Requests
+                    SET [RequestState] = 'Approved'
+                    WHERE RequestID=@RequestID;", Connection);
+            else if(action == "Deny")
+                query = new SqlCommand(@"Update Requests
+                    SET [RequestState] = 'Denied'
+                    WHERE RequestID=@RequestID;", Connection);
+            else if(action == "Info")
+                query = new SqlCommand(@"Update Requests
+                    SET [Editable]=@canEdit
+                    WHERE RequestID=@RequestID;", Connection);
+
+            Connection.Open();
+            SqlCommand cmd = query;
+            cmd.Parameters.AddWithValue("@RequestID", REQID);
+            cmd.ExecuteNonQuery();
+            Connection.Close();
         }
     }
 }

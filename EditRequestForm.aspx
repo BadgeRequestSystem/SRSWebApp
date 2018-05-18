@@ -5,8 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>SRS-Badge Request</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
+<body>
     <form id="EditRequest" runat="server">
 
         <div id="overtop">
@@ -15,7 +16,7 @@
         <div id="overbottom">
             <p>
                 <br></br>
-               SRS - Badge Request System: Augusta University Senior Capstone Project
+                SRS - Badge Request System: Augusta University Senior Capstone Project
             
                 <p></p>
             </p>
@@ -34,60 +35,60 @@
         <div id="editRequestFormMainData">
             <p>
                 &nbsp;<p>
-                &nbsp;<p>
-                <asp:Label ID="EmployeeLabel" runat="server" Text="Employee:" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
-                <div>
-                    <asp:DropDownList ID="EmployeeDDL" runat="server" Width="125px" DataSourceID="SqlDataSource1" DataTextField="Last_Name" DataValueField="Last_Name" BackColor="#CCCCCC" />
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;Persist Security Info=True;User ID=pwndatnerd;Password=AaronDavidRandall!3" SelectCommand="SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees]" ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
-                </div>
-                <asp:Label ID="ReasonLabel" runat="server" Text="Reason For Request:" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
-                <div>
-                    <asp:DropDownList ID="ReasonDDL" runat="server" Width="125px" BackColor="#CCCCCC">
-                        <asp:ListItem></asp:ListItem>
-                        <asp:ListItem>Area Access Change</asp:ListItem>
-                        <asp:ListItem>Appearance Change</asp:ListItem>
-                        <asp:ListItem>Damaged Badge</asp:ListItem>
-                        <asp:ListItem>Job Change</asp:ListItem>
-                        <asp:ListItem>Lost Badge</asp:ListItem>
-                        <asp:ListItem>Name Change</asp:ListItem>
-                        <asp:ListItem>New/Changed Clearance</asp:ListItem>
-                        <asp:ListItem>New Employee</asp:ListItem>
-                        <asp:ListItem>Rebadging Cycle</asp:ListItem>
-                        <asp:ListItem>Downgrade</asp:ListItem>
-                        <asp:ListItem>HRP</asp:ListItem>
-                        <asp:ListItem>LSE/Intern</asp:ListItem>
-                    </asp:DropDownList>
-                    <br />
-                </div>
-                <div>
-                    <br />
-                </div>
-                <asp:Label ID="getDateLabel" Text="G.E.T. Date:" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
-                <div>
-                    <asp:TextBox ID="GetTextBox" Columns="20" MaxLength="25" Placeholder="mm/dd/yyyy" runat="server" BackColor="#CCCCCC" />
-                </div>
-                <br />
-                <asp:Label ID="SSNLabel" Text="SSN:" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
-                <div>
-                    <asp:TextBox ID="SSNTextBox" Columns="20" MaxLength="25" placeholder="XXX-XX-XXXX" runat="server" BackColor="#CCCCCC" />
+                    &nbsp;<p>
+                        <asp:Label ID="EmployeeLabel" runat="server" Text="Employee:" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
+                        <div>
+                            <asp:DropDownList ID="EmployeeDDL" runat="server" Width="125px" DataSourceID="SqlDataSource1" DataTextField="Last_Name" DataValueField="Last_Name" BackColor="#CCCCCC" />
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;Persist Security Info=True;User ID=pwndatnerd;Password=AaronDavidRandall!3" SelectCommand="SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees]" ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
+                        </div>
+                        <asp:Label ID="ReasonLabel" runat="server" Text="Reason For Request:" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
+                        <div>
+                            <asp:DropDownList ID="ReasonDDL" runat="server" Width="125px" BackColor="#CCCCCC">
+                                <asp:ListItem></asp:ListItem>
+                                <asp:ListItem>Area Access Change</asp:ListItem>
+                                <asp:ListItem>Appearance Change</asp:ListItem>
+                                <asp:ListItem>Damaged Badge</asp:ListItem>
+                                <asp:ListItem>Job Change</asp:ListItem>
+                                <asp:ListItem>Lost Badge</asp:ListItem>
+                                <asp:ListItem>Name Change</asp:ListItem>
+                                <asp:ListItem>New/Changed Clearance</asp:ListItem>
+                                <asp:ListItem>New Employee</asp:ListItem>
+                                <asp:ListItem>Rebadging Cycle</asp:ListItem>
+                                <asp:ListItem>Downgrade</asp:ListItem>
+                                <asp:ListItem>HRP</asp:ListItem>
+                                <asp:ListItem>LSE/Intern</asp:ListItem>
+                            </asp:DropDownList>
+                            <br />
+                        </div>
+                        <div>
+                            <br />
+                        </div>
+                        <asp:Label ID="getDateLabel" Text="G.E.T. Date:" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
+                        <div>
+                            <asp:TextBox ID="GetTextBox" Columns="20" MaxLength="25" Placeholder="mm/dd/yyyy" runat="server" BackColor="#CCCCCC" />
+                        </div>
+                        <br />
+                        <asp:Label ID="SSNLabel" Text="SSN:" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
+                        <div>
+                            <asp:TextBox ID="SSNTextBox" Columns="20" MaxLength="25" placeholder="XXX-XX-XXXX" runat="server" BackColor="#CCCCCC" />
 
-                </div>
-                <br />
-                <asp:Label ID="DOBLabel" Text="Date of Birth:" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
-                <div>
-                    <asp:TextBox ID="DOBTextBox" Columns="20" MaxLength="25" placeholder="mm/dd/yyyy" runat="server" BackColor="#CCCCCC" />
-                </div>
-                <br />
-                <asp:Label ID="BadgeTypeLabel" Text="Type of Badge:" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
-                <div>
-                    <asp:DropDownList ID="BadgeTypeDDL" runat="server" Width="125px" BackColor="#CCCCCC">
-                        <asp:ListItem></asp:ListItem>
-                        <asp:ListItem>L</asp:ListItem>
-                        <asp:ListItem>Q</asp:ListItem>
-                        <asp:ListItem>Uncleared</asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-            </p>
+                        </div>
+                        <br />
+                        <asp:Label ID="DOBLabel" Text="Date of Birth:" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
+                        <div>
+                            <asp:TextBox ID="DOBTextBox" Columns="20" MaxLength="25" placeholder="mm/dd/yyyy" runat="server" BackColor="#CCCCCC" />
+                        </div>
+                        <br />
+                        <asp:Label ID="BadgeTypeLabel" Text="Type of Badge:" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
+                        <div>
+                            <asp:DropDownList ID="BadgeTypeDDL" runat="server" Width="125px" BackColor="#CCCCCC">
+                                <asp:ListItem></asp:ListItem>
+                                <asp:ListItem>L</asp:ListItem>
+                                <asp:ListItem>Q</asp:ListItem>
+                                <asp:ListItem>Uncleared</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </p>
         </div>
         <div id="editRequestFormCheckBoxData">
             <p>
@@ -126,4 +127,7 @@
 
 
     </form>
+    <script type="text/javascript" src="jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="JS.js"></script>
+</body>
 </html>

@@ -11,9 +11,16 @@
 $(function MainMenuFadeIn() {
     $('#Image1').hide().fadeIn(2000);
     $('#mainpageWelcome').hide().fadeIn(2000);
-    $('#ButtonNewRequest').hide().fadeIn(2000);
-    $('#ButtonViewSavedRequests').hide().fadeIn(2000);
-    $('#ButtonViewSubmittedRequests').hide().fadeIn(2000);
-    $('#ButtonUpdateEmployees').hide().fadeIn(2000);
-    $('#ButtonReviewRequests').hide().fadeIn(2000);
+    $('#ButtonNewRequest').hide().delay(200).fadeIn(2000);
+    $('#ButtonViewSavedRequests').hide().delay(400).fadeIn(2000);
+    $('#ButtonViewSubmittedRequests').hide().delay(600).fadeIn(2000);
+    $('#ButtonUpdateEmployees').hide().delay(800).fadeIn(2000);
+    $('#ButtonReviewRequests').hide().delay(1000).fadeIn(2000);
+    //The delays kind of give a cool effect like each button loads one right after another
+});
+$(function EditRequestFadeIn() {
+    $('#editRequestFormMainData').hide().fadeIn(2000);
+    $('#editRequestFormCheckBoxData').hide().fadeIn(2000);
+    $('#editRequestFormTopRightText').hide().fadeIn(2000);
+    $('#editRequestFormBottomButtons').hide().fadeIn(2000);
 });
