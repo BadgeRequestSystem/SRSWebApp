@@ -10,8 +10,14 @@ using System.Net.Mail;
 
 public partial class ManagerReviewForm : System.Web.UI.Page
 {
+    public static Methods m = new Methods();
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
+        {
+            m.SIMPLE_POPUP("Something went wrong!");
+            Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
+        }
         SSNTextBox.ReadOnly = true; SSNTextBox.BackColor = System.Drawing.Color.LightGray;
         GetTextBox.ReadOnly = true; GetTextBox.BackColor = System.Drawing.Color.LightGray;
         DOBTextBox.ReadOnly = true; DOBTextBox.BackColor = System.Drawing.Color.LightGray;
@@ -24,8 +30,6 @@ public partial class ManagerReviewForm : System.Web.UI.Page
 
         if (Request.Cookies["submittedCookieInfo"] != null)
         {
-            Methods m = new Methods(); //Contains useful methods we can use like santizing input
-
             /*Populate fields based on cookie information*/
             HttpCookie cCookie = Request.Cookies["submittedCookieInfo"];
             EmployeeDDL.Text = cCookie["Employee"]; ReasonDDL.Text = cCookie["Reason"]; GetTextBox.Text = cCookie["GET"].Replace(" 12:00:00 AM", ""); SSNTextBox.Text = m.lastFourOnly(cCookie["SSN"]); DOBTextBox.Text = cCookie["DOB"].Replace(" 12:00:00 AM", ""); BadgeTypeDDL.Text = cCookie["TOB"]; NotesTextBox.Text = cCookie["Notes"]; requestIDTxtBx.Text = cCookie["RequestID"];
@@ -40,11 +44,11 @@ public partial class ManagerReviewForm : System.Web.UI.Page
             m.DeleteCookie("submittedCookieInfo");
 
         }
+
     }
 
     protected void InfoButton_Click(object sender, EventArgs e)
     {
-        Methods m = new Methods();
         m.ReviewForm(requestIDTxtBx.Text, "Info");
         m.Review_sendNotifcation(EmployeeDDL.Text, "Need");
         Response.Redirect("~/PendingActionForm.aspx");
@@ -54,7 +58,6 @@ public partial class ManagerReviewForm : System.Web.UI.Page
 
     protected void ApproveButton_Click(object sender, EventArgs e)
     {
-        Methods m = new Methods();
         m.ReviewForm(requestIDTxtBx.Text, "Approve");
         m.Review_sendNotifcation(EmployeeDDL.Text, "Approved");
         Response.Redirect("~/PendingActionForm.aspx");
@@ -62,7 +65,6 @@ public partial class ManagerReviewForm : System.Web.UI.Page
 
     protected void DenyButton_Click(object sender, EventArgs e)
     {
-        Methods m = new Methods();
         m.ReviewForm(requestIDTxtBx.Text, "Deny");
         m.Review_sendNotifcation(EmployeeDDL.Text, "Denied");
         Response.Redirect("~/PendingActionForm.aspx");
