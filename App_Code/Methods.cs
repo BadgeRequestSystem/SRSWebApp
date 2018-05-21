@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
-
+using AES; //Accesses our static methods in 'Encryption.cs'
 
 /// <summary>
 /// Summary description for Methods
@@ -54,6 +54,13 @@ public class Methods : System.Web.UI.Page
     {
         if (HttpContext.Current.Request.Cookies[CookieName] != null)
             HttpContext.Current.Response.Cookies[CookieName].Expires = DateTime.Now.AddDays(-1);
+    }
+    public bool CookieExists(string CookieName) //Check if cookie exists, and if it does it will delete it.
+    {
+        if (HttpContext.Current.Request.Cookies[CookieName] != null)
+            return true;
+        else
+            return false;
     }
 
     public string sliceEmployee(string Employee, string CASE) //given an employee, return either the First or Last name
@@ -460,6 +467,71 @@ public class Methods : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@RequestID", REQID);
             cmd.ExecuteNonQuery();
             Connection.Close();
+        }
+    }
+
+
+    public void LoginCookie(HttpCookie aCookie, string userName) //Fills the 'userInfo' cookie after the password hash matches the password from the user.
+    {
+
+
+        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        {
+            SqlCommand cmd = new SqlCommand(@"SELECT * FROM Credentials WHERE Username=@uname", Connection);
+            cmd.Parameters.AddWithValue("@uname", sanitizeInput(userName));
+            Connection.Open();
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    aCookie.Values["userName"] = userName;
+                    aCookie.Values["isManager"] = reader["isManager"].ToString();
+                    aCookie.Values["isHR"] = reader["isHR"].ToString();
+                    aCookie.Values["UserID"] = reader["UserID"].ToString();
+                    aCookie.Values["Email"] = reader["Email"].ToString().Trim();
+
+                }
+                Connection.Close();
+            }
+            SqlCommand cmdGetManagerName = new SqlCommand(@"SELECT [Manager Name] FROM Employees
+                                                    WHERE UserID=@tempID", Connection);
+            cmdGetManagerName.Parameters.AddWithValue("@tempID", aCookie.Values["UserID"]);
+            Connection.Open();
+            aCookie.Values["Manager"] = cmdGetManagerName.ExecuteScalar().ToString().Trim(); //grabbing the Manager's name given the employee UserID
+            Connection.Close();
+
+        }
+    }
+
+    public void checkLogin(HttpCookie aCookie, string userName, string passWord)
+    {
+        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        {
+            try
+            {
+                Connection.Open();
+
+                SqlCommand cmd = new SqlCommand(@"Select PasswordHash FROM Credentials   WHERE Username=@uname", Connection);
+                cmd.Parameters.AddWithValue("@uname", sanitizeInput(userName));
+
+                string passwordHash = (string)cmd.ExecuteScalar(); //grab password hash from database
+                bool result = Encryption.ValidateInput(passWord, passwordHash); //call our ValidateInput method for the given password and the passwordHash we have on record.
+
+                if (result == true) //SUCCESSFUL LOGIN
+                {
+                    Connection.Close();
+                    LoginCookie(aCookie, sanitizeInput(userName)); //Fill the login cookie 'userInfo'
+                }
+
+                else //LOGIN UNSUCCESFUL
+                    Connection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                Connection.Close();
+            }
         }
     }
 }
