@@ -8,8 +8,14 @@ using System.Net;
 
 public partial class SavedRequestForm : System.Web.UI.Page
 {
+    public static Methods m = new Methods();
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
+        {
+            m.SIMPLE_POPUP("Something went wrong!");
+            Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
+        }
         HttpCookie aCookie = Request.Cookies["userInfo"];
         HttpCookie usernameCookie = new HttpCookie("USERname");
         usernameCookie.Value = aCookie.Values["userName"];

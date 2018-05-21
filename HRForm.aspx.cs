@@ -7,9 +7,15 @@ using System.Web.UI.WebControls;
 
 public partial class HRForm : System.Web.UI.Page
 {
+    public static Methods m = new Methods();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
+        {
+            m.SIMPLE_POPUP("Something went wrong!");
+            Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
+        }
+           
     }
 
     protected void backButton_Click(object sender, EventArgs e)
@@ -25,7 +31,6 @@ public partial class HRForm : System.Web.UI.Page
 
     protected void deleteButton_Click(object sender, EventArgs e) //Pop-up dialog, if sucessful confirmation, we activate Button1_Click()
     {
-        Methods m = new Methods();
         if (ListBox1.SelectedItem != null)
         {
             HttpCookie bCookie = new HttpCookie("EmployeeToDelete");
@@ -47,7 +52,6 @@ public partial class HRForm : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e) //Does the deleting after the pop-up dialog
     {
-        Methods m = new Methods();
         if (ListBox1.SelectedItem != null)
         {
             string UID = ListBox1.SelectedValue;
@@ -58,7 +62,6 @@ public partial class HRForm : System.Web.UI.Page
 
     protected void updateButton_Click(object sender, EventArgs e)
     {
-        Methods m = new Methods();
         if (ListBox1.SelectedItem != null)
         {
             HttpCookie bCookie = new HttpCookie("selectedEmployee");

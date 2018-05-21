@@ -10,11 +10,16 @@ using System.Net.Mail;
 
 public partial class EditRequestForm : System.Web.UI.Page
 {
+    public static Methods m = new Methods();
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
+        {
+            m.SIMPLE_POPUP("Something went wrong!");
+            Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
+        }
         ClientScript.RegisterStartupScript(this.GetType(), "script", "EditRequestFadeIn();", true); //fade effects script (see JS.js file)
-        Methods m = new Methods();
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (Request.Cookies["draftInfo"] != null) //checking if we are loading a draft
         {
@@ -77,8 +82,6 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     protected void SubmmitButton_Click(object sender, EventArgs e)
     {
-        Methods m = new Methods(); //Contains useful methods we can use like santizing input
-
         if (Request.Cookies["submittedCookieInfo"] != null) //existing pending request update
         {
             try
@@ -114,14 +117,12 @@ public partial class EditRequestForm : System.Web.UI.Page
 
     protected void CancelButton_Click(object sender, EventArgs e)
     {
-        Methods m = new Methods(); 
         m.DeleteCookie("submittedCookieInfo"); //Removes the cookie that stored the loaded in pending request (from ViewSubmittedForm edit button)
         Response.Redirect("~/MainMenuForm.aspx");
     }
 
     protected void SaveButton_Click(object sender, EventArgs e)
     {
-        Methods m = new Methods();
         try
         {
             HttpCookie aCookie = Request.Cookies["userInfo"];

@@ -8,9 +8,14 @@ using System.Net;
 
 public partial class DeniedForm : System.Web.UI.Page
 {
+    public static Methods m = new Methods();
     protected void Page_Load(object sender, EventArgs e)
     {
-        Methods m = new Methods();
+        if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
+        {
+            m.SIMPLE_POPUP("Something went wrong!");
+            Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
+        }
         /*So in order for the listbox to get the userName cookie, we have to request the userInfo cookie, create a new cookie that will hold ONLY username!*/
         /*So aCookie is the original cookie, usernameCookie is the new cookie that gets assigned aCookie.Values["userName"], and of course we named the new cookie USERname*/
         /*USERname is the cookie that will be looked for in the .aspx file*/

@@ -7,9 +7,14 @@ using System.Web.UI.WebControls;
 
 public partial class EditEmployeeForm : System.Web.UI.Page
 {
+    public static Methods m = new Methods();
     protected void Page_Load(object sender, EventArgs e)
     {
-        Methods m = new Methods();
+        if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
+        {
+            m.SIMPLE_POPUP("Something went wrong!");
+            Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
+        }
         EmployeeDDL.Items.Add("No Manager"); //Manually adding the 'No Manager' option to the drop down list.
         if (Request.Cookies["selectedEmployee"] != null)
         {
@@ -24,7 +29,6 @@ public partial class EditEmployeeForm : System.Web.UI.Page
                 EmployeeDDL.Text = cCookie["Manager Name"];
 
             m.DeleteCookie("selectedEmployee");
-
         }
 
     }
@@ -39,7 +43,6 @@ public partial class EditEmployeeForm : System.Web.UI.Page
 
     protected void SubmmitButton_Click(object sender, EventArgs e) //save button
     {
-        Methods m = new Methods(); //Contains useful methods we can use like santizing input
         if (TextBox1.Text != "" && TextBox2.Text != "" && TextBox3.Text != "" && TextBox4.Text != "" && TextBox5.Text != "" && TextBox6.Text != "" && TextBox7.Text != "" && TextBox8.Text != "" && TextBox9.Text != "" && EmployeeDDL.SelectedItem != null && TextBox5.ReadOnly == false)
         {/*New Employee Case*/
             m.EditEmployee("NEW", TextBox3.Text, TextBox1.Text, TextBox2.Text, TextBox4.Text, TextBox5.Text, TextBox6.Text, TextBox7.Text, TextBox8.Text, TextBox9.Text, TextBox10.Text, TextBox11.Text, EmployeeDDL.SelectedItem.Text);
