@@ -1,4 +1,10 @@
-﻿$(document).ready(function LoginFadeIn() {
+﻿
+/*Some great jQuery resources if anyone wants to create something:
+https://oscarotero.com/jquery/  <-- jQuery cheatsheet with definitions
+https://www.htmlgoodies.com/beyond/javascript/top-10-jquery-tips-and-tricks.html  <-- Useful tips
+****************************************************************/
+
+$(document).ready(function LoginFadeIn() {
     $('#testPic').hide().fadeIn(2000);
     $('#RequestLabel').hide().fadeIn(2000);
     $('#userLabel').hide().fadeIn(2000);
