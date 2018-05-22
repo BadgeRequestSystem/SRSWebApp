@@ -24,3 +24,9 @@ $(function EditRequestFadeIn() {
     $('#editRequestFormTopRightText').hide().fadeIn(2000);
     $('#editRequestFormBottomButtons').hide().fadeIn(2000);
 });
+
+$(function HRFormFadeIn() {
+    $('#listboxFormPanelText').hide().fadeIn(2000);
+    $('#listboxFormPanelButtons').hide().fadeIn(2000);
+    $('#listboxFormPanel').hide().fadeIn(2000);
+});

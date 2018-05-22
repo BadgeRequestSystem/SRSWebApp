@@ -15,7 +15,8 @@ public partial class HRForm : System.Web.UI.Page
             m.SIMPLE_POPUP("Something went wrong!");
             Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
         }
-           
+        ClientScript.RegisterStartupScript(this.GetType(), "script", "HRFormFadeIn();", true); //fade effects script (see JS.js file)
+
     }
 
     protected void backButton_Click(object sender, EventArgs e)
