@@ -60,7 +60,7 @@ public partial class EditRequestForm : System.Web.UI.Page
         }
 
 
-        EmployeeDDL = m.fillDDL(EmployeeDDL, aCookie["UserID"], aCookie["isManager"]);
+        EmployeeDDL = m.fillDDL(EmployeeDDL, aCookie["UserID"], aCookie["isManager"]); //fills the dropdownlist (Yes, it does it correctly. Check Methods.cs)
 
 
     }
