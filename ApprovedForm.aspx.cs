@@ -17,14 +17,6 @@ public partial class ApprovedForm : System.Web.UI.Page
             m.SIMPLE_POPUP("Something went wrong!");
             Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
         }
-        /*So in order for the listbox to get the userName cookie, we have to request the userInfo cookie, create a new cookie that will hold ONLY username!*/
-        /*So aCookie is the original cookie, usernameCookie is the new cookie that gets assigned aCookie.Values["userName"], and of course we named the new cookie USERname*/
-        /*USERname is the cookie that will be looked for in the .aspx file*/
-        HttpCookie aCookie = Request.Cookies["userInfo"];
-        HttpCookie usernameCookie = new HttpCookie("USERname");
-        usernameCookie.Value = aCookie.Values["userName"];
-        Response.Cookies.Add(usernameCookie);
-
 
         /*DOUBLE CLICK EVENT FOR LISTBOX*/
         try
@@ -33,8 +25,7 @@ public partial class ApprovedForm : System.Web.UI.Page
             {
                 HttpCookie bCookie = new HttpCookie("submittedCookieInfo");
                 Response.Cookies.Add(bCookie);
-                string REQID = ListBox1.SelectedValue;
-                m.Request_Read(bCookie, REQID);
+                m.Request_Read(bCookie, ListBox1.SelectedValue);
 
                 Response.Redirect("~/ViewSubmittedForm.aspx");
             }
@@ -44,8 +35,10 @@ public partial class ApprovedForm : System.Web.UI.Page
 
         }
         ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "move"));
-        /****************/
+        /********************************/
 
+        HttpCookie aCookie = Request.Cookies["userInfo"];
+        ListBox1 = m.fillListBox(ListBox1, aCookie.Values["userName"], "Approved"); //Populate the listbox *This must come after the double click event*
 
     }
 

@@ -539,7 +539,7 @@ public class Methods : System.Web.UI.Page
 
 
 
-    public ListBox fillListBox(ListBox LB, string USERNAME, string STATUS)
+    public ListBox fillListBox(ListBox LB, string USERNAME, string STATUS) //This method will fill the list boxes for PendingForm, DeniedForm, and ApprovedForm. string STATUS is either "Pending","Denied", or "Approved"
     {
         SqlConnection connection = new SqlConnection(SQL_STRING);
         connection.Open();
