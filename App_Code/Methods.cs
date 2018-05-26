@@ -5,6 +5,8 @@ using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
 using AES; //Accesses our static methods in 'Encryption.cs'
+using System.Data;
+using System.Web.UI.WebControls;
 
 /// <summary>
 /// Summary description for Methods
@@ -533,5 +535,25 @@ public class Methods : System.Web.UI.Page
                 Connection.Close();
             }
         }
+    }
+
+
+
+    public ListBox fillListBox(ListBox LB, string USERNAME, string STATUS)
+    {
+        SqlConnection connection = new SqlConnection(SQL_STRING);
+        connection.Open();
+        DataSet ds = new DataSet();
+        SqlDataAdapter adapter = new SqlDataAdapter(@"Select CAST([RequestID] AS varchar(200)) + '   ' + [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay, [RequestID] From Requests WHERE (([RequestState] = @RequestState) AND ([Username] = @Username))", connection);
+        adapter.SelectCommand.Parameters.AddWithValue("@Username", USERNAME);
+        adapter.SelectCommand.Parameters.AddWithValue("@RequestState", STATUS);
+        adapter.Fill(ds);
+        LB.DataSource = ds;
+        LB.DataTextField = "PendingDisplay";
+        LB.DataValueField = "RequestID";
+        LB.DataBind();
+        connection.Close();
+
+        return LB;
     }
 }
