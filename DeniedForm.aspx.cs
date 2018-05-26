@@ -24,7 +24,7 @@ public partial class DeniedForm : System.Web.UI.Page
             {
                 HttpCookie bCookie = new HttpCookie("submittedCookieInfo");
                 Response.Cookies.Add(bCookie);
-                m.Request_Read(bCookie, ListBox1.SelectedValue);
+                m.Request_Read(bCookie, ListBox1.SelectedValue, false);
 
                 Response.Redirect("~/ViewSubmittedForm.aspx");
             }
@@ -46,5 +46,5 @@ public partial class DeniedForm : System.Web.UI.Page
         Response.Redirect("~/ReviewRequestsForm.aspx");
     }
 
-    
+
 }

@@ -280,38 +280,15 @@ public class Methods : System.Web.UI.Page
         }
     }
 
-    public void Request_Read(HttpCookie bCookie, string REQID)
+    public void Request_Read(HttpCookie bCookie, string REQID, bool specialCase) //specialCase is used in basicRead(). specialCase should be true if used from PendingForm or PendingActionForm
     {
         using (SqlConnection Connection = new SqlConnection(SQL_STRING))
         {
-            SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE RequestID=@RequestID", Connection);
-            cmd.Parameters.AddWithValue("@RequestID", REQID);
-            Connection.Open();
-
-            using (SqlDataReader reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    bCookie["Employee"] = reader["Employee"].ToString();
-                    bCookie["Reason"] = reader["ReasonForRequest"].ToString();
-                    bCookie["GET"] = reader["GETDate"].ToString();
-                    bCookie["SSN"] = reader["SSN"].ToString();
-                    bCookie["DOB"] = reader["DateOfBirth"].ToString();
-                    bCookie["TOB"] = reader["TypeOfBadge"].ToString();
-                    bCookie["Proximity"] = reader["ProximityCard"].ToString();
-                    bCookie["Emergency"] = reader["EmergencyAccess"].ToString();
-                    bCookie["Accounts"] = reader["ContinueAccounts"].ToString();
-                    bCookie["Notes"] = reader["Notes"].ToString();
-                }
-                Connection.Close();
-            }
+            basicRead(bCookie, REQID, specialCase); //I've made this method in order to make sql read calling more versatile.
 
             SqlCommand cmd2 = new SqlCommand(@"SELECT * FROM Employees WHERE [First Name]=@fName AND [Last Name]=@lName", Connection);
             cmd2.Parameters.AddWithValue("@fName", sliceEmployee(bCookie["Employee"], "First Name"));
             cmd2.Parameters.AddWithValue("@lName", sliceEmployee(bCookie["Employee"], "Last Name"));
-
-
-
             Connection.Open();
             using (SqlDataReader reader2 = cmd2.ExecuteReader())
             {
@@ -331,6 +308,41 @@ public class Methods : System.Web.UI.Page
             }
         }
     }
+
+
+    public void basicRead(HttpCookie bCookie, string REQID, bool specialCase) //Part 1 for Request_Read(), and also used for PendingActionForm. if specialCase = true, then we store the "Editable" flag into bCookie.
+    {
+        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        {
+            SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE RequestID=@RequestID", Connection);
+            cmd.Parameters.AddWithValue("@RequestID", REQID);
+            bCookie["RequestID"] = REQID;
+            Connection.Open();
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    bCookie["Employee"] = reader["Employee"].ToString();
+                    bCookie["Reason"] = reader["ReasonForRequest"].ToString();
+                    bCookie["GET"] = reader["GETDate"].ToString();
+                    bCookie["SSN"] = reader["SSN"].ToString();
+                    bCookie["DOB"] = reader["DateOfBirth"].ToString();
+                    bCookie["TOB"] = reader["TypeOfBadge"].ToString();
+                    bCookie["Proximity"] = reader["ProximityCard"].ToString();
+                    bCookie["Emergency"] = reader["EmergencyAccess"].ToString();
+                    bCookie["Accounts"] = reader["ContinueAccounts"].ToString();
+                    bCookie["Notes"] = reader["Notes"].ToString();
+                    if (specialCase == true)
+                        bCookie["Editable"] = reader["Editable"].ToString(); //The 'is this request editable' flag.
+                }
+                Connection.Close();
+            }
+        }
+    }
+
+
+
 
     public void Pending_Request_Read(HttpCookie bCookie, string REQID) //Special case for Pending
     {
@@ -467,6 +479,8 @@ public class Methods : System.Web.UI.Page
             Connection.Open();
             SqlCommand cmd = query;
             cmd.Parameters.AddWithValue("@RequestID", REQID);
+            if (action == "Info")
+                cmd.Parameters.AddWithValue("@canEdit", true);
             cmd.ExecuteNonQuery();
             Connection.Close();
         }

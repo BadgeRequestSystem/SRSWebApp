@@ -26,14 +26,14 @@ public partial class PendingForm : System.Web.UI.Page
                 HttpCookie bCookie = new HttpCookie("submittedCookieInfo");
                 Response.Cookies.Add(bCookie);
 
-                m.Pending_Request_Read(bCookie, ListBox1.SelectedValue);
+                m.Request_Read(bCookie, ListBox1.SelectedValue, true);
                 Response.Redirect("~/ViewSubmittedForm.aspx");
 
             }
         }
         catch
         {
-            m.SIMPLE_POPUP("ERROR");
+
         }
         ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "move"));
 
