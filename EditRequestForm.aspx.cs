@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
+using System.Data;
 
 public partial class EditRequestForm : System.Web.UI.Page
 {
@@ -58,26 +59,10 @@ public partial class EditRequestForm : System.Web.UI.Page
             //we dont want to remove the submittedCookieInfo cookie yet. (we will remove it on 'Cancel' and on 'Submit') this is so that we can know if we are updating an existing request or not :)
         }
 
-        if (aCookie["isManager"] != "True")
-        {
-            SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]=@UserID";
-            SqlDataSource1.SelectParameters.Add("UserID", aCookie["UserID"]);
-        }
-        else
-        {
-            string temp;
-            using (SqlConnection Connection = new SqlConnection(m.SQL_STRING))
-            {
-                Connection.Open();
-                SqlCommand cmdGetDepartment = new SqlCommand(@"SELECT Department FROM Employees 
-                                                    WHERE UserID=@UserID", Connection);
-                cmdGetDepartment.Parameters.AddWithValue("@UserID", aCookie["UserID"]);
-                temp = (string)cmdGetDepartment.ExecuteScalar();
-                Connection.Close();
-            }
-            SqlDataSource1.SelectCommand = "SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [Department]=@department";
-            SqlDataSource1.SelectParameters.Add("department", temp);
-        }
+
+        EmployeeDDL = m.fillDDL(EmployeeDDL, aCookie["UserID"], aCookie["isManager"]);
+
+
     }
 
     protected void SubmmitButton_Click(object sender, EventArgs e)

@@ -532,4 +532,51 @@ public class Methods : System.Web.UI.Page
 
         return LB;
     }
+
+    public DropDownList fillDDL(DropDownList DDL, string USERID,string isManager)
+    {
+        if (isManager == "False") //they are not a manager so we just show their name
+        {
+            SqlConnection connection = new SqlConnection(SQL_STRING);
+            connection.Open();
+            DataSet ds = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]=@UserID", connection);
+            adapter.SelectCommand.Parameters.AddWithValue("@UserID", USERID);
+            adapter.Fill(ds);
+            DDL.DataSource = ds;
+            DDL.DataTextField = "Last_Name";
+            DDL.DataValueField = "Last_Name";
+            DDL.DataBind();
+            connection.Close();
+        }
+        else //they are a manager
+        {
+            string temp;
+            using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+            {
+                Connection.Open();
+                SqlCommand cmdGetDepartment = new SqlCommand(@"SELECT Department FROM Employees 
+                                                    WHERE UserID=@UserID", Connection);
+                cmdGetDepartment.Parameters.AddWithValue("@UserID", USERID);
+                temp = (string)cmdGetDepartment.ExecuteScalar();
+                Connection.Close();
+            }
+            SqlConnection connection = new SqlConnection(SQL_STRING);
+            connection.Open();
+            DataSet ds = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [Department]=@department", connection);
+            adapter.SelectCommand.Parameters.AddWithValue("@department", temp);
+            adapter.Fill(ds);
+            DDL.DataSource = ds;
+            DDL.DataTextField = "Last_Name";
+            DDL.DataValueField = "Last_Name";
+            DDL.DataBind();
+            connection.Close();
+        }
+        return DDL;
+    }
+
+
+
+
 }
