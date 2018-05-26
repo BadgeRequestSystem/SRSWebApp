@@ -342,62 +342,6 @@ public class Methods : System.Web.UI.Page
     }
 
 
-
-
-    public void Pending_Request_Read(HttpCookie bCookie, string REQID) //Special case for Pending
-    {
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
-        {
-            SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE RequestID=@RequestID", Connection);
-            cmd.Parameters.AddWithValue("@RequestID", REQID);
-            bCookie["RequestID"] = REQID;
-            Connection.Open();
-
-            using (SqlDataReader reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    bCookie["Employee"] = reader["Employee"].ToString();
-                    bCookie["Reason"] = reader["ReasonForRequest"].ToString();
-                    bCookie["GET"] = reader["GETDate"].ToString();
-                    bCookie["SSN"] = reader["SSN"].ToString();
-                    bCookie["DOB"] = reader["DateOfBirth"].ToString();
-                    bCookie["TOB"] = reader["TypeOfBadge"].ToString();
-                    bCookie["Proximity"] = reader["ProximityCard"].ToString();
-                    bCookie["Emergency"] = reader["EmergencyAccess"].ToString();
-                    bCookie["Accounts"] = reader["ContinueAccounts"].ToString();
-                    bCookie["Notes"] = reader["Notes"].ToString();
-                    bCookie["Editable"] = reader["Editable"].ToString(); //'Is this request editable' flag
-                }
-                Connection.Close();
-            }
-
-            SqlCommand cmd2 = new SqlCommand(@"SELECT * FROM Employees WHERE [First Name]=@fName AND [Last Name]=@lName", Connection);
-            cmd2.Parameters.AddWithValue("@fName", sliceEmployee(bCookie["Employee"], "First Name"));
-            cmd2.Parameters.AddWithValue("@lName", sliceEmployee(bCookie["Employee"], "Last Name"));
-
-
-
-            Connection.Open();
-            using (SqlDataReader reader2 = cmd2.ExecuteReader())
-            {
-                while (reader2.Read())
-                {
-                    bCookie["Initials"] = reader2["Initials"].ToString();
-                    bCookie["UserID"] = reader2["UserID"].ToString();
-                    bCookie["Company"] = reader2["Employee Company"].ToString();
-                    bCookie["Department"] = reader2["Department"].ToString();
-                    bCookie["Location"] = reader2["Work Location"].ToString();
-                    bCookie["Phone"] = reader2["Work Phone Number"].ToString();
-                    bCookie["Manager"] = reader2["Manager Name"].ToString();
-                    bCookie["ManagerLocation"] = reader2["Manager Work Location"].ToString();
-                    bCookie["ManagerPhone"] = reader2["Manager Work Phone Number"].ToString();
-                }
-                Connection.Close();
-            }
-        }
-    }
-
     public void SubmitRequest(string Employee, string Reason, string GET, string SSN, string DOB, string BadgeType, bool Proximity, bool Emergency, bool Accounts, string Notes, string Username, string State, bool canEdit, string REQID)
     {
         using (SqlConnection Connection = new SqlConnection(SQL_STRING))
@@ -561,6 +505,24 @@ public class Methods : System.Web.UI.Page
         SqlDataAdapter adapter = new SqlDataAdapter(@"Select CAST([RequestID] AS varchar(200)) + '   ' + [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay, [RequestID] From Requests WHERE (([RequestState] = @RequestState) AND ([Username] = @Username))", connection);
         adapter.SelectCommand.Parameters.AddWithValue("@Username", USERNAME);
         adapter.SelectCommand.Parameters.AddWithValue("@RequestState", STATUS);
+        adapter.Fill(ds);
+        LB.DataSource = ds;
+        LB.DataTextField = "PendingDisplay";
+        LB.DataValueField = "RequestID";
+        LB.DataBind();
+        connection.Close();
+
+        return LB;
+    }
+    public ListBox fillListBox(ListBox LB, string USERNAME, string MANAGER, string STATUS) //string STATUS is either "Pending","Denied", or "Approved". This is used for PendingActionForm listbox that requires manager to be passed in.
+    {
+        SqlConnection connection = new SqlConnection(SQL_STRING);
+        connection.Open();
+        DataSet ds = new DataSet();
+        SqlDataAdapter adapter = new SqlDataAdapter(@"Select CAST([RequestID] AS varchar(200)) + '   ' + [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay, [RequestID] From Requests JOIN Employees ON [Employee] = ([First Name] + ' ' + [Middle Name] + ' ' + [Last Name]) WHERE ([RequestState] = @RequestState AND [Username] = @CookieUsername) OR ([RequestState] = @RequestState AND [Manager Name] = @CookieManager)", connection);
+        adapter.SelectCommand.Parameters.AddWithValue("@CookieUsername", USERNAME);
+        adapter.SelectCommand.Parameters.AddWithValue("@RequestState", STATUS);
+        adapter.SelectCommand.Parameters.AddWithValue("@CookieManager", MANAGER);
         adapter.Fill(ds);
         LB.DataSource = ds;
         LB.DataTextField = "PendingDisplay";
