@@ -34,15 +34,7 @@
         </div>
         <div id="listboxFormPanel">
             <p>
-                <asp:ListBox ID="ListBox1" runat="server" Height="218px" Font-Size="X-Large" BackColor="#CCCCCC" Font-Bold="True" Width="100%"></asp:ListBox>
-<%--                <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:badge_requestConnectionString %>" SelectCommand="Select [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay From Drafts WHERE (([RequestState] = @RequestState) AND ([Username] = @Username))">--%>
-                
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;Persist Security Info=True;User ID=pwndatnerd;Password=AaronDavidRandall!3" SelectCommand="" ProviderName="System.Data.SqlClient">
-                    <SelectParameters>
-                        <asp:Parameter DefaultValue="Draft" Name="RequestState" Type="String" />
-                        <asp:CookieParameter CookieName="USERname" Name="Username" Type="String" />
-                    </SelectParameters>
-                </asp:SqlDataSource>--%>
+                <asp:ListBox ID="ListBox1" runat="server" Height="218px" Font-Size="X-Large" BackColor="#CCCCCC" Font-Bold="True" Width="100%"></asp:ListBox>           
             </p>
         </div>
         <div id="listboxFormPanelButtons">

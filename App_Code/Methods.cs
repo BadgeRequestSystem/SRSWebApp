@@ -495,7 +495,7 @@ public class Methods : System.Web.UI.Page
         }
     }
 
-    public ListBox fillListBoxDRAFT(ListBox LB, string USERNAME) //This method will fill the list boxes for PendingForm, DeniedForm, and ApprovedForm. string STATUS is either "Pending","Denied", or "Approved"
+    public ListBox fillListBoxDRAFT(ListBox LB, string USERNAME) //SavedRequestForm's fill listbox method.
     {
         SqlConnection connection = new SqlConnection(SQL_STRING);
         connection.Open();
