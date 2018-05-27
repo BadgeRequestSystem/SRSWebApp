@@ -590,7 +590,35 @@ public class Methods : System.Web.UI.Page
         return DDL;
     }
 
+    public void readDraftInfo(HttpCookie cCookie,string Employee) //SavedRequestForm | reading all drafts from an employee
+    {
+        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        {
+            SqlCommand cmd = new SqlCommand(@"SELECT * FROM Drafts WHERE Employee=@Employee", Connection);
+            cmd.Parameters.AddWithValue("@Employee", Employee);
+            Connection.Open();
 
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    cCookie["Employee"] = reader["Employee"].ToString();
+                    cCookie["Reason"] = reader["ReasonForRequest"].ToString();
+                    cCookie["GET"] = reader["GETDate"].ToString();
+                    cCookie["SSN"] = reader["SSN"].ToString();
+                    cCookie["DOB"] = reader["DateOfBirth"].ToString();
+                    cCookie["TOB"] = reader["TypeOfBadge"].ToString();
+                    cCookie["Proximity"] = reader["ProximityCard"].ToString();
+                    cCookie["Emergency"] = reader["EmergencyAccess"].ToString();
+                    cCookie["Accounts"] = reader["ContinueAccounts"].ToString();
+                    cCookie["Notes"] = reader["Notes"].ToString();
+                }
+                Connection.Close();
+            }
+
+
+        }
+    }
 
 
 }

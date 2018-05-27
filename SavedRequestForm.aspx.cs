@@ -26,33 +26,8 @@ public partial class SavedRequestForm : System.Web.UI.Page
         {
             HttpCookie cCookie = new HttpCookie("draftInfo"); //trying to store info that will be seen on ViewSubmittedForm.aspx into cooked 'submittedCookieInfo'
             Response.Cookies.Add(cCookie);
+            m.readDraftInfo(cCookie, ListBox1.SelectedValue);
 
-            using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
-            {
-                SqlCommand cmd = new SqlCommand(@"SELECT * FROM Drafts WHERE Employee=@Employee", Connection);
-                cmd.Parameters.AddWithValue("@Employee", ListBox1.SelectedValue);
-                Connection.Open();
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        cCookie["Employee"] = reader["Employee"].ToString();
-                        cCookie["Reason"] = reader["ReasonForRequest"].ToString();
-                        cCookie["GET"] = reader["GETDate"].ToString();
-                        cCookie["SSN"] = reader["SSN"].ToString();
-                        cCookie["DOB"] = reader["DateOfBirth"].ToString();
-                        cCookie["TOB"] = reader["TypeOfBadge"].ToString();
-                        cCookie["Proximity"] = reader["ProximityCard"].ToString();
-                        cCookie["Emergency"] = reader["EmergencyAccess"].ToString();
-                        cCookie["Accounts"] = reader["ContinueAccounts"].ToString();
-                        cCookie["Notes"] = reader["Notes"].ToString();
-                    }
-                    Connection.Close();
-                }
-
-
-            }
 
             Response.Redirect("~/EditRequestForm.aspx");
         }
