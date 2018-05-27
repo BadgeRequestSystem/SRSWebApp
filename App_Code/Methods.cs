@@ -532,7 +532,21 @@ public class Methods : System.Web.UI.Page
 
         return LB;
     }
+    public ListBox fillListBox(ListBox LB) //HRForm overload. Literally grabbing all employees, so pretty basic method.
+    {
+        SqlConnection connection = new SqlConnection(SQL_STRING);
+        connection.Open();
+        DataSet ds = new DataSet();
+        SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS empNAME, [UserID] AS uid FROM Employees ORDER BY [Last Name]", connection);
+        adapter.Fill(ds);
+        LB.DataSource = ds;
+        LB.DataTextField = "empNAME";
+        LB.DataValueField = "uid";
+        LB.DataBind();
+        connection.Close();
 
+        return LB;
+    }
     public DropDownList fillDDL(DropDownList DDL, string USERID,string isManager)
     {
         if (isManager == "False") //they are not a manager so we just show their name

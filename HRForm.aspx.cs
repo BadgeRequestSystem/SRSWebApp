@@ -15,7 +15,13 @@ public partial class HRForm : System.Web.UI.Page
             m.SIMPLE_POPUP("Something went wrong!");
             Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
         }
-        ClientScript.RegisterStartupScript(this.GetType(), "script", "HRFormFadeIn();", true); //fade effects script (see JS.js file)
+
+        if (!IsPostBack)
+            ListBox1 = m.fillListBox(ListBox1);
+
+
+
+
 
     }
 
@@ -38,11 +44,11 @@ public partial class HRForm : System.Web.UI.Page
             Response.Cookies.Add(bCookie);
             string UID = ListBox1.SelectedValue;
             m.HRForm_Read(bCookie, UID); //Read from database
+                                         /*BEGIN POP-UP*/
 
-            /*BEGIN POP-UP*/
             ClientScript.RegisterStartupScript(typeof(Page), "exampleScript",
-            "if(confirm(\"Are you sure you want to delete " + bCookie["First Name"] + " " + bCookie["Middle Name"] + " " + bCookie["Last Name"] + "? \"))" +
-            "{ document.getElementById('Button1').click(); }", true);
+"if(confirm(\"Are you sure you want to delete " + bCookie["First Name"] + " " + bCookie["Middle Name"] + " " + bCookie["Last Name"] + "? \"))" +
+"{ document.getElementById('Button1').click(); }", true);
             /*END POP-UP*/
 
             m.DeleteCookie("EmployeeToDelete");

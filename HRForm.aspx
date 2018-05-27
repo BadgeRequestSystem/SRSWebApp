@@ -38,8 +38,8 @@
                 &nbsp;
             </p>
             <p>
-                <asp:ListBox ID="ListBox1" runat="server" DataSourceID="SqlDataSource1" DataTextField="empNAME" DataValueField="uid" BackColor="#CCCCCC" Font-Bold="True" ForeColor="Black" Height="323px" Width="100%" Font-Size="Medium"></asp:ListBox>
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;Persist Security Info=True;User ID=pwndatnerd;Password=AaronDavidRandall!3" SelectCommand="SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS empNAME, [UserID] AS uid FROM Employees ORDER BY [Last Name]" ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
+                <asp:ListBox ID="ListBox1" runat="server" BackColor="#CCCCCC" Font-Bold="True" ForeColor="Black" Height="323px" Width="100%" Font-Size="Medium"></asp:ListBox>
+                
             </p>
         </div>
         <div id="listboxFormPanelButtons">
@@ -62,11 +62,11 @@
             </p>
             <p>
                 <asp:Label ID="Label1" runat="server" Text="Employees" Font-Bold="True" Font-Size="XX-Large" ForeColor="#FF9900"></asp:Label>
+                <asp:TextBox ID="hiddenLoadedFlagBox" runat="server" Visible="false"></asp:TextBox>
             </p>
         </div>
         <asp:Button ID="Button1" Visible="true" SkinID="button" OnClick="Button1_Click" runat="server" Style="display: none" />
     </form>
-    <script type="text/javascript" src="jquery-2.2.2.min.js"></script>
-    <script type="text/javascript" src="JS.js"></script>
+
 </body>
 </html>
