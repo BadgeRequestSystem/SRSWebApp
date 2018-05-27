@@ -16,10 +16,6 @@ public partial class SavedRequestForm : System.Web.UI.Page
             m.SIMPLE_POPUP("Something went wrong!");
             Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
         }
-        HttpCookie aCookie = Request.Cookies["userInfo"];
-        HttpCookie usernameCookie = new HttpCookie("USERname");
-        usernameCookie.Value = aCookie.Values["userName"];
-        Response.Cookies.Add(usernameCookie);
 
         /*DOUBLE CLICK EVENT FOR LISTBOX*/
         if (Request["__EVENTARGUMENT"] != null && Request["__EVENTARGUMENT"] == "move")
@@ -33,6 +29,14 @@ public partial class SavedRequestForm : System.Web.UI.Page
         }
         ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "move"));
         /****************/
+
+        HttpCookie aCookie = Request.Cookies["userInfo"];
+        ListBox1 = m.fillListBoxDRAFT(ListBox1, aCookie.Values["userName"]);
+
+
+
+
+
     }
 
     protected void Button1_Click(object sender, EventArgs e)
