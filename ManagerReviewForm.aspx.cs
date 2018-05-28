@@ -28,6 +28,9 @@ public partial class ManagerReviewForm : System.Web.UI.Page
 
         HttpCookie aCookie = Request.Cookies["userInfo"];
 
+        if (!IsPostBack)
+            EmployeeDDL = m.fillDDL(EmployeeDDL); //Populate the dropdownlist box
+
         if (Request.Cookies["submittedCookieInfo"] != null)
         {
             /*Populate fields based on cookie information*/
@@ -44,6 +47,7 @@ public partial class ManagerReviewForm : System.Web.UI.Page
             m.DeleteCookie("submittedCookieInfo");
 
         }
+
 
     }
 
@@ -70,4 +74,9 @@ public partial class ManagerReviewForm : System.Web.UI.Page
         Response.Redirect("~/PendingActionForm.aspx");
     }
 
+
+    protected void BackButton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/PendingActionForm.aspx");
+    }
 }

@@ -37,8 +37,7 @@
         <p>
             <asp:Label ID="EmployeeLabel" runat="server" Text="Employee:" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
             <div>
-                <asp:DropDownList ID="EmployeeDDL" runat="server" Width="125px" DataSourceID="SqlDataSource1" DataTextField="Last_Name" DataValueField="Last_Name" BackColor="#CCCCCC" />
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;Persist Security Info=True;User ID=pwndatnerd;Password=AaronDavidRandall!3" SelectCommand="SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees]" ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
+                <asp:DropDownList ID="EmployeeDDL" runat="server" Width="125px" BackColor="#CCCCCC" />
             </div>
             <asp:Label ID="ReasonLabel" runat="server" Text="Reason For Request:" Font-Bold="True" Font-Size="Large" ForeColor="#FF9900" />
             <div>
@@ -117,6 +116,7 @@
             <asp:Button ID="ApproveButton" Text="Approve" runat="server" OnClick="ApproveButton_Click" Width="125px" Font-Bold="True" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Size="Large" />
             <asp:Button ID="DenyButton" Text="Deny" runat="server" OnClick="DenyButton_Click" Width="125px" Font-Bold="True" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Size="Large" />
             <asp:Button ID="InfoButton" Text="Needs More Info" runat="server" OnClick="InfoButton_Click" Width="170px" Font-Bold="True" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Size="Large" />
+            <asp:Button ID="BackButton" Text="Back" runat="server" Width="125px" Font-Bold="True" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Size="Large" OnClick="BackButton_Click" />
         </p>
     </div>
     <div id="editRequestFormTopRightText">

@@ -563,7 +563,7 @@ public class Methods : System.Web.UI.Page
 
         return LB;
     }
-    public DropDownList fillDDL(DropDownList DDL, string USERID,string isManager)
+    public DropDownList fillDDL(DropDownList DDL, string USERID,string isManager) //EditRequestForm overload. Checks if user is manager or not, and fills out ddl accordingly
     {
         if (isManager == "False") //they are not a manager so we just show their name
         {
@@ -603,6 +603,22 @@ public class Methods : System.Web.UI.Page
             DDL.DataBind();
             connection.Close();
         }
+        return DDL;
+    }
+
+    public DropDownList fillDDL(DropDownList DDL) //ManagerReviewForm overload to populate the dropdown (basically just a list of all employees that is grayed out)
+    {
+        SqlConnection connection = new SqlConnection(SQL_STRING);
+        connection.Open();
+        DataSet ds = new DataSet();
+        SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees]", connection);
+        adapter.Fill(ds);
+        DDL.DataSource = ds;
+        DDL.DataTextField = "Last_Name";
+        DDL.DataValueField = "Last_Name";
+        DDL.DataBind();
+        connection.Close();
+
         return DDL;
     }
 
