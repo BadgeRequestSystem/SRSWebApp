@@ -51,7 +51,7 @@
             <br />
             <br />
             <br />
-            <a target="_blank" href="http://google.com" style="color: white">How do I use the demo?</a>
+            <a target="_blank" href="/DemoInformation.html" style="color: white">How do I use the demo?</a>
 
         </div>
 
