@@ -18,11 +18,11 @@ public partial class MainMenuForm : System.Web.UI.Page
 
         ClientScript.RegisterStartupScript(this.GetType(), "script", "MainMenuFadeIn();", true); //fade effects script (see JS.js file)
 
-        if (Request.Browser.IsMobileDevice == true)
-            Image1.Visible = false; //SRS logo on main page bugs out on mobile, lets remove it for mobile only.
+        //if (Request.Browser.IsMobileDevice == true)
+        //    Image1.Visible = false; //SRS logo on main page bugs out on mobile, lets remove it for mobile only.
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (!Label2.Text.Contains(aCookie["userName"]))
-            Label2.Text = "Welcome, " + aCookie["userName"];
+            Label2.Text = Label2.Text + aCookie["userName"];
         if (aCookie["isManager"] == "True")
             ButtonReviewRequests.Visible = true;
         if (aCookie["isHR"] == "True")
