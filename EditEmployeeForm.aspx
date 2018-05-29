@@ -15,7 +15,7 @@
     <div id="overbottom">
             <p>
                 <br></br>
-               SRS - Badge Request System: Augusta University Senior Capstone Project
+               <strong>SRS - Badge Request System: Augusta University Senior Capstone Project</strong>
             
                 <p></p>
             </p>
@@ -45,74 +45,74 @@
         <p>
             <asp:label id="Label1" runat="server" text="First Name" font-bold="True" font-size="Large" forecolor="#FF9900"></asp:label>
             <br />
-            <asp:textbox id="TextBox1" runat="server" backcolor="#CCCCCC"></asp:textbox>
+            <asp:textbox id="TextBox1" runat="server" Width="30%" backcolor="#CCCCCC"></asp:textbox>
         </p>
         <p>
             <br />
             <asp:label id="Label2" runat="server" text="Middle Name" font-bold="True" font-size="Large" forecolor="#FF9900"></asp:label>
             <br />
-            <asp:textbox id="TextBox2" runat="server" backcolor="#CCCCCC"></asp:textbox>
+            <asp:textbox id="TextBox2" runat="server" Width="30%" backcolor="#CCCCCC"></asp:textbox>
         </p>
         <p>
             <br />
             <asp:label id="Label3" runat="server" text="Last Name" font-bold="True" font-size="Large" forecolor="#FF9900"></asp:label>
             <br />
-            <asp:textbox id="TextBox3" runat="server" backcolor="#CCCCCC"></asp:textbox>
+            <asp:textbox id="TextBox3" runat="server" Width="30%" backcolor="#CCCCCC"></asp:textbox>
         </p>
         <p>
             <br />
             <asp:label id="Label4" runat="server" text="Initials" font-bold="True" font-size="Large" forecolor="#FF9900"></asp:label>
             <br />
-            <asp:textbox id="TextBox4" runat="server" backcolor="#CCCCCC"></asp:textbox>
+            <asp:textbox id="TextBox4" runat="server" Width="30%" backcolor="#CCCCCC"></asp:textbox>
         </p>
         <p>
             <br />
             <asp:label id="Label12" runat="server" text="UserID" font-bold="True" font-size="Large" forecolor="#FF9900"></asp:label>
             <br />
-            <asp:textbox id="TextBox5" runat="server" backcolor="#CCCCCC"></asp:textbox>
+            <asp:textbox id="TextBox5" runat="server" Width="30%" backcolor="#CCCCCC"></asp:textbox>
         </p>
         <p>
             <br />
 
             <asp:label id="Label7" runat="server" text="Work Location" font-bold="True" font-size="Large" forecolor="#FF9900"></asp:label>
             <br />
-            <asp:textbox id="TextBox8" runat="server" backcolor="#CCCCCC" ontextchanged="TextBox8_TextChanged"></asp:textbox>
+            <asp:textbox id="TextBox8" runat="server" Width="30%" backcolor="#CCCCCC" ontextchanged="TextBox8_TextChanged"></asp:textbox>
         </p>
         <p>
             <br />
             <asp:label id="Label8" runat="server" text="Work Phone" font-bold="True" font-size="Large" forecolor="#FF9900"></asp:label>
             <br />
-            <asp:textbox id="TextBox9" runat="server" backcolor="#CCCCCC"></asp:textbox>
+            <asp:textbox id="TextBox9" runat="server" Width="30%" backcolor="#CCCCCC"></asp:textbox>
         </p>
     </div>
     <div id="editRequestFormCheckBoxData">
         <p>
             <asp:label id="Label5" runat="server" text="Employee Company" font-bold="True" font-size="Large" forecolor="#FF9900"></asp:label>
             <br />
-            <asp:textbox id="TextBox6" runat="server" backcolor="#CCCCCC"></asp:textbox>
+            <asp:textbox id="TextBox6" runat="server" Width="30%" backcolor="#CCCCCC"></asp:textbox>
         </p>
         <p>
             <br />
             <asp:label id="Label6" runat="server" text="Department" font-bold="True" font-size="Large" forecolor="#FF9900"></asp:label>
             <br />
-            <asp:textbox id="TextBox7" runat="server" backcolor="#CCCCCC"></asp:textbox>
+            <asp:textbox id="TextBox7" runat="server" Width="30%" backcolor="#CCCCCC"></asp:textbox>
         </p>
         <p>
             <br />
             <asp:label id="EmployeeLabel" runat="server" text="Employee Manager:" font-bold="True" font-size="Large" forecolor="#FF9900" />
             <div>
-                <asp:dropdownlist id="EmployeeDDL" runat="server" width="125px" datasourceid="SqlDataSource1" datatextfield="Last_Name" datavaluefield="Last_Name" appenddatabounditems="True" onload="EmployeeDDL_Load" backcolor="#CCCCCC" />
-                <asp:sqldatasource id="SqlDataSource1" runat="server" connectionstring="Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;Persist Security Info=True;User ID=pwndatnerd;Password=AaronDavidRandall!3" selectcommand="SELECT Employees.[First Name] + ' ' + Employees.[Middle Name] + ' ' + Employees.[Last Name] AS Last_Name, Employees.[UserID] AS uid, Credentials.[isManager] FROM [Employees] INNER JOIN [Credentials] ON Employees.[UserID] = Credentials.[UserID] WHERE Credentials.[isManager] = 'True'" providername="System.Data.SqlClient"></asp:sqldatasource>
+                <asp:dropdownlist id="EmployeeDDL" runat="server" Width="30%" appenddatabounditems="True" onload="EmployeeDDL_Load" backcolor="#CCCCCC" />
+                
                 <br />
                 <br />
                 <asp:label id="Label9" runat="server" text="Manager Work Location" font-bold="True" font-size="Large" forecolor="#FF9900"></asp:label>
                 <br />
-                <asp:textbox id="TextBox10" runat="server" backcolor="#CCCCCC"></asp:textbox>
+                <asp:textbox id="TextBox10" runat="server" Width="30%" backcolor="#CCCCCC"></asp:textbox>
                 <br />
                 <br />
                 <asp:label id="Label10" runat="server" text="Manager Work Phone" font-bold="True" font-size="Large" forecolor="#FF9900"></asp:label>
                 <br />
-                <asp:textbox id="TextBox11" runat="server" backcolor="#CCCCCC"></asp:textbox>
+                <asp:textbox id="TextBox11" runat="server" Width="30%" backcolor="#CCCCCC"></asp:textbox>
         </p>
     </div>
 

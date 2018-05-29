@@ -627,7 +627,22 @@ public class Methods : System.Web.UI.Page
 
         return DDL;
     }
+    public DropDownList fillDDL(DropDownList DDL, string isManager) //EditEmployeeForm overload for the ddl
+    {
+        SqlConnection connection = new SqlConnection(SQL_STRING);
+        connection.Open();
+        DataSet ds = new DataSet();
+        SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT Employees.[First Name] + ' ' + Employees.[Middle Name] + ' ' + Employees.[Last Name] AS Last_Name, Employees.[UserID] AS uid, Credentials.[isManager] FROM [Employees] INNER JOIN [Credentials] ON Employees.[UserID] = Credentials.[UserID] WHERE Credentials.[isManager]=@isManager", connection);
+        adapter.SelectCommand.Parameters.AddWithValue("@isManager", isManager);
+        adapter.Fill(ds);
+        DDL.DataSource = ds;
+        DDL.DataTextField = "Last_Name";
+        DDL.DataValueField = "Last_Name";
+        DDL.DataBind();
+        connection.Close();
 
+        return DDL;
+    }
     public void readDraftInfo(HttpCookie cCookie, string Employee) //SavedRequestForm | reading all drafts from an employee
     {
         using (SqlConnection Connection = new SqlConnection(SQL_STRING))

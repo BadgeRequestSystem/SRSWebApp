@@ -16,6 +16,8 @@ public partial class EditEmployeeForm : System.Web.UI.Page
             Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
         }
         EmployeeDDL.Items.Add("No Manager"); //Manually adding the 'No Manager' option to the drop down list.
+        m.fillDDL(EmployeeDDL, "True");
+
         if (Request.Cookies["selectedEmployee"] != null)
         {
             /*Populate the fields with the cookie information*/
