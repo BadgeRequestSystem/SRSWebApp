@@ -16,12 +16,12 @@
         <p></p>
     </div>
     <div id="overbottom">
-            <p>
-                <br></br>
-               SRS - Badge Request System: Augusta University Senior Capstone Project
+        <p>
+            <br></br>
+            <strong></strong>SRS - Badge Request System: Augusta University Senior Capstone Project
             
                 <p></p>
-            </p>
+        </p>
     </div>
     <div id="overright">
         <p></p>
@@ -33,17 +33,17 @@
         <p>
             <div id="listboxFormPanel">
                 <p>
-                    <asp:listbox id="ListBox1" runat="server"  height="323px" font-size="Medium" BackColor="#CCCCCC" Font-Bold="True" ForeColor="Black" Width="100%"></asp:listbox>
+                    <asp:listbox id="ListBox1" runat="server" height="323px" font-size="100%" backcolor="#CCCCCC" font-bold="True" forecolor="Black" width="100%"></asp:listbox>
                 </p>
             </div>
             <div id="listboxFormPanelText">
-                <p>
-                    <asp:label id="Label1" runat="server" font-bold="True" font-size="XX-Large" forecolor="#FF9900" text="Pending"></asp:label>
-                </p>
+                <img alt="MainMenuImage" class="auto-style1" src="Images/srslogo52818.png" id="testPic" width="100%" height="85%" /><br />
+                <asp:label id="Label1" runat="server" font-bold="True" font-size="XX-Large" forecolor="#FF9900" text="Pending"></asp:label>
+
             </div>
             <div id="listboxFormPanelButtons">
                 <p>
-                    <asp:button id="Button1" runat="server" text="Back" onclick="Button1_Click" width="100%" font-bold="True" BackColor="#CCCCCC" BorderColor="#FF9900" Font-Size="Large" />
+                    <asp:button id="Button1" runat="server" text="Back" onclick="Button1_Click" width="100%" font-bold="True" backcolor="#CCCCCC" bordercolor="#FF9900" font-size="Large" />
                 </p>
             </div>
         </p>
