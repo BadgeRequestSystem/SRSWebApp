@@ -11,15 +11,8 @@ public partial class MainMenuForm : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
-        {
-            m.SIMPLE_POPUP("Something went wrong!");
             Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
-        }
 
-        ClientScript.RegisterStartupScript(this.GetType(), "script", "MainMenuFadeIn();", true); //fade effects script (see JS.js file)
-
-        //if (Request.Browser.IsMobileDevice == true)
-        //    Image1.Visible = false; //SRS logo on main page bugs out on mobile, lets remove it for mobile only.
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (!Label2.Text.Contains(aCookie["userName"]))
             Label2.Text = Label2.Text + aCookie["userName"];

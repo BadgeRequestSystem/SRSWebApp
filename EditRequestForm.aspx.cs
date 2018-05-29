@@ -20,7 +20,6 @@ public partial class EditRequestForm : System.Web.UI.Page
             m.SIMPLE_POPUP("Something went wrong!");
             Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
         }
-        ClientScript.RegisterStartupScript(this.GetType(), "script", "EditRequestFadeIn();", true); //fade effects script (see JS.js file)
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (Request.Cookies["draftInfo"] != null) //checking if we are loading a draft
         {

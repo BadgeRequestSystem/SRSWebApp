@@ -37,14 +37,14 @@
             <br />
             <br />
             <br />
-            <asp:Label ID="userLabel" runat="server" Text="Username:" Font-Bold="True" ForeColor="#FF9900" Font-Size="180%" />
+            <asp:Label ID="userLabel" runat="server" Text="Username:" Font-Bold="True" ForeColor="White" Font-Size="180%" />
             <br />
-            <asp:TextBox ID="userBox" Columns="20" MaxLength="25" Text="" runat="server" Height="6%" Font-Size="X-Large" Width="25%" />
+            <asp:TextBox ID="userBox" Columns="20" MaxLength="25" Text="" runat="server" Height="6%" Font-Size="X-Large" Width="25%" BackColor="#CCCCCC" style="text-align: center"/>
             <br />
             <br />
-            <asp:Label ID="passLabel" runat="server" Text="Password:" Font-Bold="True" Font-Size="180%" ForeColor="#FF9900" />
+            <asp:Label ID="passLabel" runat="server" Text="Password:" Font-Bold="True" Font-Size="180%" ForeColor="White" />
             <br />
-            <asp:TextBox ID="passBox" Columns="20" MaxLength="25" Text="" runat="server" Height="6%" TextMode="Password" Font-Size="X-Large" Width="25%" />
+            <asp:TextBox ID="passBox" Columns="20" MaxLength="25" Text="" runat="server" Height="6%" Font-Size="X-Large" Width="25%" BackColor="#CCCCCC" style="text-align: center" TextMode="Password" />
             <br />
             <br />
             <asp:Button ID="loginButton" Text="Login" OnClick="LoginBtn_Click" runat="server" Font-Bold="true" Width="15%" BackColor="#FF9900" Height="5%" />
