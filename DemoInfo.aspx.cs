@@ -15,7 +15,7 @@ public partial class DemoInfo : System.Web.UI.Page
     {
         try
         {
-            Server.Transfer("~/Site_Data/UserManual.pdf");
+            Response.Redirect("/Site_Data/UserManual.pdf");
         }
         catch
         {
