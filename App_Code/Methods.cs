@@ -464,7 +464,7 @@ public class Methods : System.Web.UI.Page
         }
     }
 
-    public void checkLogin(HttpCookie aCookie, string userName, string passWord)
+    public bool checkLogin(HttpCookie aCookie, string userName, string passWord)
     {
         using (SqlConnection Connection = new SqlConnection(SQL_STRING))
         {
@@ -482,15 +482,21 @@ public class Methods : System.Web.UI.Page
                 {
                     Connection.Close();
                     LoginCookie(aCookie, sanitizeInput(userName)); //Fill the login cookie 'userInfo'
+                    return true;
                 }
 
                 else //LOGIN UNSUCCESFUL
+                {
                     Connection.Close();
+                    return false;
+                }
+
 
             }
             catch (Exception ex)
             {
                 Connection.Close();
+                return false;
             }
         }
     }
@@ -563,7 +569,7 @@ public class Methods : System.Web.UI.Page
 
         return LB;
     }
-    public DropDownList fillDDL(DropDownList DDL, string USERID,string isManager) //EditRequestForm overload. Checks if user is manager or not, and fills out ddl accordingly
+    public DropDownList fillDDL(DropDownList DDL, string USERID, string isManager) //EditRequestForm overload. Checks if user is manager or not, and fills out ddl accordingly
     {
         if (isManager == "False") //they are not a manager so we just show their name
         {
@@ -622,7 +628,7 @@ public class Methods : System.Web.UI.Page
         return DDL;
     }
 
-    public void readDraftInfo(HttpCookie cCookie,string Employee) //SavedRequestForm | reading all drafts from an employee
+    public void readDraftInfo(HttpCookie cCookie, string Employee) //SavedRequestForm | reading all drafts from an employee
     {
         using (SqlConnection Connection = new SqlConnection(SQL_STRING))
         {

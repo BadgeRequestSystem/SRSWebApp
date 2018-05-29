@@ -37,8 +37,6 @@
             <br />
             <br />
             <br />
-            <br />
-            <br />
             <asp:Label ID="userLabel" runat="server" Text="Username:" Font-Bold="True" ForeColor="#FF9900" Font-Size="180%" />
             <br />
             <asp:TextBox ID="userBox" Columns="20" MaxLength="25" Text="" runat="server" Height="6%" Font-Size="X-Large" Width="25%" />
@@ -50,9 +48,6 @@
             <br />
             <br />
             <asp:Button ID="loginButton" Text="Login" OnClick="LoginBtn_Click" runat="server" Font-Bold="true" Width="15%" BackColor="#FF9900" Height="5%" />
-            <br />
-            <br />
-            <br />
             <br />
             <br />
             <br />
