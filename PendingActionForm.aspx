@@ -18,7 +18,7 @@
             <div id="overbottom">
             <p>
                 <br></br>
-               SRS - Badge Request System: Augusta University Senior Capstone Project
+               <strong>SRS - Badge Request System: Augusta University Senior Capstone Project</strong>
             
                 <p></p>
             </p>
@@ -44,7 +44,8 @@
                 </p>
             </div>
             <div id="listboxFormPanelText">
-                <p><asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="XX-Large" ForeColor="#FF9900" Text="Pending Action"></asp:Label></p>
+                <img alt="MainMenuImage" class="auto-style1" src="Images/srslogo52818.png" id="testPic" width="100%" height="85%" /><br />
+                <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="XX-Large" ForeColor="#FF9900" Text="Pending Action"></asp:Label>
             </div>
         </form>
     </body>
