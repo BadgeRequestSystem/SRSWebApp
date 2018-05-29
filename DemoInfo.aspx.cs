@@ -28,7 +28,7 @@ public partial class DemoInfo : System.Web.UI.Page
     {
         try
         {
-            Server.Transfer("~/Site_Data/Database.zip");
+            Response.Redirect("~/Site_Data/Database.zip");
         }
         catch
         {
