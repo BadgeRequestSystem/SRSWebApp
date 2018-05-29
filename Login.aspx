@@ -44,14 +44,15 @@
             <br />
             <asp:Label ID="passLabel" runat="server" Text="Password:" Font-Bold="True" Font-Size="180%" ForeColor="White" />
             <br />
-            <asp:TextBox ID="passBox" Columns="20" MaxLength="25" Text="" runat="server" Height="6%" Font-Size="X-Large" Width="25%" BackColor="#CCCCCC" style="text-align: center" TextMode="Password" />
+            <asp:TextBox ID="passBox" Columns="20" MaxLength="25" Text="" runat="server" Height="6%" Font-Size="X-Large" Width="25%" BackColor="#CCCCCC" style="text-align: center"  TextMode="Password" />
             <br />
             <br />
             <asp:Button ID="loginButton" Text="Login" OnClick="LoginBtn_Click" runat="server" Font-Bold="true" Width="15%" BackColor="#FF9900" Height="5%" />
             <br />
             <br />
             <br />
-            <a target="_blank" href="/DemoInformation.html" style="color: white">How do I use the demo?</a>
+            <asp:LinkButton ID="LinkButton1" runat="server" style="color: white" OnClick="LinkButton1_Click">How do I use the demo?</asp:LinkButton>
+            
 
         </div>
 

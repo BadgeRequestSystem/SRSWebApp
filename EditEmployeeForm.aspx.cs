@@ -43,16 +43,24 @@ public partial class EditEmployeeForm : System.Web.UI.Page
 
     protected void SubmmitButton_Click(object sender, EventArgs e) //save button
     {
-        if (TextBox1.Text != "" && TextBox2.Text != "" && TextBox3.Text != "" && TextBox4.Text != "" && TextBox5.Text != "" && TextBox6.Text != "" && TextBox7.Text != "" && TextBox8.Text != "" && TextBox9.Text != "" && EmployeeDDL.SelectedItem != null && TextBox5.ReadOnly == false)
-        {/*New Employee Case*/
-            m.EditEmployee("NEW", TextBox3.Text, TextBox1.Text, TextBox2.Text, TextBox4.Text, TextBox5.Text, TextBox6.Text, TextBox7.Text, TextBox8.Text, TextBox9.Text, TextBox10.Text, TextBox11.Text, EmployeeDDL.SelectedItem.Text);
-            Response.Redirect("~/HRForm.aspx");
+        try
+        {
+            if (TextBox1.Text != "" && TextBox2.Text != "" && TextBox3.Text != "" && TextBox4.Text != "" && TextBox5.Text != "" && TextBox6.Text != "" && TextBox7.Text != "" && TextBox8.Text != "" && TextBox9.Text != "" && EmployeeDDL.SelectedItem != null && TextBox5.ReadOnly == false)
+            {/*New Employee Case*/
+                m.EditEmployee("NEW", TextBox3.Text, TextBox1.Text, TextBox2.Text, TextBox4.Text, TextBox5.Text, TextBox6.Text, TextBox7.Text, TextBox8.Text, TextBox9.Text, TextBox10.Text, TextBox11.Text, EmployeeDDL.SelectedItem.Text);
+                Response.Redirect("~/HRForm.aspx");
+            }
+            if (TextBox1.Text != "" && TextBox2.Text != "" && TextBox3.Text != "" && TextBox4.Text != "" && TextBox6.Text != "" && TextBox7.Text != "" && TextBox8.Text != "" && TextBox9.Text != "" && EmployeeDDL.SelectedItem != null && TextBox5.ReadOnly == true)
+            {/*Update Employee Case*/
+                m.EditEmployee("UPDATE", TextBox3.Text, TextBox1.Text, TextBox2.Text, TextBox4.Text, TextBox5.Text, TextBox6.Text, TextBox7.Text, TextBox8.Text, TextBox9.Text, TextBox10.Text, TextBox11.Text, EmployeeDDL.SelectedItem.Text);
+                Response.Redirect("~/HRForm.aspx");
+            }
         }
-        if (TextBox1.Text != "" && TextBox2.Text != "" && TextBox3.Text != "" && TextBox4.Text != "" && TextBox6.Text != "" && TextBox7.Text != "" && TextBox8.Text != "" && TextBox9.Text != "" && EmployeeDDL.SelectedItem != null && TextBox5.ReadOnly == true)
-        {/*Update Employee Case*/
-            m.EditEmployee("UPDATE", TextBox3.Text, TextBox1.Text, TextBox2.Text, TextBox4.Text, TextBox5.Text, TextBox6.Text, TextBox7.Text, TextBox8.Text, TextBox9.Text, TextBox10.Text, TextBox11.Text, EmployeeDDL.SelectedItem.Text);
-            Response.Redirect("~/HRForm.aspx");
+        catch
+        {
+            m.SIMPLE_POPUP("Check your format!");
         }
+
     }
 
 
