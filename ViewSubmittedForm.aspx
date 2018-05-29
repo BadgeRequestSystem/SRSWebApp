@@ -17,8 +17,8 @@
         <p>
             <br></br>
             <strong>SRS - Badge Request System: Augusta University Senior Capstone Project</strong>
-            
-                <p></p>
+
+            <p></p>
         </p>
     </div>
     <div id="overright">
@@ -38,6 +38,12 @@
             <br />
 
         </p>
+
+    </div>
+    <div id="editRequestFormBottomButtons">
+
+        <asp:button id="backButton" runat="server" onclick="backButton_Click" text="Back" width="100%" font-bold="True" backcolor="#CCCCCC" bordercolor="#FF9900" font-size="Large" />
+        <asp:button id="editButton" runat="server" text="Edit" backcolor="#CCCCCC" bordercolor="#FF9900" font-bold="True" font-size="Large" width="100%" onclick="editButton_Click" />
 
     </div>
 
@@ -99,36 +105,32 @@
         </p>
     </div>
     <div id="editRequestFormCheckBoxData">
-        <br /><br /><br />
+        <br />
+        <br />
+        <br />
         <p>
             <br />
         </p>
-        <p>
-            <asp:label id="typeofbadgeLabel" runat="server" text="Type of badge required: " font-size="22px" font-bold="True" forecolor="White"></asp:label>
-            <asp:label id="typeofbadgeLabel0" runat="server" text="Type of badge required: " font-size="Large" font-bold="True" forecolor="Black" backcolor="#CCCCCC" bordercolor="Black" borderstyle="Solid" borderwidth="2px"></asp:label>
-            <br />
-            <asp:label id="proximitycardLabel" runat="server" text="Proximity Card? " font-size="22px" font-bold="True" forecolor="White"></asp:label>
-            <asp:label id="proximitycardLabel0" runat="server" text="Proximity Card? " font-size="Large" font-bold="True" forecolor="Black" backcolor="#CCCCCC" bordercolor="Black" borderstyle="Solid" borderwidth="2px"></asp:label>
-            <br />
-            <asp:label id="emergencyaccessLabel" runat="server" text="Emergency Access? " font-size="22px" font-bold="True" forecolor="White"></asp:label>
-            <asp:label id="emergencyaccessLabel0" runat="server" text="Emergency Access? " font-size="Large" font-bold="True" forecolor="Black" backcolor="#CCCCCC" bordercolor="Black" borderstyle="Solid" borderwidth="2px"></asp:label>
-            <br />
-            <asp:label id="continuecomputeraccountsLabel" runat="server" text="Continue Computer Accounts? " font-size="22px" font-bold="True" forecolor="White"></asp:label>
-            <asp:label id="continuecomputeraccountsLabel0" runat="server" text="Continue Computer Accounts? " font-size="Large" font-bold="True" forecolor="Black" backcolor="#CCCCCC" bordercolor="Black" borderstyle="Solid" borderwidth="2px"></asp:label>
-            <br />
-            <br />
-            <br />
-            <asp:label id="notesLabel" runat="server" text="Notes: " font-size="22px" font-bold="True" forecolor="White"></asp:label>
-            <br />
-            <asp:textbox id="TextBox1" runat="server" height="35%" textmode="MultiLine" width="100%" font-size="22px" backcolor="#CCCCCC"></asp:textbox>
-        </p>
+        <asp:label id="typeofbadgeLabel" runat="server" text="Type of badge required: " font-size="22px" font-bold="True" forecolor="White"></asp:label>
+        <asp:label id="typeofbadgeLabel0" runat="server" text="Type of badge required: " font-size="Large" font-bold="True" forecolor="Black" backcolor="#CCCCCC" bordercolor="Black" borderstyle="Solid" borderwidth="2px"></asp:label>
+        <br />
+        <asp:label id="proximitycardLabel" runat="server" text="Proximity Card? " font-size="22px" font-bold="True" forecolor="White"></asp:label>
+        <asp:label id="proximitycardLabel0" runat="server" text="Proximity Card? " font-size="Large" font-bold="True" forecolor="Black" backcolor="#CCCCCC" bordercolor="Black" borderstyle="Solid" borderwidth="2px"></asp:label>
+        <br />
+        <asp:label id="emergencyaccessLabel" runat="server" text="Emergency Access? " font-size="22px" font-bold="True" forecolor="White"></asp:label>
+        <asp:label id="emergencyaccessLabel0" runat="server" text="Emergency Access? " font-size="Large" font-bold="True" forecolor="Black" backcolor="#CCCCCC" bordercolor="Black" borderstyle="Solid" borderwidth="2px"></asp:label>
+        <br />
+        <asp:label id="continuecomputeraccountsLabel" runat="server" text="Continue Computer Accounts? " font-size="22px" font-bold="True" forecolor="White"></asp:label>
+        <asp:label id="continuecomputeraccountsLabel0" runat="server" text="Continue Computer Accounts? " font-size="Large" font-bold="True" forecolor="Black" backcolor="#CCCCCC" bordercolor="Black" borderstyle="Solid" borderwidth="2px"></asp:label>
+        <br />
+        <br />
+        <br />
+        <asp:label id="notesLabel" runat="server" text="Notes: " font-size="22px" font-bold="True" forecolor="White"></asp:label>
+        <br />
+        <asp:textbox id="TextBox1" runat="server" height="35%" textmode="MultiLine" width="100%" font-size="22px" backcolor="#CCCCCC"></asp:textbox>
+
     </div>
-    <div id="editRequestFormBottomButtons">
-        <p>
-            <asp:button id="backButton" runat="server" onclick="backButton_Click" text="Back" width="100%" font-bold="True" backcolor="#CCCCCC" bordercolor="#FF9900" font-size="Large" />
-            <asp:button id="editButton" runat="server" text="Edit" backcolor="#CCCCCC" bordercolor="#FF9900" font-bold="True" font-size="Large" width="100%" onclick="editButton_Click" />
-        </p>
-    </div>
+
     <div id="editRequestFormTopRightText">
         <img alt="Savannah River Site Logo" class="auto-style1" src="Images/srslogo52818.png" id="testPic" width="80%" height="75%" /><br />
         <asp:label id="Label1" runat="server" font-bold="True" font-size="XX-Large" forecolor="#FF9900" text="View Submitted Form"></asp:label>
