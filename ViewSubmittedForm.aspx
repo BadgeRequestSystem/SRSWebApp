@@ -16,7 +16,7 @@
     <div id="overbottom">
         <p>
             <br></br>
-            SRS - Badge Request System: Augusta University Senior Capstone Project
+            <strong>SRS - Badge Request System: Augusta University Senior Capstone Project</strong>
             
                 <p></p>
         </p>
