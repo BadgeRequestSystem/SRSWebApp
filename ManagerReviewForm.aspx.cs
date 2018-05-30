@@ -18,6 +18,12 @@ public partial class ManagerReviewForm : System.Web.UI.Page
             m.SIMPLE_POPUP("Something went wrong!");
             Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
         }
+        HttpCookie nCookie = Request.Cookies["userInfo"];
+        if (nCookie["isManager"] == "False")
+        {
+            Response.Redirect("~/MainMenuForm.aspx"); //Send unauthorized user back to main menu.
+        }
+
         SSNTextBox.ReadOnly = true; SSNTextBox.BackColor = System.Drawing.Color.LightGray;
         GetTextBox.ReadOnly = true; GetTextBox.BackColor = System.Drawing.Color.LightGray;
         DOBTextBox.ReadOnly = true; DOBTextBox.BackColor = System.Drawing.Color.LightGray;
