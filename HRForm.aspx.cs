@@ -38,20 +38,34 @@ public partial class HRForm : System.Web.UI.Page
 
     protected void deleteButton_Click(object sender, EventArgs e) //Pop-up dialog, if sucessful confirmation, we activate Button1_Click()
     {
+
+
         if (ListBox1.SelectedItem != null)
         {
             HttpCookie bCookie = new HttpCookie("EmployeeToDelete");
             Response.Cookies.Add(bCookie);
             string UID = ListBox1.SelectedValue;
-            m.HRForm_Read(bCookie, UID); //Read from database
-                                         /*BEGIN POP-UP*/
+            if (m.liveDemoEnabled == false)
+            {
+                m.HRForm_Read(bCookie, UID); //Read from database
+                                             /*BEGIN POP-UP*/
+                ClientScript.RegisterStartupScript(typeof(Page), "exampleScript",
+    "if(confirm(\"Are you sure you want to delete " + bCookie["First Name"] + " " + bCookie["Middle Name"] + " " + bCookie["Last Name"] + "? \"))" +
+    "{ document.getElementById('Button1').click(); }", true);
+                /*END POP-UP*/
+                m.DeleteCookie("EmployeeToDelete");
+            }
+            else if (m.liveDemoEnabled == true)
+            {
+                if (UID == "A1234" || UID == "c0239" || UID == "e3923")
+                {
+                    m.SIMPLE_POPUP("Cannot edit standard demo profiles!");
+                    m.DeleteCookie("EmployeeToDelete");
 
-            ClientScript.RegisterStartupScript(typeof(Page), "exampleScript",
-"if(confirm(\"Are you sure you want to delete " + bCookie["First Name"] + " " + bCookie["Middle Name"] + " " + bCookie["Last Name"] + "? \"))" +
-"{ document.getElementById('Button1').click(); }", true);
-            /*END POP-UP*/
+                }
+            }
 
-            m.DeleteCookie("EmployeeToDelete");
+
         }
 
 
@@ -71,11 +85,22 @@ public partial class HRForm : System.Web.UI.Page
     {
         if (ListBox1.SelectedItem != null)
         {
-            HttpCookie bCookie = new HttpCookie("selectedEmployee");
-            Response.Cookies.Add(bCookie);
-            string UID = ListBox1.SelectedValue;
-            m.HRForm_Read(bCookie, UID); //Read from database
-            Response.Redirect("~/EditEmployeeForm.aspx");
+            if(m.liveDemoEnabled == false)
+            {
+                HttpCookie bCookie = new HttpCookie("selectedEmployee");
+                Response.Cookies.Add(bCookie);
+                string UID = ListBox1.SelectedValue;
+                m.HRForm_Read(bCookie, UID); //Read from database
+                Response.Redirect("~/EditEmployeeForm.aspx");
+            }
+            else if (m.liveDemoEnabled == true)
+            {
+                if (ListBox1.SelectedValue == "A1234" || ListBox1.SelectedValue == "c0239" || ListBox1.SelectedValue == "e3923")
+                {
+                    m.SIMPLE_POPUP("Cannot edit standard demo profiles!");
+
+                }
+            }
         }
 
     }
