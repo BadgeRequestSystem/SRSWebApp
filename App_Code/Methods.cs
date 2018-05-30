@@ -182,7 +182,7 @@ public class Methods : System.Web.UI.Page
         {
             Connection.Open();
             SqlCommand cmd = new SqlCommand(@"Select Email FROM Credentials WHERE UserID =
-                                            (Select UserID FROM Employees WHERE ([First Name] + ' ' + [Middle Name]  + ' ' + [Last Name]) =@employee)", Connection);
+                                            (Select UserID FROM Employees WHERE ([First_Name] + ' ' + [Middle_Name]  + ' ' + [Last_Name]) =@employee)", Connection);
             cmd.Parameters.AddWithValue("@employee", Employee);
             email = (string)cmd.ExecuteScalar();
             Connection.Close();
@@ -209,7 +209,7 @@ public class Methods : System.Web.UI.Page
                     VALUES (@LName, @FName, @MName, @Initials, @UserID, @ECompany, @Department, @WLocation, @WPhone, @EManager, @MWLocation, @MWPhone);", Connection);
             if (CASE == "UPDATE")
                 query = new SqlCommand(@"Update Employees
-                    SET [First Name]=@FName, [Last Name]=@LName, [Middle Name]=@MName, [Initials]=@Initials, [Employee Company]=@ECompany, [Department]=@Department, [Work Location]=@WLocation, [Work Phone Number]=@WPhone, [Manager Name]=@EManager, [Manager Work Location]=@MWLocation, [Manager Work Phone Number]=@MWPhone
+                    SET [First_Name]=@FName, [Last_Name]=@LName, [Middle_Name]=@MName, [Initials]=@Initials, [Employee_Company]=@ECompany, [Department]=@Department, [Work_Location]=@WLocation, [Work_Phone_Number]=@WPhone, [Manager_Name]=@EManager, [Manager_Work_Location]=@MWLocation, [Manager_Work_Phone_Number]=@MWPhone
                     WHERE UserID=@UserID;", Connection);
             Connection.Open();
             SqlCommand cmd = query;
@@ -249,18 +249,18 @@ public class Methods : System.Web.UI.Page
             {
                 while (reader.Read())
                 {
-                    bCookie["Last Name"] = reader["Last Name"].ToString().Trim();
-                    bCookie["First Name"] = reader["First Name"].ToString().Trim();
-                    bCookie["Middle Name"] = reader["Middle Name"].ToString().Trim();
+                    bCookie["Last Name"] = reader["Last_Name"].ToString().Trim();
+                    bCookie["First Name"] = reader["First_Name"].ToString().Trim();
+                    bCookie["Middle Name"] = reader["Middle_Name"].ToString().Trim();
                     bCookie["Initials"] = reader["Initials"].ToString().Trim();
                     bCookie["UserID"] = reader["UserID"].ToString().Trim();
-                    bCookie["Employee Company"] = reader["Employee Company"].ToString().Trim();
+                    bCookie["Employee Company"] = reader["Employee_Company"].ToString().Trim();
                     bCookie["Department"] = reader["Department"].ToString().Trim();
-                    bCookie["Work Location"] = reader["Work Location"].ToString().Trim();
-                    bCookie["Work Phone Number"] = reader["Work Phone Number"].ToString().Trim();
-                    bCookie["Manager Name"] = reader["Manager Name"].ToString().Trim();
-                    bCookie["Manager Work Location"] = reader["Manager Work Location"].ToString().Trim();
-                    bCookie["Manager Work Phone Number"] = reader["Manager Work Phone Number"].ToString().Trim();
+                    bCookie["Work Location"] = reader["Work_Location"].ToString().Trim();
+                    bCookie["Work Phone Number"] = reader["Work_Phone_Number"].ToString().Trim();
+                    bCookie["Manager Name"] = reader["Manager_Name"].ToString().Trim();
+                    bCookie["Manager Work Location"] = reader["Manager_Work_Location"].ToString().Trim();
+                    bCookie["Manager Work Phone Number"] = reader["Manager_Work_Phone_Number"].ToString().Trim();
 
                 }
                 Connection.Close();
@@ -286,7 +286,7 @@ public class Methods : System.Web.UI.Page
         {
             basicRead(bCookie, REQID, specialCase); //I've made this method in order to make sql read calling more versatile.
 
-            SqlCommand cmd2 = new SqlCommand(@"SELECT * FROM Employees WHERE [First Name]=@fName AND [Last Name]=@lName", Connection);
+            SqlCommand cmd2 = new SqlCommand(@"SELECT * FROM Employees WHERE [First_Name]=@fName AND [Last_Name]=@lName", Connection);
             cmd2.Parameters.AddWithValue("@fName", sliceEmployee(bCookie["Employee"], "First Name"));
             cmd2.Parameters.AddWithValue("@lName", sliceEmployee(bCookie["Employee"], "Last Name"));
             Connection.Open();
@@ -296,13 +296,13 @@ public class Methods : System.Web.UI.Page
                 {
                     bCookie["Initials"] = reader2["Initials"].ToString();
                     bCookie["UserID"] = reader2["UserID"].ToString();
-                    bCookie["Company"] = reader2["Employee Company"].ToString();
+                    bCookie["Company"] = reader2["Employee_Company"].ToString();
                     bCookie["Department"] = reader2["Department"].ToString();
-                    bCookie["Location"] = reader2["Work Location"].ToString();
-                    bCookie["Phone"] = reader2["Work Phone Number"].ToString();
-                    bCookie["Manager"] = reader2["Manager Name"].ToString();
-                    bCookie["ManagerLocation"] = reader2["Manager Work Location"].ToString();
-                    bCookie["ManagerPhone"] = reader2["Manager Work Phone Number"].ToString();
+                    bCookie["Location"] = reader2["Work_Location"].ToString();
+                    bCookie["Phone"] = reader2["Work_Phone_Number"].ToString();
+                    bCookie["Manager"] = reader2["Manager_Name"].ToString();
+                    bCookie["ManagerLocation"] = reader2["Manager_Work_Location"].ToString();
+                    bCookie["ManagerPhone"] = reader2["Manager_Work_Phone_Number"].ToString();
                 }
                 Connection.Close();
             }
@@ -454,7 +454,7 @@ public class Methods : System.Web.UI.Page
                 }
                 Connection.Close();
             }
-            SqlCommand cmdGetManagerName = new SqlCommand(@"SELECT [Manager Name] FROM Employees
+            SqlCommand cmdGetManagerName = new SqlCommand(@"SELECT [Manager_Name] FROM Employees
                                                     WHERE UserID=@tempID", Connection);
             cmdGetManagerName.Parameters.AddWithValue("@tempID", aCookie.Values["UserID"]);
             Connection.Open();
@@ -541,7 +541,7 @@ public class Methods : System.Web.UI.Page
         SqlConnection connection = new SqlConnection(SQL_STRING);
         connection.Open();
         DataSet ds = new DataSet();
-        SqlDataAdapter adapter = new SqlDataAdapter(@"Select CAST([RequestID] AS varchar(200)) + '   ' + [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay, [RequestID] From Requests JOIN Employees ON [Employee] = ([First Name] + ' ' + [Middle Name] + ' ' + [Last Name]) WHERE ([RequestState] = @RequestState AND [Username] = @CookieUsername) OR ([RequestState] = @RequestState AND [Manager Name] = @CookieManager)", connection);
+        SqlDataAdapter adapter = new SqlDataAdapter(@"Select CAST([RequestID] AS varchar(200)) + '   ' + [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay, [RequestID] From Requests JOIN Employees ON [Employee] = ([First_Name] + ' ' + [Middle_Name] + ' ' + [Last_Name]) WHERE ([RequestState] = @RequestState AND [Username] = @CookieUsername) OR ([RequestState] = @RequestState AND [Manager_Name] = @CookieManager)", connection);
         adapter.SelectCommand.Parameters.AddWithValue("@CookieUsername", USERNAME);
         adapter.SelectCommand.Parameters.AddWithValue("@RequestState", STATUS);
         adapter.SelectCommand.Parameters.AddWithValue("@CookieManager", MANAGER);
@@ -559,7 +559,7 @@ public class Methods : System.Web.UI.Page
         SqlConnection connection = new SqlConnection(SQL_STRING);
         connection.Open();
         DataSet ds = new DataSet();
-        SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS empNAME, [UserID] AS uid FROM Employees ORDER BY [Last Name]", connection);
+        SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First_Name] + ' ' + [Middle_Name] + ' ' + [Last_Name] AS empNAME, [UserID] AS uid FROM Employees ORDER BY [Last_Name]", connection);
         adapter.Fill(ds);
         LB.DataSource = ds;
         LB.DataTextField = "empNAME";
@@ -576,7 +576,7 @@ public class Methods : System.Web.UI.Page
             SqlConnection connection = new SqlConnection(SQL_STRING);
             connection.Open();
             DataSet ds = new DataSet();
-            SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [UserID]=@UserID", connection);
+            SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First_Name] + ' ' + [Middle_Name] + ' ' + [Last_Name] AS Last_Name FROM [Employees] WHERE [UserID]=@UserID", connection);
             adapter.SelectCommand.Parameters.AddWithValue("@UserID", USERID);
             adapter.Fill(ds);
             DDL.DataSource = ds;
@@ -600,7 +600,7 @@ public class Methods : System.Web.UI.Page
             SqlConnection connection = new SqlConnection(SQL_STRING);
             connection.Open();
             DataSet ds = new DataSet();
-            SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees] WHERE [Department]=@department", connection);
+            SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First_Name] + ' ' + [Middle_Name] + ' ' + [Last_Name] AS Last_Name FROM [Employees] WHERE [Department]=@department", connection);
             adapter.SelectCommand.Parameters.AddWithValue("@department", temp);
             adapter.Fill(ds);
             DDL.DataSource = ds;
@@ -617,7 +617,7 @@ public class Methods : System.Web.UI.Page
         SqlConnection connection = new SqlConnection(SQL_STRING);
         connection.Open();
         DataSet ds = new DataSet();
-        SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First Name] + ' ' + [Middle Name] + ' ' + [Last Name] AS Last_Name FROM [Employees]", connection);
+        SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First_Name] + ' ' + [Middle_Name] + ' ' + [Last_Name] AS Last_Name FROM [Employees]", connection);
         adapter.Fill(ds);
         DDL.DataSource = ds;
         DDL.DataTextField = "Last_Name";
@@ -632,7 +632,7 @@ public class Methods : System.Web.UI.Page
         SqlConnection connection = new SqlConnection(SQL_STRING);
         connection.Open();
         DataSet ds = new DataSet();
-        SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT Employees.[First Name] + ' ' + Employees.[Middle Name] + ' ' + Employees.[Last Name] AS Last_Name, Employees.[UserID] AS uid, Credentials.[isManager] FROM [Employees] INNER JOIN [Credentials] ON Employees.[UserID] = Credentials.[UserID] WHERE Credentials.[isManager]=@isManager", connection);
+        SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT Employees.[First_Name] + ' ' + Employees.[Middle_Name] + ' ' + Employees.[Last_Name] AS Last_Name, Employees.[UserID] AS uid, Credentials.[isManager] FROM [Employees] INNER JOIN [Credentials] ON Employees.[UserID] = Credentials.[UserID] WHERE Credentials.[isManager]=@isManager", connection);
         adapter.SelectCommand.Parameters.AddWithValue("@isManager", isManager);
         adapter.Fill(ds);
         DDL.DataSource = ds;
