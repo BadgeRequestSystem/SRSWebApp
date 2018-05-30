@@ -10,12 +10,14 @@ namespace Email
 {
     class Program
     {
+        public static string Connectionstring = "Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3";
         static void Main(string[] args)
         {
 
             /******************************************************************************************************************/
 
             bool DEBUG_MODE = false; //set to true if you don't want emails to actually be sent out (useful for testing purposes)
+
 
             /******************************************************************************************************************/
 
@@ -84,7 +86,7 @@ namespace Email
                     MailMessage mail = new MailMessage();
                     SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-                    mail.From = new MailAddress("dontreplysrsmail@gmail.com");
+                    mail.From = new MailAddress("dontreplysr@example.com");
                     mail.To.Add(Email);
                     mail.Subject = "RequestID: " + requestID + " Automatic Notification";
                     mail.IsBodyHtml = true;
@@ -92,7 +94,7 @@ namespace Email
                     mail.Body = body1;
 
                     SmtpServer.Port = 587;
-                    SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrsmail@gmail.com", "Password!1");
+                    SmtpServer.Credentials = new System.Net.NetworkCredential("dontreplysrs@example.com", "Passwor");
                     SmtpServer.EnableSsl = true;
 
                     SmtpServer.Send(mail);
@@ -117,7 +119,7 @@ namespace Email
             switch (info)
             {
                 case 0: //Employee name
-                    using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+                    using (SqlConnection Connection = new SqlConnection(Connectionstring))
                     {
                         try
                         {
@@ -148,13 +150,13 @@ namespace Email
 
 
                 case 1: //Manager email
-                    using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+                    using (SqlConnection Connection = new SqlConnection(Connectionstring))
                     {
                         try
                         {
                             SqlCommand cmd = new SqlCommand(@"Select Email FROM Credentials WHERE UserID =
-                                            (Select UserID FROM Employees WHERE ([First Name] + ' ' + [Middle Name]  + ' ' + [Last Name]) =
-                                             (Select [Manager Name] FROM Employees WHERE ([First Name] + ' ' + [Middle Name]  + ' ' + [Last Name]) = 
+                                            (Select UserID FROM Employees WHERE ([First_Name] + ' ' + [Middle_Name]  + ' ' + [Last_Name]) =
+                                             (Select [Manager_Name] FROM Employees WHERE ([First_Name] + ' ' + [Middle_Name]  + ' ' + [Last_Name]) = 
                                                 (Select Employee FROM Requests WHERE [RequestID]=@reqid)))", Connection);
                             cmd.Parameters.AddWithValue("@reqid", requestid);
                             Connection.Open();
@@ -174,7 +176,7 @@ namespace Email
 
 
                 case 2: //date request was submitted
-                    using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+                    using (SqlConnection Connection = new SqlConnection(Connectionstring))
                     {
                         try
                         {
@@ -204,7 +206,7 @@ namespace Email
 
 
                 case 3: //request state
-                    using (SqlConnection Connection = new SqlConnection("Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3"))
+                    using (SqlConnection Connection = new SqlConnection(Connectionstring))
                     {
                         try
                         {
