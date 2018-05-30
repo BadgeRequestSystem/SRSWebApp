@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <center>
-        <strong>Message from the developers:</strong><br />
+        <strong>Message from the developers</strong><br />
         "This web application was developed for a 1920x1080 resolution, with the primary testing browser being Firefox.
         <br />
         The developers who worked on this project are not strong in their artistic capability. As you demo this project, you may notice graphical bugs and things in general that could have been designed better.
@@ -17,6 +17,20 @@
         Thanks for taking the time to demo our work!"
         <br />
         -Devs
+    </center>
+        <br />
+        <br />
+        <br />
+        <br />
+        <center>
+        <strong>Demo Login Information</strong><br />
+        Example Manager account -> (Username: Chuck)(Password: Prather)
+        <br />
+        Example HR account -> (Username: Jane)(Password: Adams)
+        <br />
+        Example Employee account -> (Username: James)(Password: Cliett)
+        <br />
+        Keep in mind while demoing this project, we prevent these base accounts from being edited or deleted in the Update Employee's function. You are free to create as many employee's as you wish, however; you may not create login credentials for your custom employees unless you create your own database and hook up the project to it.
     </center>
         <br />
         <br />
@@ -42,7 +56,7 @@
         <br />
         <center>
         <strong>General Information</strong><br />
-        We have disabled email notifications for the demo version. A copy of the FLAT file type tables that you may import into your own database can be downloaded <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">here</asp:LinkButton>. All you would need to do is hook up your database in the Methods.cs file which is located in the 'App_Code' folder.
+        We have disabled email notifications for the demo version. Download the zip containing everything you need to set-up your own database for the project <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">here</asp:LinkButton>. All you would need to do is hook up your database in the Methods.cs file which is located in the 'App_Code' folder.
         <br />
         Creating credentials is out of scope for this projects design. This would in practice be handled in a different way, so you will need to go into your Credentials table and create your custom login information if you wish to create more.
         <br />
