@@ -7,21 +7,18 @@ using System.Web;
 using AES; //Accesses our static methods in 'Encryption.cs'
 using System.Data;
 using System.Web.UI.WebControls;
+using PI;
 
 /// <summary>
 /// Summary description for Methods
 /// </summary>
 public class Methods : System.Web.UI.Page
 {
-    //So we won't have the connection string hanging around every page and changing it here will change it everywhere! (Except for the aspx.cs pages but I want to fix that too!)
-    public string SQL_STRING = "Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3";
-    public string WEB_LINK = "http://srswebapp-test.us-west-2.elasticbeanstalk.com";
-    public string companyEmail = "srsmail@example.com"; //For live demo purposes we should probably disable email notifications but leave the feature available in the github
-    public string companyEmailPassword = "Password!1";
-    public int companyEmailPort = 587;
-    public string companyEmailServer = "smtp.gmail.com";
     public bool liveDemoEnabled = false; //Setting this to true will prevent a demo user from editing Chuck E Hacker, Jane L Carter, and James K Wesker
-    //~~
+    //
+    //All private stuff like sql string is located in the PI namespace and under the static class PrivateInfo, located in /App_Code/PrivateInfo.cs
+    //You may need to create your own if you found this project via GitHub :)
+    //
 
     public Methods()
     {
@@ -92,32 +89,32 @@ public class Methods : System.Web.UI.Page
         try
         {
             MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient(companyEmailServer);
+            SmtpClient SmtpServer = new SmtpClient(PrivateInfo.companyEmailServer);
 
-            mail.From = new MailAddress(companyEmail);
+            mail.From = new MailAddress(PrivateInfo.companyEmail);
             mail.To.Add(returnEmail(Employee));
             mail.Subject = "SRS Badge Request Received";
             mail.IsBodyHtml = true;
             string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been received." + "\nYou will be notified on the status of your request shortly. We thank you for your patience. \nSincerely,\nThe SRS Badge Request System\n", Employee);
-            mail.Body = body1 + "<a href = '" + WEB_LINK + "' > Login to view your request! </a>";
+            mail.Body = body1 + "<a href = '" + PrivateInfo.WEB_LINK + "' > Login to view your request! </a>";
 
-            SmtpServer.Port = companyEmailPort;
-            SmtpServer.Credentials = new System.Net.NetworkCredential(companyEmail, companyEmailPassword);
+            SmtpServer.Port = PrivateInfo.companyEmailPort;
+            SmtpServer.Credentials = new System.Net.NetworkCredential(PrivateInfo.companyEmail, PrivateInfo.companyEmailPassword);
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);
 
             MailMessage mail2 = new MailMessage();
-            SmtpClient SmtpServer2 = new SmtpClient(companyEmailServer);
+            SmtpClient SmtpServer2 = new SmtpClient(PrivateInfo.companyEmailServer);
 
-            mail2.From = new MailAddress(companyEmail);
+            mail2.From = new MailAddress(PrivateInfo.companyEmail);
             mail2.To.Add(returnEmail(Manager));
             mail2.Subject = "SRS Badge Request Attention Needed";
             mail2.Body = String.Format("Dear {0},\n\tWe wanted to inform you that {1} has put in a request for a new badge." +
                 "\nPlease review the request at your earliest convenience. We thank you for your time. \nSincerely,\nThe SRS Badge Request System", Manager, Employee);
 
-            SmtpServer2.Port = companyEmailPort;
-            SmtpServer2.Credentials = new System.Net.NetworkCredential(companyEmail, companyEmailPassword);
+            SmtpServer2.Port = PrivateInfo.companyEmailPort;
+            SmtpServer2.Credentials = new System.Net.NetworkCredential(PrivateInfo.companyEmail, PrivateInfo.companyEmailPassword);
             SmtpServer2.EnableSsl = true;
             SmtpServer2.Send(mail2);
         }
@@ -134,17 +131,17 @@ public class Methods : System.Web.UI.Page
             {
                 //Response should be either "Accepted" or "Denied"
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient(companyEmailServer);
+                SmtpClient SmtpServer = new SmtpClient(PrivateInfo.companyEmailServer);
 
-                mail.From = new MailAddress(companyEmail);
+                mail.From = new MailAddress(PrivateInfo.companyEmail);
                 mail.To.Add(returnEmail(Employee));
                 mail.Subject = String.Format("SRS Badge Request {0}", Response);
                 mail.IsBodyHtml = true;
                 string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been {1}." + "\nWe thank you for your patience. \nSincerely,\nThe SRS Badge Request System\n", Employee, Response);
-                mail.Body = body1 + "Please click " + "<a href = '" + WEB_LINK + "' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
+                mail.Body = body1 + "Please click " + "<a href = '" + PrivateInfo.WEB_LINK + "' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
 
-                SmtpServer.Port = companyEmailPort;
-                SmtpServer.Credentials = new System.Net.NetworkCredential(companyEmail, companyEmailPassword);
+                SmtpServer.Port = PrivateInfo.companyEmailPort;
+                SmtpServer.Credentials = new System.Net.NetworkCredential(PrivateInfo.companyEmail, PrivateInfo.companyEmailPassword);
                 SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
@@ -152,17 +149,17 @@ public class Methods : System.Web.UI.Page
             else
             {
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient(companyEmailServer);
+                SmtpClient SmtpServer = new SmtpClient(PrivateInfo.companyEmailServer);
 
-                mail.From = new MailAddress(companyEmail);
+                mail.From = new MailAddress(PrivateInfo.companyEmail);
                 mail.To.Add(returnEmail(Employee));
                 mail.Subject = String.Format("SRS Badge Request Needs Review");
                 mail.IsBodyHtml = true;
                 string body1 = String.Format("Dear {0},\n\tWe wanted to inform you that your SRS Badge Request has been flagged due to an error." + "\nPlease review your pending requests and make any needed corrections.\nSincerely,\nThe SRS Badge Request System\n", Employee);
-                mail.Body = body1 + "Please click " + "<a href = '" + WEB_LINK + "' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
+                mail.Body = body1 + "Please click " + "<a href = '" + PrivateInfo.WEB_LINK + "' > HERE </a>" + "if you would like to vist the SRS Badge Request Site.";
 
-                SmtpServer.Port = companyEmailPort;
-                SmtpServer.Credentials = new System.Net.NetworkCredential(companyEmail, companyEmailPassword);
+                SmtpServer.Port = PrivateInfo.companyEmailPort;
+                SmtpServer.Credentials = new System.Net.NetworkCredential(PrivateInfo.companyEmail, PrivateInfo.companyEmailPassword);
                 SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
@@ -179,7 +176,7 @@ public class Methods : System.Web.UI.Page
     {
         HttpCookie aCookie = Request.Cookies["userInfo"];
         string email = string.Empty;
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
         {
             Connection.Open();
             SqlCommand cmd = new SqlCommand(@"Select Email FROM Credentials WHERE UserID =
@@ -203,7 +200,7 @@ public class Methods : System.Web.UI.Page
     {
         SqlCommand query = new SqlCommand(); //store the command here
 
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
         {
             if (CASE == "NEW")
                 query = new SqlCommand(@"INSERT INTO Employees
@@ -240,7 +237,7 @@ public class Methods : System.Web.UI.Page
 
     public void HRForm_Read(HttpCookie bCookie, string UID)
     {
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
         {
             SqlCommand cmd = new SqlCommand(@"SELECT * FROM Employees WHERE UserID=@UID", Connection);
             cmd.Parameters.AddWithValue("@UID", UID);
@@ -271,7 +268,7 @@ public class Methods : System.Web.UI.Page
 
     public void DeleteFromEmployeesByUID(string UID)
     {
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
         {
             Connection.Open();
             SqlCommand cmd = new SqlCommand(@"DELETE FROM Employees WHERE [UserID] = @uid", Connection);
@@ -283,7 +280,7 @@ public class Methods : System.Web.UI.Page
 
     public void Request_Read(HttpCookie bCookie, string REQID, bool specialCase) //specialCase is used in basicRead(). specialCase should be true if used from PendingForm or PendingActionForm
     {
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
         {
             basicRead(bCookie, REQID, specialCase); //I've made this method in order to make sql read calling more versatile.
 
@@ -313,7 +310,7 @@ public class Methods : System.Web.UI.Page
 
     public void basicRead(HttpCookie bCookie, string REQID, bool specialCase) //Part 1 for Request_Read(), and also used for PendingActionForm. if specialCase = true, then we store the "Editable" flag into bCookie.
     {
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
         {
             SqlCommand cmd = new SqlCommand(@"SELECT * FROM Requests WHERE RequestID=@RequestID", Connection);
             cmd.Parameters.AddWithValue("@RequestID", REQID);
@@ -345,7 +342,7 @@ public class Methods : System.Web.UI.Page
 
     public void SubmitRequest(string Employee, string Reason, string GET, string SSN, string DOB, string BadgeType, bool Proximity, bool Emergency, bool Accounts, string Notes, string Username, string State, bool canEdit, string REQID)
     {
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
         {
             SqlCommand query = new SqlCommand(); //store the command here
             if (REQID == "") //Normal case
@@ -380,7 +377,7 @@ public class Methods : System.Web.UI.Page
 
     public void SaveRequest(string Employee, string Reason, string GET, string SSN, string DOB, string BadgeType, bool Proximity, bool Emergency, bool Accounts, string Notes, string Username) //Saving request as a DRAFT
     {
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
         {
             Connection.Open();
             SqlCommand cmd = new SqlCommand(@"INSERT INTO Drafts
@@ -405,7 +402,7 @@ public class Methods : System.Web.UI.Page
 
     public void ReviewForm(string REQID, string action) //ManagerReviewForm - Approve, deny, or needs more info
     {
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
         {
             SqlCommand query = new SqlCommand(); //store the command here
             if (action == "Approve")
@@ -436,7 +433,7 @@ public class Methods : System.Web.UI.Page
     {
 
 
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
         {
             SqlCommand cmd = new SqlCommand(@"SELECT * FROM Credentials WHERE Username=@uname", Connection);
             cmd.Parameters.AddWithValue("@uname", sanitizeInput(userName));
@@ -467,7 +464,7 @@ public class Methods : System.Web.UI.Page
 
     public bool checkLogin(HttpCookie aCookie, string userName, string passWord)
     {
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
         {
             try
             {
@@ -504,7 +501,7 @@ public class Methods : System.Web.UI.Page
 
     public ListBox fillListBoxDRAFT(ListBox LB, string USERNAME) //SavedRequestForm's fill listbox method.
     {
-        SqlConnection connection = new SqlConnection(SQL_STRING);
+        SqlConnection connection = new SqlConnection(PrivateInfo.SQL_STRING);
         connection.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter adapter = new SqlDataAdapter(@"Select [Employee], [CurrentDate] From Drafts WHERE (([RequestState] = @RequestState) AND ([Username] = @Username))", connection);
@@ -522,7 +519,7 @@ public class Methods : System.Web.UI.Page
 
     public ListBox fillListBox(ListBox LB, string USERNAME, string STATUS) //This method will fill the list boxes for PendingForm, DeniedForm, and ApprovedForm. string STATUS is either "Pending","Denied", or "Approved"
     {
-        SqlConnection connection = new SqlConnection(SQL_STRING);
+        SqlConnection connection = new SqlConnection(PrivateInfo.SQL_STRING);
         connection.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter adapter = new SqlDataAdapter(@"Select CAST([RequestID] AS varchar(200)) + '   ' + [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay, [RequestID] From Requests WHERE (([RequestState] = @RequestState) AND ([Username] = @Username))", connection);
@@ -539,7 +536,7 @@ public class Methods : System.Web.UI.Page
     }
     public ListBox fillListBox(ListBox LB, string USERNAME, string MANAGER, string STATUS) //string STATUS is either "Pending","Denied", or "Approved". This is used for PendingActionForm listbox that requires manager to be passed in.
     {
-        SqlConnection connection = new SqlConnection(SQL_STRING);
+        SqlConnection connection = new SqlConnection(PrivateInfo.SQL_STRING);
         connection.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter adapter = new SqlDataAdapter(@"Select CAST([RequestID] AS varchar(200)) + '   ' + [Employee] + '   ' + CAST([CurrentDate] AS varchar(15)) AS PendingDisplay, [RequestID] From Requests JOIN Employees ON [Employee] = ([First_Name] + ' ' + [Middle_Name] + ' ' + [Last_Name]) WHERE ([RequestState] = @RequestState AND [Username] = @CookieUsername) OR ([RequestState] = @RequestState AND [Manager_Name] = @CookieManager)", connection);
@@ -557,7 +554,7 @@ public class Methods : System.Web.UI.Page
     }
     public ListBox fillListBox(ListBox LB) //HRForm overload. Literally grabbing all employees, so pretty basic method.
     {
-        SqlConnection connection = new SqlConnection(SQL_STRING);
+        SqlConnection connection = new SqlConnection(PrivateInfo.SQL_STRING);
         connection.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First_Name] + ' ' + [Middle_Name] + ' ' + [Last_Name] AS empNAME, [UserID] AS uid FROM Employees ORDER BY [Last_Name]", connection);
@@ -574,7 +571,7 @@ public class Methods : System.Web.UI.Page
     {
         if (isManager == "False") //they are not a manager so we just show their name
         {
-            SqlConnection connection = new SqlConnection(SQL_STRING);
+            SqlConnection connection = new SqlConnection(PrivateInfo.SQL_STRING);
             connection.Open();
             DataSet ds = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First_Name] + ' ' + [Middle_Name] + ' ' + [Last_Name] AS Last_Name FROM [Employees] WHERE [UserID]=@UserID", connection);
@@ -589,7 +586,7 @@ public class Methods : System.Web.UI.Page
         else //they are a manager
         {
             string temp;
-            using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+            using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
             {
                 Connection.Open();
                 SqlCommand cmdGetDepartment = new SqlCommand(@"SELECT Department FROM Employees 
@@ -598,7 +595,7 @@ public class Methods : System.Web.UI.Page
                 temp = (string)cmdGetDepartment.ExecuteScalar();
                 Connection.Close();
             }
-            SqlConnection connection = new SqlConnection(SQL_STRING);
+            SqlConnection connection = new SqlConnection(PrivateInfo.SQL_STRING);
             connection.Open();
             DataSet ds = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First_Name] + ' ' + [Middle_Name] + ' ' + [Last_Name] AS Last_Name FROM [Employees] WHERE [Department]=@department", connection);
@@ -615,7 +612,7 @@ public class Methods : System.Web.UI.Page
 
     public DropDownList fillDDL(DropDownList DDL) //ManagerReviewForm overload to populate the dropdown (basically just a list of all employees that is grayed out)
     {
-        SqlConnection connection = new SqlConnection(SQL_STRING);
+        SqlConnection connection = new SqlConnection(PrivateInfo.SQL_STRING);
         connection.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT [First_Name] + ' ' + [Middle_Name] + ' ' + [Last_Name] AS Last_Name FROM [Employees]", connection);
@@ -630,7 +627,7 @@ public class Methods : System.Web.UI.Page
     }
     public DropDownList fillDDL(DropDownList DDL, string isManager) //EditEmployeeForm overload for the ddl
     {
-        SqlConnection connection = new SqlConnection(SQL_STRING);
+        SqlConnection connection = new SqlConnection(PrivateInfo.SQL_STRING);
         connection.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter adapter = new SqlDataAdapter(@"SELECT Employees.[First_Name] + ' ' + Employees.[Middle_Name] + ' ' + Employees.[Last_Name] AS Last_Name, Employees.[UserID] AS uid, Credentials.[isManager] FROM [Employees] INNER JOIN [Credentials] ON Employees.[UserID] = Credentials.[UserID] WHERE Credentials.[isManager]=@isManager", connection);
@@ -646,7 +643,7 @@ public class Methods : System.Web.UI.Page
     }
     public void readDraftInfo(HttpCookie cCookie, string Employee) //SavedRequestForm | reading all drafts from an employee
     {
-        using (SqlConnection Connection = new SqlConnection(SQL_STRING))
+        using (SqlConnection Connection = new SqlConnection(PrivateInfo.SQL_STRING))
         {
             SqlCommand cmd = new SqlCommand(@"SELECT * FROM Drafts WHERE Employee=@Employee", Connection);
             cmd.Parameters.AddWithValue("@Employee", Employee);
