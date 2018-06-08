@@ -10,13 +10,13 @@ namespace Email
 {
     class Program
     {
-        public static string Connectionstring = "Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3";
+        public static string Connectionstring = "";
         static void Main(string[] args)
         {
 
             /******************************************************************************************************************/
 
-            bool DEBUG_MODE = false; //set to true if you don't want emails to actually be sent out (useful for testing purposes)
+            bool DEBUG_MODE = true; //set to true if you don't want emails to actually be sent out (useful for testing purposes)
 
 
             /******************************************************************************************************************/
