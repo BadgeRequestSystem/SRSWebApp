@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
         <center>
         <strong>Message from the developers</strong><br />
-        "This web application was developed for a 1920x1080 resolution, with the primary testing browser being Firefox.
+        "This web application was developed for a 1920x1080 resolution, with the primary testing browser being Firefox. Due to our limited knowledge of Javascript and Bootstrap at the time of this projects development, you may notice minor issues while using this demo.
         <br />
         The developers who worked on this project are not strong in their artistic capability. As you demo this project, you may notice graphical bugs and things in general that could have been designed better.
         <br />
