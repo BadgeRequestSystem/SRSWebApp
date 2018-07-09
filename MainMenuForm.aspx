@@ -51,20 +51,7 @@
             <br />
 
         </div>
-        <%--        <div id="overmiddleright">
-            <asp:Image ID="Image1" runat="server" Height="100%" ImageUrl="~/Images/srs logo main menu.png" Width="100%" />
-        </div>--%>
 
-        <%--        <div id="overmiddleleft">
-            <br />
-            <br />
-            <br />
-
-        </div>--%>
-        <%--        <div id="mainpageWelcome">
-        </div>--%>
     </form>
-    <script type="text/javascript" src="jquery-2.2.2.min.js"></script>
-    <script type="text/javascript" src="JS.js"></script>
 </body>
 </html>
