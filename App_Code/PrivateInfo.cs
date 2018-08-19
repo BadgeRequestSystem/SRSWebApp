@@ -9,12 +9,14 @@ namespace PI
 {
     public static class PrivateInfo
     {
-        public static string SQL_STRING = "Data Source=badgerequest.cthyx0iu4w46.us-east-2.rds.amazonaws.com;Initial Catalog=badge_request;User ID=pwndatnerd;Password=AaronDavidRandall!3";
-        public static string WEB_LINK = "http://srswebapp-test.us-west-2.elasticbeanstalk.com";
-        public static string companyEmail = "srsmail@example.com"; //For live demo purposes we should probably disable email notifications but leave the feature available in the github
-        public static string companyEmailPassword = "Password!1";
-        public static int companyEmailPort = 587;
-        public static string companyEmailServer = "smtp.gmail.com";
+        //David & Randall contact me if you need help with PrivateInfo.cs file, I will explain in detail & provide access to the live demo database.
+        //All previous info that existed on this file is no longer valid for security reasons.
+        public static string SQL_STRING = "";//Place sql connection string here
+        public static string WEB_LINK = "";//Live link of the web application
+        public static string companyEmail = ""; //Email address that will send out notification emails
+        public static string companyEmailPassword = "";
+        public static int companyEmailPort = -1;
+        public static string companyEmailServer = "";//smtp address of your email provider
 
     }
 }
