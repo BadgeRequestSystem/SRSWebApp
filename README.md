@@ -4,6 +4,8 @@ Senior Capstone project.
 
 Aaron, David, Randall
 
+Guidelines can be found here: https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Site_Data/BadgeRequestProject.pdf
+
 Live link can be found here: http://srswebapp-test.us-west-2.elasticbeanstalk.com
 
 
