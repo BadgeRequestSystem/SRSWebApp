@@ -1,4 +1,4 @@
-Badge Request System for SRNS.
+Badge Request System.
 
 Senior Capstone project.
 
