@@ -15,6 +15,8 @@ This project was written as part of our *Spring* 2018 Senior Capstone class and 
 
 This project was developed using the [ASP .NET Web Framework](https://dotnet.microsoft.com/apps/aspnet) and very little JavaScript.
 
+Used Microsoft SQL Server for database, which was hosted by Amazon AWS.
+
 ## Screenshots
 
 ### Login Menu
