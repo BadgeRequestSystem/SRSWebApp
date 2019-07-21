@@ -1,18 +1,28 @@
-Badge Request System.
 
-Senior Capstone project.
+# - Badge Request System -
 
-Aaron, David, Randall
-
-Guidelines can be found here: https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Site_Data/BadgeRequestProject.pdf
-
-Live link can be found here: [OFFLINE]
+This project was written as part of our Senior Capstone class and served as the first real web-development experience for all of us.
 
 
-![ScreenShot](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Images/Screenshot_1.png)
+ 
+-*Aaron, David, and Randall*
 
-![ScreenShot](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Images/Screenshot_2.png)
+## Project Guide Lines
 
-![ScreenShot](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Images/Screenshot_3.png)
+ [<img src="https://img.shields.io/badge/Guide%20Lines-Link-blue.svg?style=for-the-badge&logo=appveyor">](https://github.com/aaprather/Click-Servant/raw/Development/Click-Servant.exe)
+ 
 
-![ScreenShot](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Images/Screenshot_4.png)
+## Development
+
+This project was developed using the [ASP .NET Web Framework](https://dotnet.microsoft.com/apps/aspnet) and very little JavaScript.
+
+## Screenshots
+
+### Login Menu
+![enter image description here](https://raw.githubusercontent.com/BadgeRequestSystem/SRSWebApp/PostSemesterUpdates/Images/Screenshot_1.png)
+### Main Menu
+![enter image description here](https://raw.githubusercontent.com/BadgeRequestSystem/SRSWebApp/PostSemesterUpdates/Images/Screenshot_2.png)
+### Submitted Requests (Approved) Menu
+![enter image description here](https://raw.githubusercontent.com/BadgeRequestSystem/SRSWebApp/PostSemesterUpdates/Images/Screenshot_3.png)
+### Submitted Form View
+![enter image description here](https://raw.githubusercontent.com/BadgeRequestSystem/SRSWebApp/PostSemesterUpdates/Images/Screenshot_4.png)
