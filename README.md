@@ -9,7 +9,7 @@ This project was written as part of our Senior Capstone class and served as the 
 
 ## Project Guide Lines
 
- [<img src="https://img.shields.io/badge/Guide%20Lines-Link-blue.svg?style=for-the-badge&logo=appveyor">](https://github.com/aaprather/Click-Servant/raw/Development/Click-Servant.exe)
+ [<img src="https://img.shields.io/badge/Guide%20Lines-Link-blue.svg?style=for-the-badge&logo=appveyor">](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Site_Data/BadgeRequestProject.pdf)
  
 
 ## Development
