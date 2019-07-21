@@ -1,7 +1,8 @@
 
+
 # - Badge Request System -
 
-This project was written as part of our Senior Capstone class and served as the first real web-development experience for all of us.
+This project was written as part of our *Spring* 2018 Senior Capstone class and served as the first real web-development experience for all of us.
 
 
  [<img src="https://img.shields.io/badge/Guide%20Lines-Link-blue.svg?style=for-the-badge&logo=appveyor">](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Site_Data/BadgeRequestProject.pdf)
