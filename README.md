@@ -9,7 +9,8 @@ Due to our limited knowledge of JavaScript at the time of this projects developm
 As you run this project, you may notice graphical bugs and things in general that could have been designed better.
 
 [<< Project Guidelines > >](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Site_Data/BadgeRequestProject.pdf)
- 
+
+[<< Project Documentation > >](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Site_Data/UserManual.pdf)
 -*Aaron, David, and Randall*
  
 
