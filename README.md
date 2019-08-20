@@ -4,7 +4,7 @@
 
 This project was written as part of our Senior Capstone class and served as the first real web-development experience for all of us.
 
-Due to our limited knowledge of JavaScript at the time of this projects development, you may notice minor issues while using testing this project.
+Due to our limited knowledge of JavaScript at the time of this projects development, you may notice minor issues while testing this project.
 
 As you run this project, you may notice graphical bugs and things in general that could have been designed better.
 
