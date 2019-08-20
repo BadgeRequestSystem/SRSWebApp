@@ -26,9 +26,9 @@ public partial class Login : System.Web.UI.Page
         Response.Cookies.Add(aCookie);
 
         if (m.checkLogin(aCookie, userBox.Text, passBox.Text) == true) /*We will check the login info, then we will fill the 'userInfo' cookie and send them to the MainMenuForm.*/
-            Response.Redirect("~/MainMenuForm.aspx"); //successful login
+            Response.Redirect("~/General/MainMenuForm.aspx"); //successful login
         else
-            Response.Redirect("~/Login.aspx"); //failed login
+            Response.Redirect("~/General/Login.aspx"); //failed login
 
 
 
@@ -38,7 +38,7 @@ public partial class Login : System.Web.UI.Page
     {
         try
         {
-            Server.Transfer("~/DemoInfo.aspx");
+            Server.Transfer("~/General/DemoInfo.aspx");
         }
         catch
         {

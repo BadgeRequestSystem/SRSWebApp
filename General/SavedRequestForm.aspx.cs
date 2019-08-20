@@ -14,7 +14,7 @@ public partial class SavedRequestForm : System.Web.UI.Page
         if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
         {
             m.SIMPLE_POPUP("Something went wrong!");
-            Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
+            Response.Redirect("~/General/Login.aspx"); //Send unauthorized user back to login page.
         }
 
         /*DOUBLE CLICK EVENT FOR LISTBOX*/
@@ -25,7 +25,7 @@ public partial class SavedRequestForm : System.Web.UI.Page
             m.readDraftInfo(cCookie, ListBox1.SelectedValue);
 
 
-            Response.Redirect("~/EditRequestForm.aspx");
+            Response.Redirect("~/General/EditRequestForm.aspx");
         }
         ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "move"));
         /****************/
@@ -41,6 +41,6 @@ public partial class SavedRequestForm : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/MainMenuForm.aspx");
+        Response.Redirect("~/General/MainMenuForm.aspx");
     }
 }

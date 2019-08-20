@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Net;
-using System.Data;
 
-public partial class PendingForm : System.Web.UI.Page
+
+public partial class ApprovedForm : System.Web.UI.Page
 {
     public static Methods m = new Methods();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
         {
             m.SIMPLE_POPUP("Something went wrong!");
-            Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
+            Response.Redirect("~/General/Login.aspx"); //Send unauthorized user back to login page.
         }
 
         /*DOUBLE CLICK EVENT FOR LISTBOX*/
@@ -25,10 +25,9 @@ public partial class PendingForm : System.Web.UI.Page
             {
                 HttpCookie bCookie = new HttpCookie("submittedCookieInfo");
                 Response.Cookies.Add(bCookie);
+                m.Request_Read(bCookie, ListBox1.SelectedValue, false);
 
-                m.Request_Read(bCookie, ListBox1.SelectedValue, true);
-                Response.Redirect("~/ViewSubmittedForm.aspx");
-
+                Response.Redirect("~/General/ViewSubmittedForm.aspx");
             }
         }
         catch
@@ -36,19 +35,22 @@ public partial class PendingForm : System.Web.UI.Page
 
         }
         ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "move"));
-
-        /*********************************/
-
+        /********************************/
 
         HttpCookie aCookie = Request.Cookies["userInfo"];
-        ListBox1 = m.fillListBox(ListBox1, aCookie.Values["userName"], "Pending"); //Populate the listbox *This must come after the double click event*
-
+        ListBox1 = m.fillListBox(ListBox1, aCookie.Values["userName"], "Approved"); //Populate the listbox *This must come after the double click event*
 
     }
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/ReviewRequestsForm.aspx");
+        Response.Redirect("~/General/ReviewRequestsForm.aspx");
+    }
+
+
+    protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
     }
 
 

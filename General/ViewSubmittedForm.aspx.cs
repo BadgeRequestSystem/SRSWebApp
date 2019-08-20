@@ -12,7 +12,7 @@ public partial class ViewSubmittedForm : System.Web.UI.Page
         if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
         {
             m.SIMPLE_POPUP("Something went wrong!");
-            Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
+            Response.Redirect("~/General/Login.aspx"); //Send unauthorized user back to login page.
         }
         /*Populate form with the cookie info*/
         HttpCookie aCookie = Request.Cookies["submittedCookieInfo"];
@@ -35,14 +35,14 @@ public partial class ViewSubmittedForm : System.Web.UI.Page
     protected void backButton_Click(object sender, EventArgs e)
     {
         m.DeleteCookie("submittedCookieInfo");
-        Response.Redirect("~/ReviewRequestsForm.aspx");
+        Response.Redirect("~/General/ReviewRequestsForm.aspx");
 
     }
 
     protected void editButton_Click(object sender, EventArgs e)
     {
 
-        Response.Redirect("~/EditRequestForm.aspx"); //We are taking the 'submittedCookieInfo' cookie and bringing it to EditRequestForm so we can use it there.
+        Response.Redirect("~/General/EditRequestForm.aspx"); //We are taking the 'submittedCookieInfo' cookie and bringing it to EditRequestForm so we can use it there.
 
 
 

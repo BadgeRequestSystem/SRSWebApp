@@ -11,7 +11,7 @@ public partial class MainMenuForm : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
-            Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
+            Response.Redirect("~/General/Login.aspx"); //Send unauthorized user back to login page.
 
         HttpCookie aCookie = Request.Cookies["userInfo"];
         if (!Label2.Text.Contains(aCookie["userName"]))
@@ -29,31 +29,31 @@ public partial class MainMenuForm : System.Web.UI.Page
     {
         m.DeleteCookie("userInfo");
         m.DeleteCookie("USERname");
-        Response.Redirect("~/Login.aspx");
+        Response.Redirect("~/General/Login.aspx");
     }
 
     protected void ButtonNewRequest_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/EditRequestForm.aspx");
+        Response.Redirect("~/General/EditRequestForm.aspx");
     }
 
     protected void ButtonViewSavedRequests_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/SavedRequestForm.aspx");
+        Response.Redirect("~/General/SavedRequestForm.aspx");
     }
 
     protected void ButtonViewSubmittedRequests_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/ReviewRequestsForm.aspx");
+        Response.Redirect("~/General/ReviewRequestsForm.aspx");
     }
 
     protected void ButtonReviewRequests_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/PendingActionForm.aspx");
+        Response.Redirect("~/Manager/PendingActionForm.aspx");
     }
 
     protected void ButtonUpdateEmployees_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/HRForm.aspx");
+        Response.Redirect("~/HR/HRForm.aspx");
     }
 }

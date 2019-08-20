@@ -14,7 +14,7 @@ public partial class PendingActionForm : System.Web.UI.Page
         if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
         {
             m.SIMPLE_POPUP("Something went wrong!");
-            Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
+            Response.Redirect("~/General/Login.aspx"); //Send unauthorized user back to login page.
         }
 
         /*DOUBLE CLICK EVENT FOR LISTBOX*/
@@ -23,7 +23,7 @@ public partial class PendingActionForm : System.Web.UI.Page
             HttpCookie bCookie = new HttpCookie("submittedCookieInfo");
             Response.Cookies.Add(bCookie);
             m.basicRead(bCookie, ListBox1.SelectedValue, true); //true because we only need some basic info (refer to Methods.cs for more context)
-            Response.Redirect("~/ManagerReviewForm.aspx");
+            Response.Redirect("~/Manager/ManagerReviewForm.aspx");
         }
         ListBox1.Attributes.Add("ondblclick", ClientScript.GetPostBackEventReference(ListBox1, "move"));
         /****************/
@@ -34,7 +34,7 @@ public partial class PendingActionForm : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/MainMenuForm.aspx");
+        Response.Redirect("~/General/MainMenuForm.aspx");
     }
 
 

@@ -14,7 +14,7 @@ public partial class DeniedForm : System.Web.UI.Page
         if (!m.CookieExists("userInfo")) //Fixes 'Chuck E Hacker' bug
         {
             m.SIMPLE_POPUP("Something went wrong!");
-            Response.Redirect("~/Login.aspx"); //Send unauthorized user back to login page.
+            Response.Redirect("~/General/Login.aspx"); //Send unauthorized user back to login page.
         }
 
         /*DOUBLE CLICK EVENT FOR LISTBOX*/
@@ -26,7 +26,7 @@ public partial class DeniedForm : System.Web.UI.Page
                 Response.Cookies.Add(bCookie);
                 m.Request_Read(bCookie, ListBox1.SelectedValue, false);
 
-                Response.Redirect("~/ViewSubmittedForm.aspx");
+                Response.Redirect("~/General/ViewSubmittedForm.aspx");
             }
         }
         catch
@@ -43,7 +43,7 @@ public partial class DeniedForm : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/ReviewRequestsForm.aspx");
+        Response.Redirect("~/General/ReviewRequestsForm.aspx");
     }
 
 
