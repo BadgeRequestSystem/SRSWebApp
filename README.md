@@ -2,20 +2,20 @@
 
 # - Badge Request System -
 
-This project was written as part of our *Spring* 2018 Senior Capstone class and served as the first real web-development experience for all of us.
+This project was written as part of our Senior Capstone class and served as the first real web-development experience for all of us.
 
+Due to our limited knowledge of JavaScript at the time of this projects development, you may notice minor issues while using this demo.
 
- [<img src="https://img.shields.io/badge/Guide%20Lines-Link-blue.svg?style=for-the-badge&logo=appveyor">](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Site_Data/BadgeRequestProject.pdf)
- 
+As you demo this project, you may notice graphical bugs and things in general that could have been designed better.
+
+[<< Project Guidelines > >](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Site_Data/BadgeRequestProject.pdf)
  
 -*Aaron, David, and Randall*
-
+ 
 
 ## Development
 
 This project was developed using the [ASP .NET Web Framework](https://dotnet.microsoft.com/apps/aspnet) and very little JavaScript.
-
-Used Microsoft SQL Server for database, which was hosted by Amazon AWS.
 
 ## Screenshots
 
@@ -27,3 +27,5 @@ Used Microsoft SQL Server for database, which was hosted by Amazon AWS.
 ![enter image description here](https://raw.githubusercontent.com/BadgeRequestSystem/SRSWebApp/PostSemesterUpdates/Images/Screenshot_3.png)
 ### Submitted Form View
 ![enter image description here](https://raw.githubusercontent.com/BadgeRequestSystem/SRSWebApp/PostSemesterUpdates/Images/Screenshot_4.png)
+### 'About' page from live demo
+![enter image description here](https://raw.githubusercontent.com/BadgeRequestSystem/SRSWebApp/PostSemesterUpdates/Images/Screenshot_5.png)
