@@ -11,6 +11,7 @@ As you run this project, you may notice graphical bugs and things in general tha
 [<< Project Guidelines > >](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Site_Data/BadgeRequestProject.pdf)
 
 [<< Project Documentation > >](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Site_Data/UserManual.pdf)
+
 -*Aaron, David, and Randall*
  
 
