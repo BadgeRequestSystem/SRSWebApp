@@ -4,9 +4,9 @@
 
 This project was written as part of our Senior Capstone class and served as the first real web-development experience for all of us.
 
-Due to our limited knowledge of JavaScript at the time of this projects development, you may notice minor issues while using this demo.
+Due to our limited knowledge of JavaScript at the time of this projects development, you may notice minor issues while using testing this project.
 
-As you demo this project, you may notice graphical bugs and things in general that could have been designed better.
+As you run this project, you may notice graphical bugs and things in general that could have been designed better.
 
 [<< Project Guidelines > >](https://github.com/BadgeRequestSystem/SRSWebApp/blob/PostSemesterUpdates/Site_Data/BadgeRequestProject.pdf)
  
