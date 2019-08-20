@@ -21,7 +21,7 @@ This project was developed using the [ASP .NET Web Framework](https://dotnet.mic
 
 ### Login Menu
 ![enter image description here](https://raw.githubusercontent.com/BadgeRequestSystem/SRSWebApp/PostSemesterUpdates/Images/Screenshot_1.png)
-### 'About' page from live demo
+### 'How do I use the demo?' page from live demo
 ![enter image description here](https://raw.githubusercontent.com/BadgeRequestSystem/SRSWebApp/PostSemesterUpdates/Images/Screenshot_5.png)
 ### Main Menu
 ![enter image description here](https://raw.githubusercontent.com/BadgeRequestSystem/SRSWebApp/PostSemesterUpdates/Images/Screenshot_2.png)
